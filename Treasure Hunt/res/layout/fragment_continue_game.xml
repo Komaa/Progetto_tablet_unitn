@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#ff8400" >
+    android:background="#e67e22" >
     
     <TextView
         android:id="@+id/continue_title"
@@ -15,12 +15,14 @@
         android:gravity="center"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/continue_title" />
+
     <ListView
         android:id="@+id/listContinue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true" >
+        android:layout_below="@+id/continue_title"
+        android:layout_centerHorizontal="true" >
+
     </ListView>
     
 
