@@ -1,5 +1,7 @@
 package tablet_unitn.treasurehunt;
 
+//manca last_access e last_position
+
 public class User {
 	Integer ID=0,
 			points=0;

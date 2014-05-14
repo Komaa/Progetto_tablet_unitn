@@ -4,5 +4,7 @@
     <string name="app_name">TreasureHunt</string>
     <string name="action_settings">Settings</string>
     <string name="home_title">Welcome back</string>
+    <string name="continue_title">Continue games!</string>
+    <string name="new_title">New games!</string>
 
 </resources>

@@ -5,12 +5,23 @@
     android:orientation="vertical"
     android:background="#ff8400" >
     
-    <TextView android:layout_width="fill_parent"
+    <TextView
+        android:id="@+id/continue_title"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="14dp"
         android:gravity="center"
-        android:text="Design Games Screen"
-        android:textSize="20dp"
-        android:layout_centerInParent="true"/>
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/continue_title" />
+    <ListView
+        android:id="@+id/listContinue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true" >
+    </ListView>
     
 
 </RelativeLayout>
