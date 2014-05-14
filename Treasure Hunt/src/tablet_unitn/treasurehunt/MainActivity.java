@@ -4,13 +4,14 @@ import tablet_unitn.adapter.TabsPagerAdapter;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 
 public class MainActivity extends FragmentActivity implements
 		ActionBar.TabListener {
-
+	private static Context context;
 	private ViewPager viewPager;
 	private TabsPagerAdapter mAdapter;
 	private ActionBar actionBar;
@@ -20,6 +21,7 @@ public class MainActivity extends FragmentActivity implements
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		MainActivity.context = getApplicationContext();
 		setContentView(R.layout.activity_main);
 
 		// Initilization
@@ -59,6 +61,10 @@ public class MainActivity extends FragmentActivity implements
 		});
 	}
 
+	public static Context getAppContext(){
+		return MainActivity.context;
+	}
+	
 	@Override
 	public void onTabReselected(Tab tab, FragmentTransaction ft) {
 	}
