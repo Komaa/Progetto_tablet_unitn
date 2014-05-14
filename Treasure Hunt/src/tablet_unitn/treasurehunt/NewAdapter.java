@@ -10,20 +10,20 @@ import android.widget.ArrayAdapter;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-public class ContinueAdapter extends ArrayAdapter<Map>{
+public class NewAdapter extends ArrayAdapter<Map>{
 	
-	public ContinueAdapter(Context context, int textViewResourceId, List<Map> objects) {
+	public NewAdapter(Context context, int textViewResourceId, List<Map> objects) {
         super(context, textViewResourceId, objects);
     }
 	@Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) getContext()
              .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        convertView = inflater.inflate(R.layout.continuelist, null);
-        TextView name = (TextView)convertView.findViewById(R.id.continue_nomeMappa);
-		TextView distanza = (TextView)convertView.findViewById(R.id.continue_distanza);
-		TextView tempo_rimasto = (TextView)convertView.findViewById(R.id.continue_tempoRimasto);
-		ProgressBar avanzamaneto = (ProgressBar)convertView.findViewById(R.id.continue_avanzamento);
+        convertView = inflater.inflate(R.layout.newlist, null);
+        TextView name = (TextView)convertView.findViewById(R.id.new_nomeMappa);
+		TextView distanza = (TextView)convertView.findViewById(R.id.new_distanza);
+		TextView tempo_rimasto = (TextView)convertView.findViewById(R.id.new_tempoRimasto);
+		ProgressBar avanzamaneto = (ProgressBar)convertView.findViewById(R.id.new_difficolta);
         Map c = getItem(position);
         name.setText("Nome: "+c.getName());
 		distanza.setText("Distanza"+"13m");

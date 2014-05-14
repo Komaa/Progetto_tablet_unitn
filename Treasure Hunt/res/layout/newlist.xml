@@ -14,19 +14,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
 	        <TextView
-	            android:id="@+id/continue_nomeMappa"
+	            android:id="@+id/new_nomeMappa"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
 	            android:gravity="left" />
 	
 	        <TextView
-	            android:id="@+id/continue_distanza"
+	            android:id="@+id/new_distanza"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
 	            android:gravity="center" />
 	
 	        <TextView
-	            android:id="@+id/continue_tempoRimasto"
+	            android:id="@+id/new_tempoRimasto"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
 	            android:gravity="right" />
@@ -34,7 +34,7 @@
         </LinearLayout>
 
         <ProgressBar
-            android:id="@+id/continue_avanzamento"
+            android:id="@+id/new_difficolta"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
             android:layout_height="81dp" 

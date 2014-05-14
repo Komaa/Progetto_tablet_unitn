@@ -13,7 +13,14 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="14dp"
         android:gravity="center"
+        android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/new_title" />
-    
+    <ListView
+        android:id="@+id/listNew"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true" >
+    </ListView>
 
 </RelativeLayout>
