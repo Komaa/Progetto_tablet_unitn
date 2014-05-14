@@ -1,7 +1,7 @@
 package tablet_unitn.adapter;
 
-import tablet_unitn.treasurehunt.ContinueGameFragment;
-import tablet_unitn.treasurehunt.NewGameFragment;
+import tablet_unitn.treasurehunt.ContinueFragment;
+import tablet_unitn.treasurehunt.NewFragment;
 import tablet_unitn.treasurehunt.HomeFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -22,10 +22,10 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
 			return new HomeFragment();
 		case 1:
 			// Games fragment activity
-			return new ContinueGameFragment();
+			return new ContinueFragment();
 		case 2:
 			// NewGame fragment activity
-			return new NewGameFragment();
+			return new NewFragment();
 		}
 
 		return null;

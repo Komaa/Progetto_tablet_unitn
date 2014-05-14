@@ -4,19 +4,21 @@ import java.util.LinkedList;
 import java.util.List;
 
 import tablet_unitn.treasurehunt.R;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
-public class NewGameFragment extends Fragment {
+public class NewFragment extends Fragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-
 		View new_rootView = inflater.inflate(R.layout.fragment_new_game, container, false);
 		ListView new_listView = (ListView)new_rootView.findViewById(R.id.listNew);
 		List<Map> new_list = new LinkedList<Map>();
@@ -25,6 +27,15 @@ public class NewGameFragment extends Fragment {
 		}
         NewAdapter new_adapter = new NewAdapter(MainActivity.getAppContext(), R.layout.newlist, new_list);
         new_listView.setAdapter(new_adapter);
+        new_listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			  @Override
+			  public void onItemClick(AdapterView<?> parent, final View view,
+			      int position, long id) {
+			    //Toast.makeText(MainActivity.getAppContext(), "ciao!", Toast.LENGTH_LONG).show();
+			    Intent showMap = new Intent(getActivity(),ShowMapDetails.class); // NON funziona - da vedere il getActivity!!!
+			    startActivity(showMap);
+			  }
+	    });
 		return new_rootView;
 	}
 
