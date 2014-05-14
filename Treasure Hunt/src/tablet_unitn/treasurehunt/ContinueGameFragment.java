@@ -23,7 +23,9 @@ public class ContinueGameFragment extends Fragment {
 		View continue_rootView = inflater.inflate(R.layout.fragment_continue_game, container, false);
 		ListView continue_listView = (ListView)continue_rootView.findViewById(R.id.listContinue);
 		List<Map> continue_list = new LinkedList<Map>();
-		continue_list.add(new Map("Mappa1"));
+		for (int i = 0; i < 30; i++) {
+			continue_list.add(new Map("Mappa"+i, i, 100));
+		}
         ContinueAdapter continue_adapter = new ContinueAdapter(MainActivity.getAppContext(), R.layout.continuelist, continue_list);
         continue_listView.setAdapter(continue_adapter);
 		return continue_rootView;

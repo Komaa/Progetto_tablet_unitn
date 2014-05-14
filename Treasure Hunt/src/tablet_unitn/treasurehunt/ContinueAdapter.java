@@ -29,10 +29,10 @@ public class ContinueAdapter extends ArrayAdapter<Map>{
         name.setText("Nome: "+c.getName());
 		distanza.setText("Distanza: "+"13m");
 		tempo_rimasto.setText("Tempo rimanente: "+"2h 13m");
-		Integer fatti = 75,
-				totale= 100;
-		avanzamento_txt.setText("Trovati "+fatti+" su "+totale);
-		avanzamaneto.setProgress(100*fatti/totale);
+		Integer trovati = c.getTrovati(),
+				totale= c.getTotali();
+		avanzamento_txt.setText("Trovati "+trovati+" su "+totale);
+		avanzamaneto.setProgress(100*trovati/totale);
         return convertView;
     }
 }

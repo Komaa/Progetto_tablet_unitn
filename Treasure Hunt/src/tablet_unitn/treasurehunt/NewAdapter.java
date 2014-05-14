@@ -23,12 +23,20 @@ public class NewAdapter extends ArrayAdapter<Map>{
         TextView name = (TextView)convertView.findViewById(R.id.new_nomeMappa);
 		TextView distanza = (TextView)convertView.findViewById(R.id.new_distanza);
 		TextView tempo_rimasto = (TextView)convertView.findViewById(R.id.new_tempoRimasto);
-		ProgressBar avanzamaneto = (ProgressBar)convertView.findViewById(R.id.new_difficolta);
+		TextView difficolta_txt = (TextView)convertView.findViewById(R.id.new_difficolta_txt);
+		ProgressBar difficolta = (ProgressBar)convertView.findViewById(R.id.new_difficolta);
         Map c = getItem(position);
         name.setText("Nome: "+c.getName());
 		distanza.setText("Distanza"+"13m");
 		tempo_rimasto.setText("Tempo rimanente"+"2h 13m");
-		avanzamaneto.setProgress(0);
+		Integer difficolta_val = c.getTrovati(); // da aggiornare
+		if(difficolta_val<3)
+			difficolta_txt.setText("Percorso facile");
+		else if (difficolta_val>7)
+			difficolta_txt.setText("Percorso difficile");
+		else
+			difficolta_txt.setText("Percorso medio");
+		difficolta.setProgress(100*difficolta_val/10);
         return convertView;
     }
 }
