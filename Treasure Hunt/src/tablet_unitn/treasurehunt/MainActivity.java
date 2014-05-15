@@ -23,9 +23,8 @@ public class MainActivity extends FragmentActivity implements
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		MainActivity.context = getApplicationContext();
 		setContentView(R.layout.activity_main);
-
+		MainActivity.context = getApplicationContext();
 		// Initilization
 		viewPager = (ViewPager) findViewById(R.id.pager);
 		actionBar = getActionBar();
@@ -63,10 +62,6 @@ public class MainActivity extends FragmentActivity implements
 		});
 	}
 
-	public static Context getAppContext(){
-		return MainActivity.context;
-	}
-	
 	@Override
 	public void onTabReselected(Tab tab, FragmentTransaction ft) {
 	}
@@ -81,6 +76,10 @@ public class MainActivity extends FragmentActivity implements
 	@Override
 	public void onTabUnselected(Tab tab, FragmentTransaction ft) {
 	}
+	
+	public static Context getAppContext(){
+ 		return MainActivity.context;
+ 	} 
 	
 	@Override
     public boolean onCreateOptionsMenu(Menu menu) {

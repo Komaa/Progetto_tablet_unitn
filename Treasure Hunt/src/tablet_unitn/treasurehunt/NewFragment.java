@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 public class NewFragment extends Fragment {
 
@@ -31,9 +30,12 @@ public class NewFragment extends Fragment {
 			  @Override
 			  public void onItemClick(AdapterView<?> parent, final View view,
 			      int position, long id) {
-			    //Toast.makeText(MainActivity.getAppContext(), "ciao!", Toast.LENGTH_LONG).show();
-			    Intent showMap = new Intent(getActivity(),ShowMapDetails.class); // NON funziona - da vedere il getActivity!!!
-			    startActivity(showMap);
+				//Toast.makeText(MainActivity.getAppContext(), "ciao!", Toast.LENGTH_LONG).show();
+				  Intent intent = new Intent(MainActivity.getAppContext(),ShowMapDetails.class);
+				  String[] mio = new String[2];
+				  mio[0]= Integer.toString(position);
+				  intent.putExtra(MainActivity.getAppContext()+".item",mio);
+				  startActivity(intent);
 			  }
 	    });
 		return new_rootView;

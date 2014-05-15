@@ -6,5 +6,8 @@
     <string name="home_title">Welcome back</string>
     <string name="continue_title">Continue games!</string>
     <string name="new_title">New games!</string>
-
+	<string name="logo">TreasureHunt</string>
+	<string name="mail">Your email</string>
+	<string name="psw">Password</string>
+	<string name="b_login">Sign in!</string>
 </resources>

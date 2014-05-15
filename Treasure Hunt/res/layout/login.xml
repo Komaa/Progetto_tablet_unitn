@@ -1,0 +1,78 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity"
+    android:background="#b9f7c6" >
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="#bbb9f7c6"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="53dp"
+        android:contentDescription="@+id/go"
+        android:src="@drawable/ic_launcher" />
+    
+    <EditText
+        android:id="@+id/login_mail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/t_mail"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:ems="10" 
+        android:inputType="textEmailAddress" >
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:id="@+id/t_psw"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/imageView1"
+        android:layout_below="@+id/login_mail"
+        android:layout_marginTop="29dp"
+        android:text="@string/psw"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+    <EditText
+        android:id="@+id/login_psw"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/login_mail"
+        android:layout_below="@+id/t_psw"
+        android:ems="10"
+        android:inputType="textPassword" />
+	
+	<Button
+        android:id="@+id/login_button"
+        android:layout_width="270dp"
+        android:layout_height="60dp"
+        android:layout_below="@+id/login_psw"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/loginbutton"
+        android:shadowColor="#A8A8A8"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="5"
+        android:text="@string/b_login"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp" />
+
+	<TextView
+	    android:id="@+id/t_mail"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@+id/imageView1"
+	    android:layout_centerHorizontal="true"
+	    android:text="@string/mail"
+	    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+</RelativeLayout>
