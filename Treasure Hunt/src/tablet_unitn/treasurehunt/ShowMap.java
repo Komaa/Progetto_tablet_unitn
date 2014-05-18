@@ -17,20 +17,20 @@ public class ShowMap extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.showmap);
  
-        /*try {
+        try {
             // Loading map
             initilizeMap();
  
         } catch (Exception e) {
             e.printStackTrace();
-        }*/
+        }
  
     }
  
     /**
      * function to load map. If map is not created it will create it for you
      * */
- /*   private void initilizeMap() {
+    private void initilizeMap() {
         if (googleMap == null) {
             googleMap = ((MapFragment) getFragmentManager().findFragmentById(
                     R.id.map)).getMap();
@@ -49,5 +49,5 @@ public class ShowMap extends Activity {
         super.onResume();
         initilizeMap();
     }
- */
+ 
 }

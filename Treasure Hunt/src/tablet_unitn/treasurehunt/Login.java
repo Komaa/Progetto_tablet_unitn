@@ -37,6 +37,7 @@ public class Login extends Activity {
 		    //intent.putExtra("ID_USR","ciao");
 	        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		    startActivity(intent);
+		    finish();
 	     }	
 	     else{
 	        Toast.makeText(this, "Wrong Credentials", Toast.LENGTH_SHORT).show();
