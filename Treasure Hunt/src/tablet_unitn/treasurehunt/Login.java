@@ -29,16 +29,17 @@ public class Login extends Activity {
      }
 
      public void login(){
-        if(mail.getText().toString().equals("admin") && 
-        psw.getText().toString().equals("admin")){
-        Toast.makeText(this, "Redirecting...", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(this,MainActivity.class);
-	    //intent.putExtra("ID_USR","ciao");
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-	    startActivity(intent);
-     }	
-     else{
-        Toast.makeText(this, "Wrong Credentials", Toast.LENGTH_SHORT).show();
-     }
+	     /*if(mail.getText().toString().equals("admin") && 
+	        psw.getText().toString().equals("admin")){*/
+	    if(true){
+	        Toast.makeText(this, "Redirecting...", Toast.LENGTH_SHORT).show();
+	        Intent intent = new Intent(this,MainActivity.class);
+		    //intent.putExtra("ID_USR","ciao");
+	        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		    startActivity(intent);
+	     }	
+	     else{
+	        Toast.makeText(this, "Wrong Credentials", Toast.LENGTH_SHORT).show();
+	     }
     }
 }

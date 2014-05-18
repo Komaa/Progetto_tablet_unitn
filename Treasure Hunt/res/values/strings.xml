@@ -10,4 +10,5 @@
 	<string name="mail">Your email</string>
 	<string name="psw">Password</string>
 	<string name="b_login">Sign in!</string>
+	<string name="show_map">Show map!</string>
 </resources>
