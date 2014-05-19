@@ -304,9 +304,10 @@ int id action_context_bar 0x7f060020
 int id action_menu_divider 0x7f060019
 int id action_menu_presenter 0x7f06001a
 int id action_mode_close_button 0x7f060027
-int id action_settings 0x7f06005a
+int id action_settings 0x7f06005c
 int id activity_chooser_view_content 0x7f060028
 int id always 0x7f06000f
+int id b_piazzaDante 0x7f060058
 int id beginning 0x7f060014
 int id checkbox 0x7f060030
 int id collapseActionView 0x7f060011
@@ -319,6 +320,7 @@ int id continue_title 0x7f060045
 int id default_activity_button 0x7f06002b
 int id dialog 0x7f060012
 int id disableHome 0x7f06000c
+int id distance 0x7f060059
 int id dropdown 0x7f060013
 int id edit_query 0x7f060033
 int id end 0x7f060016
@@ -341,7 +343,7 @@ int id login_button 0x7f060050
 int id login_mail 0x7f06004c
 int id login_psw 0x7f06004f
 int id map 0x7f060057
-int id map_name 0x7f060058
+int id map_name 0x7f06005a
 int id middle 0x7f060015
 int id never 0x7f06000d
 int id new_difficolta 0x7f060054
@@ -371,7 +373,7 @@ int id shortcut 0x7f060031
 int id showCustom 0x7f06000b
 int id showHome 0x7f060008
 int id showTitle 0x7f06000a
-int id show_map 0x7f060059
+int id show_map 0x7f06005b
 int id split_action_bar 0x7f060021
 int id submit_area 0x7f06003c
 int id t_mail 0x7f06004d
