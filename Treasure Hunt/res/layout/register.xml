@@ -82,6 +82,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/t_mail"
         android:layout_below="@+id/register_psw"
+        
         android:text="@string/rePsw"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 

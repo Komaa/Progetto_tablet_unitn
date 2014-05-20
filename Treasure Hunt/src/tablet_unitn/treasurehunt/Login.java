@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 public class Login extends Activity {
 	EditText mail,psw;
-	Button login;
+	Button login,register;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,11 +19,20 @@ public class Login extends Activity {
         mail = (EditText)findViewById(R.id.login_mail);
         psw = (EditText)findViewById(R.id.login_psw);
         login = (Button)findViewById(R.id.login_button);
+        register = (Button)findViewById(R.id.login_register);
         login.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				login();
+			}
+		});
+        register.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+			Intent intent = new Intent(getApplicationContext(),Register.class);
+			startActivity(intent);
 			}
 		});
      }
