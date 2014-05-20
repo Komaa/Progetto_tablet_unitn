@@ -13,11 +13,14 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
+import android.util.Log;
 import android.widget.Toast;
 
-public class Sinc_dbmanager extends Service{
+public class Sinc_dbmanager{
 
-	public void register(String name, String mail, String psw){
+	public String register(String name, String mail, String psw){
+		
+		Log.d("ciao","ciao");
 		HttpResponse response = null;
 		
 	    try {        
@@ -35,12 +38,7 @@ public class Sinc_dbmanager extends Service{
 	               // TODO Auto-generated catch block
 	               e.printStackTrace();
 	       }
-	    Toast.makeText(this, "response is "+response ,Toast.LENGTH_LONG).show();
-	}
-
-	@Override
-	public IBinder onBind(Intent intent) {
-		// TODO Auto-generated method stub
-		return null;
+	    //Toast.makeText(this, "response is "+response ,Toast.LENGTH_LONG).show();
+	    return response.toString();
 	}
 }

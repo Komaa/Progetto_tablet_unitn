@@ -32,8 +32,8 @@ public class Register extends Activity {
 
      public void register(){
     	Sinc_dbmanager reg = new Sinc_dbmanager();
-	    if(name.getText().toString() != "" && mail.getText().toString() != "" && psw.getText().toString() != "" && psw.getText().toString() == rePsw.getText().toString()){
-	        
+	    //if(name.getText().toString() != "" && mail.getText().toString() != "" && psw.getText().toString() != "" && psw.getText().toString() == rePsw.getText().toString()){
+	    if(true){    
 	        reg.register(name.getText().toString(), mail.getText().toString(), psw.getText().toString());
 	     }	
 	     else{
