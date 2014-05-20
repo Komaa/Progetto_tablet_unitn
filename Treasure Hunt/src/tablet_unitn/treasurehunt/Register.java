@@ -1,31 +1,8 @@
 package tablet_unitn.treasurehunt;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.util.EntityUtils;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.json.JSONTokener;
-
 import tablet_unitn.dbmanager.Sinc_dbmanager;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -54,51 +31,14 @@ public class Register extends Activity {
      }
 
      public void register(){
-    	Sinc_dbmanager reg = new Sinc_dbmanager();
-	    //if(name.getText().toString() != "" && mail.getText().toString() != "" && psw.getText().toString() != "" && psw.getText().toString() == rePsw.getText().toString()){
-	    if(true){    
-	    	new MyAsyncTask().execute(name.getText().toString(), mail.getText().toString(), psw.getText().toString());		
-	    	//reg.register(name.getText().toString(), mail.getText().toString(), psw.getText().toString());
+	    if(!name.getText().toString().equals("") && !mail.getText().toString().equals("") && !psw.getText().toString().equals("") && psw.getText().toString().equals(rePsw.getText().toString())){
+	    	String res = "ciao";
+	    	Sinc_dbmanager register = new Sinc_dbmanager();
+	    	register.execute(name.getText().toString(), mail.getText().toString(), psw.getText().toString());	
+	    	Toast.makeText(this, res, Toast.LENGTH_SHORT).show();
 	     }	
 	     else{
 	        Toast.makeText(this, "Wrong Credentials", Toast.LENGTH_SHORT).show();
 	     }
     }
-     
-     
-     
-     private class MyAsyncTask extends AsyncTask<String, Integer, Double>{
-    	 
- 		@Override
- 		protected Double doInBackground(String... params) {
- 			// TODO Auto-generated method stub
- 			postData(params[0],params[1],params[2]);
- 			
- 			return null;
- 		}
-  
- 		public void postData(String name, String psw, String mail) {
- 			
- 			HttpClient httpclient = new DefaultHttpClient();
-
- 		    // Prepare a request object
- 		    HttpGet httpget = new HttpGet("http://treasure-back.herokuapp.com/users/register/"+ name+"/"+mail+"/"+psw); 
-
- 		    // Execute the request
- 		    HttpResponse response;
- 		    try {
- 		        response = httpclient.execute(httpget);
- 		       String result = EntityUtils.toString(response.getEntity());
-				Log.d("risposta", result);		       
- 		      
- 		     
-	 		}catch (ClientProtocolException e) {
-				// TODO Auto-generated catch block
-			} catch (IOException e) {
-					// TODO Auto-generated catch block
-		}
-  
- 	}
- 
-}
 }

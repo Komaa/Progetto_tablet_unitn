@@ -1,44 +1,44 @@
 package tablet_unitn.dbmanager;
 
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
 
-import android.app.Service;
-import android.content.Intent;
-import android.os.IBinder;
+import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
 
-public class Sinc_dbmanager{
+public class Sinc_dbmanager extends AsyncTask<String, Integer, Double>{
 
-	public String register(String name, String mail, String psw){
+	@Override
+	protected Double doInBackground(String... params) {
+		// TODO Auto-generated method stub
+		postData(params[0],params[1],params[2]);
 		
-		Log.d("ciao","ciao");
-		HttpResponse response = null;
+		return null;
+	}
+
+	public void postData(String name, String psw, String mail) {
 		
-	    try {        
-	           HttpClient client = new DefaultHttpClient();
-	           HttpGet request = new HttpGet();
-	           request.setURI(new URI("http://treasure-back.herokuapp.com/register/" + name + "/" + psw + "/" + mail));
-	           response = client.execute(request);
-	       } catch (URISyntaxException e) {
-	           e.printStackTrace();
-	       }
-	           catch (ClientProtocolException e) {
-	           // TODO Auto-generated catch block
-	           e.printStackTrace();
-	       } catch (IOException e) {
-	               // TODO Auto-generated catch block
-	               e.printStackTrace();
-	       }
-	    //Toast.makeText(this, "response is "+response ,Toast.LENGTH_LONG).show();
-	    return response.toString();
+		HttpClient httpclient = new DefaultHttpClient();
+
+	    // Prepare a request object
+	    HttpGet httpget = new HttpGet("http://treasure-back.herokuapp.com/users/register/"+ name+"/"+mail+"/"+psw); 
+
+	    // Execute the request
+	    HttpResponse response;
+	    try {
+	        response = httpclient.execute(httpget);
+	        String result = EntityUtils.toString(response.getEntity());
+	        Log.d("risposta", result);		       
+	    }catch (ClientProtocolException e) {
+		// TODO Auto-generated catch block
+	} catch (IOException e) {
+			// TODO Auto-generated catch block
+	}
+
 	}
 }
