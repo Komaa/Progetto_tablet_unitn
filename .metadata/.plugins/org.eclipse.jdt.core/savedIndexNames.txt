@@ -1,0 +1,3 @@
+INDEX VERSION 1.126+/home/pietro/workspace_nuovo/.metadata/.plugins/org.eclipse.jdt.core
+3758244639.index
+1270315800.index
