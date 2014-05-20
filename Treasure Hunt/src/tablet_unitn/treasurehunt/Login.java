@@ -37,6 +37,8 @@ public class Login extends Activity {
 		});
      }
 
+    //diego e' un veronese
+    
      public void login(){
 	     /*if(mail.getText().toString().equals("admin") && 
 	        psw.getText().toString().equals("admin")){*/
