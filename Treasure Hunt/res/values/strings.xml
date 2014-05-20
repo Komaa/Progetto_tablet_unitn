@@ -9,6 +9,9 @@
 	<string name="logo">TreasureHunt</string>
 	<string name="mail">Your email</string>
 	<string name="psw">Password</string>
+	<string name="rePsw">Your password again</string>
 	<string name="b_login">Sign in!</string>
+	<string name="b_register">Sign up!</string>
 	<string name="show_map">Show map!</string>
+	<string name="name">Your name</string>
 </resources>

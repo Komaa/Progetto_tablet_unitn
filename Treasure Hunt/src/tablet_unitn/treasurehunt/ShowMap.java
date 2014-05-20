@@ -82,6 +82,7 @@ public class ShowMap extends FragmentActivity implements LocationListener {
                 onLocationChanged(myLocation);
             }
             locationManager.requestLocationUpdates(provider, 20000, 0, this);
+            googleMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
         }
     }
     @Override
@@ -103,13 +104,6 @@ public class ShowMap extends FragmentActivity implements LocationListener {
         Location.distanceBetween(latitude, longitude,
         		dante_latitude, dante_longitude, results);
         distance.setText("Distance: "+results[0]+" metres");
-        /*
-        // Showing the current location in Google Map
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
- 
-        // Zoom in the Google Map
-        googleMap.animateCamera(CameraUpdateFactory.zoomTo(15));
- 	*/
         
         //Sposta la camera in una posizione
         CameraPosition myPosition = new CameraPosition.Builder().target(
