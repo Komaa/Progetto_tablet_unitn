@@ -1,6 +1,8 @@
 package tablet_unitn.treasurehunt;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +16,10 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.JSONTokener;
 
 import tablet_unitn.dbmanager.Sinc_dbmanager;
 import android.os.AsyncTask;
@@ -71,9 +77,7 @@ public class Register extends Activity {
  			return null;
  		}
   
- 		protected void onPostExecute(Double result){
- 			Toast.makeText(getApplicationContext(), "command sent", Toast.LENGTH_LONG).show();
- 		}
+ 	
  
  		
  		public void postData(String name, String psw, String mail) {
@@ -112,6 +116,18 @@ public class Register extends Activity {
  		        response = httpclient.execute(httpget);
  		       String result = EntityUtils.toString(response.getEntity());
 				Log.d("risposta", result);
+// 		       try {
+//				String successo = new JSONObject(result).getString("success");
+//				if(successo.equals("true")){
+//					//Toast.makeText(getApplicationContext(), "Registration completed", Toast.LENGTH_LONG).show();
+//				}
+//			} catch (JSONException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+ 		       
+ 		      
+ 		     
  		}catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
 			} catch (IOException e) {

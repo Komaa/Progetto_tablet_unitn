@@ -1,8 +1,19 @@
 package tablet_unitn.treasurehunt;
 
+import java.io.IOException;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
+
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -42,6 +53,8 @@ public class Login extends Activity {
      public void login(){
 	     /*if(mail.getText().toString().equals("admin") && 
 	        psw.getText().toString().equals("admin")){*/
+    	 new MyAsyncLogin().execute(mail.getText().toString(), psw.getText().toString());		
+ 	    
 	    if(true){
 	        Toast.makeText(this, "Redirecting...", Toast.LENGTH_SHORT).show();
 	        Intent intent = new Intent(this,MainActivity.class);
@@ -54,4 +67,54 @@ public class Login extends Activity {
 	        Toast.makeText(this, "Wrong Credentials", Toast.LENGTH_SHORT).show();
 	     }
     }
+     
+     private class MyAsyncLogin extends AsyncTask<String, Integer, Double>{
+    	 
+  		@Override
+  		protected Double doInBackground(String... params) {
+  			// TODO Auto-generated method stub
+  			postData(params[0],params[1]);
+  			
+  			return null;
+  		}
+   
+  	
+  
+  		
+  		public void postData(String name, String psw) {
+  			
+  			 HttpClient httpclient = new DefaultHttpClient();
+
+  		    // Prepare a request object
+  		    HttpGet httpget = new HttpGet("http://treasure-back.herokuapp.com/users/login/"+ name+"/"+mail+"/"+psw); 
+
+  		    // Execute the request
+  		    HttpResponse response;
+  		    try {
+  		        response = httpclient.execute(httpget);
+  		       String result = EntityUtils.toString(response.getEntity());
+ 				Log.d("risposta", result);
+//  		       try {
+// 				String successo = new JSONObject(result).getString("success");
+// 				if(successo.equals("true")){
+// 					//Toast.makeText(getApplicationContext(), "Registration completed", Toast.LENGTH_LONG).show();
+// 				}
+// 			} catch (JSONException e) {
+// 				// TODO Auto-generated catch block
+// 				e.printStackTrace();
+// 			}
+  		       
+  		      
+  		     
+  		}catch (ClientProtocolException e) {
+ 			// TODO Auto-generated catch block
+ 			} catch (IOException e) {
+ 				// TODO Auto-generated catch block
+ 			}
+   
+  	}
+  
+ }
+ 
+
 }
