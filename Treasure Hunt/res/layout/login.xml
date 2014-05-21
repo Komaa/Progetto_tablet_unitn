@@ -59,7 +59,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:ems="10"
-        android:inputType="textPassword" />
+        android:inputType="textEmailAddress" />
     
     <Button
         android:id="@+id/login_button"
