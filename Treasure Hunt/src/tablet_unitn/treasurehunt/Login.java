@@ -1,6 +1,7 @@
 
 package tablet_unitn.treasurehunt;
 
+import tablet_unitn.checkInternet.MobileInternetConnectionDetector;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -16,6 +17,15 @@ import android.widget.Toast;
 public class Login extends Activity {
 	EditText mail,psw;
 	Button login, register;
+	
+	//Internet status flag
+    Boolean isMobileConnectionExist = false;
+    //Internet status flag
+    Boolean isWifiConnectionExist = false;
+    
+    // Connection detector class
+    MobileInternetConnectionDetector cd;
+	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +35,9 @@ public class Login extends Activity {
         
         Typeface robotoThin = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Thin.ttf");
         Typeface robotoBold = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Bold.ttf");
+        
+        // creating connection detector class instance
+        cd = new MobileInternetConnectionDetector(getApplicationContext());
         
         TextView t_mail = (TextView) findViewById(R.id.t_mail);
         t_mail.setTypeface(robotoThin);
@@ -45,7 +58,20 @@ public class Login extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				login();
+				// get Internet status
+		        isMobileConnectionExist = cd.checkMobileInternetConn();
+
+		        // check for Internet status
+		        if (isMobileConnectionExist) {
+		            // Internet Connection exists
+		        	Toast.makeText(Login.this, "Your device has mobile internet", Toast.LENGTH_SHORT).show();
+		        	login();
+		        } else {
+		            // Internet connection doesn't exist
+		        	Toast.makeText(Login.this, "Your device doesn't have mobile internet", Toast.LENGTH_SHORT).show();
+//		            showAlertDialog(this, "No Internet Connection",
+//		                    "Your device doesn't have mobile internet", false);
+		        }
 			}
 		});
         
