@@ -1,7 +1,11 @@
 
 package tablet_unitn.treasurehunt;
 
+import java.util.concurrent.ExecutionException;
+
 import tablet_unitn.checkInternet.MobileInternetConnectionDetector;
+import tablet_unitn.dbmanager.Sinc_dbmanager;
+import tablet_unitn.dbmanager.Login_db;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -64,7 +68,7 @@ public class Login extends Activity {
 		        // check for Internet status
 		        if ((isMobileConnectionExist)||true) {
 		            // Internet Connection exists
-		        	Toast.makeText(Login.this, "Your device has mobile internet", Toast.LENGTH_SHORT).show();
+		        	//Toast.makeText(Login.this, "Your device has mobile internet", Toast.LENGTH_SHORT).show();
 		        	login();
 		        } else {
 		            // Internet connection doesn't exist
@@ -88,8 +92,22 @@ public class Login extends Activity {
      public void login(){
 	     /*if(mail.getText().toString().equals("admin") && 
 	        psw.getText().toString().equals("admin")){*/
-	    if(true){
-	        Toast.makeText(this, "Redirecting...", Toast.LENGTH_SHORT).show();
+    	 
+    	 String res = "ciao";
+	    	Login_db login = new Login_db();
+	    	try {
+				res=login.execute(mail.getText().toString(), psw.getText().toString()).get();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ExecutionException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}	
+    	 
+    	 
+	    if(res.equals("true")){
+	        //Toast.makeText(this, "Redirecting...", Toast.LENGTH_SHORT).show();
 	        Intent intent = new Intent(this, MainActivity.class);
 		    //intent.putExtra("ID_USR","ciao");
 	        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
