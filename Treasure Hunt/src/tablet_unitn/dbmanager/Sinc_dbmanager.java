@@ -1,28 +1,31 @@
 package tablet_unitn.dbmanager;
 
 import java.io.IOException;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.os.AsyncTask;
 import android.util.Log;
 
-public class Sinc_dbmanager extends AsyncTask<String, Integer, Double>{
+public class Sinc_dbmanager extends AsyncTask<String, Integer, String>{
 
 	@Override
-	protected Double doInBackground(String... params) {
+	protected String doInBackground(String... params) {
 		// TODO Auto-generated method stub
-		postData(params[0],params[1],params[2]);
+		String res=postData(params[0],params[1],params[2]);
 		
-		return null;
+		return res;
 	}
 
-	public void postData(String name, String psw, String mail) {
-		
+	public String postData(String name, String psw, String mail) {
+		String result="";
 		HttpClient httpclient = new DefaultHttpClient();
 
 	    // Prepare a request object
@@ -32,13 +35,19 @@ public class Sinc_dbmanager extends AsyncTask<String, Integer, Double>{
 	    HttpResponse response;
 	    try {
 	        response = httpclient.execute(httpget);
-	        String result = EntityUtils.toString(response.getEntity());
-	        Log.d("risposta", result);		       
+	        result = EntityUtils.toString(response.getEntity());	 
+	        try {
+				JSONObject obj = new JSONObject(result);
+				result=obj.getString("success");
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	    }catch (ClientProtocolException e) {
 		// TODO Auto-generated catch block
 	} catch (IOException e) {
 			// TODO Auto-generated catch block
 	}
-
+	return result;  
 	}
 }

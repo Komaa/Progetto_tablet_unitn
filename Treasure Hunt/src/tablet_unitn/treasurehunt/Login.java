@@ -62,7 +62,7 @@ public class Login extends Activity {
 		        isMobileConnectionExist = cd.checkMobileInternetConn();
 
 		        // check for Internet status
-		        if (isMobileConnectionExist) {
+		        if ((isMobileConnectionExist)||true) {
 		            // Internet Connection exists
 		        	Toast.makeText(Login.this, "Your device has mobile internet", Toast.LENGTH_SHORT).show();
 		        	login();

@@ -1,5 +1,7 @@
 package tablet_unitn.treasurehunt;
 
+import java.util.concurrent.ExecutionException;
+
 import tablet_unitn.dbmanager.Sinc_dbmanager;
 import android.os.Bundle;
 import android.app.Activity;
@@ -34,8 +36,19 @@ public class Register extends Activity {
 	    if(!name.getText().toString().equals("") && !mail.getText().toString().equals("") && !psw.getText().toString().equals("") && psw.getText().toString().equals(rePsw.getText().toString())){
 	    	String res = "ciao";
 	    	Sinc_dbmanager register = new Sinc_dbmanager();
-	    	register.execute(name.getText().toString(), mail.getText().toString(), psw.getText().toString());	
-	    	Toast.makeText(this, res, Toast.LENGTH_SHORT).show();
+	    	try {
+				res=register.execute(name.getText().toString(), mail.getText().toString(), psw.getText().toString()).get();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ExecutionException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}	
+	    	if(res.equals("true"))
+	    	Toast.makeText(this, "Registration completed", Toast.LENGTH_SHORT).show();
+	    	else
+	    	Toast.makeText(this, "Username already exists", Toast.LENGTH_SHORT).show();
 	     }	
 	     else{
 	        Toast.makeText(this, "Wrong Credentials", Toast.LENGTH_SHORT).show();
