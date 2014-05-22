@@ -14,4 +14,6 @@
 	<string name="b_register">Sign up!</string>
 	<string name="show_map">Show map!</string>
 	<string name="name">Your name</string>
+	<string name="confirm_psw">Confirm Password</string>
+	<string name="username">Username</string>
 </resources>

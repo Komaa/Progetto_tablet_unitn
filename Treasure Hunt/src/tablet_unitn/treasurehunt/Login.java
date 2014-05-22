@@ -19,7 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class Login extends Activity {
-	EditText mail,psw;
+	EditText name, psw;
 	Button login, register;
 	
 	//Internet status flag
@@ -40,23 +40,20 @@ public class Login extends Activity {
         Typeface robotoThin = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Thin.ttf");
         Typeface robotoBold = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Bold.ttf");
         
-        // creating connection detector class instance
-        cd = new MobileInternetConnectionDetector(getApplicationContext());
-        
-        TextView t_mail = (TextView) findViewById(R.id.t_mail);
-        t_mail.setTypeface(robotoThin);
+        TextView t_name = (TextView) findViewById(R.id.t_name);
+        t_name.setTypeface(robotoThin);
         TextView t_psw = (TextView) findViewById(R.id.t_psw);
         t_psw.setTypeface(robotoThin);
         TextView title_app = (TextView) findViewById(R.id.app_title);
         title_app.setTypeface(robotoBold);
         
-        mail = (EditText) findViewById(R.id.login_mail);
+        name = (EditText) findViewById(R.id.login_name);
         psw = (EditText) findViewById(R.id.login_psw);
         login = (Button) findViewById(R.id.login_button);
         register = (Button) findViewById(R.id.register_button);
         
-        login.setTypeface(robotoThin);
-        register.setTypeface(robotoThin);
+     // creating connection detector class instance
+        cd = new MobileInternetConnectionDetector(getApplicationContext());
         
         login.setOnClickListener(new OnClickListener() {
 			
@@ -96,7 +93,7 @@ public class Login extends Activity {
     	 String res = "ciao";
 	    	Login_db login = new Login_db();
 	    	try {
-				res=login.execute(mail.getText().toString(), psw.getText().toString()).get();
+				res=login.execute(name.getText().toString(), psw.getText().toString()).get();
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

@@ -20,21 +20,21 @@
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
-        android:id="@+id/t_mail"
+        android:id="@+id/t_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/app_title"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"
-        android:text="@string/mail"
+        android:text="@string/name"
         android:textSize="20sp"
         android:textAppearance="?android:attr/textAppearanceSmall" />
     
     <EditText
-        android:id="@+id/login_mail"
+        android:id="@+id/login_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/t_mail"
+        android:layout_below="@+id/t_name"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:ems="10"
@@ -44,7 +44,7 @@
         android:id="@+id/t_psw"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/login_mail"
+        android:layout_below="@+id/login_name"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:text="@string/psw"

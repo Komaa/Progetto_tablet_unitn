@@ -49,8 +49,5 @@
         android:textColor="#ffffff"
         android:layout_width="match_parent"
         android:layout_height="15dp"
-        android:layout_alignLeft="@id/continue_avanzamento"
-        android:layout_alignTop="@id/continue_avanzamento"
-        android:layout_alignRight="@id/continue_avanzamento"
-        android:layout_alignBottom="@id/continue_avanzamento" />
+         />
 </RelativeLayout>

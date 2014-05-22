@@ -1,30 +1,51 @@
 package tablet_unitn.treasurehunt;
 
 public class Map {
-	String name="";
-	Integer trovati=0,
-			totali=0;
-	public Map(String name, Integer trovati, Integer totali) {
-		this.name=name;
-		this.trovati=trovati;
-		this.totali=totali;
+	String mapName = "";
+	
+	int cpDone = 0, cpTotal = 0, //rispettivamente checkpoint raggiungi e checkpoint totali
+		pathDone = 0, pathTotal = 0; //rispettivamente distanza percorsa e distanza totale
+	
+	String difficulty = "";
+	
+	//il costructor di ogni singola mappa deve contenere informazioni basilari
+	//e cioè nome mappa, checkpoint totali, distanza totale e difficoltà
+	public Map(String mapName, int cpTotal, int pathTotal, String difficulty) {
+		this.mapName = mapName;
+		this.cpTotal = cpTotal;
+		this.pathTotal = pathTotal;
+		this.difficulty = difficulty;
 	}
-	public void setName(String name) {
-		this.name=name;
-	}
+	
 	public String getName() {
-		return name;
+		return mapName;
 	}
-	public void setTrovati(Integer trovati) {
-		this.trovati=trovati;
+	
+	public String getDifficulty(){
+		return this.difficulty;
 	}
-	public Integer getTrovati() {
-		return trovati;
+	
+	public void setCheckpoints(int cpDone) {
+		this.cpDone = cpDone;
 	}
-	public void setTotali(Integer totali) {
-		this.totali=totali;
+	
+	public int getCheckpointsDone() {
+		return this.cpDone;
 	}
-	public Integer getTotali() {
-		return totali;
+	
+	public int getCheckpointsTotal(){
+		return this.cpTotal;
+	}
+	
+	public void setPath(int pathDone) {
+		this.pathDone = pathDone;
+	}
+	
+	public int getPathDone() {
+		return this.pathDone;
+	}
+	
+	public int getPathTotal() {
+		return this.pathTotal;
 	}
 }

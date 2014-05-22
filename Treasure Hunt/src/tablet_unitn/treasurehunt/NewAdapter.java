@@ -20,7 +20,7 @@ public class NewAdapter extends ArrayAdapter<Map>{
         LayoutInflater inflater = (LayoutInflater) getContext()
              .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         convertView = inflater.inflate(R.layout.newlist, null);
-        TextView name = (TextView)convertView.findViewById(R.id.new_nomeMappa);
+        /*TextView name = (TextView)convertView.findViewById(R.id.new_nomeMappa);
 		TextView distanza = (TextView)convertView.findViewById(R.id.new_distanza);
 		TextView tempo_rimasto = (TextView)convertView.findViewById(R.id.new_tempoRimasto);
 		TextView difficolta_txt = (TextView)convertView.findViewById(R.id.new_difficolta_txt);
@@ -36,7 +36,7 @@ public class NewAdapter extends ArrayAdapter<Map>{
 			difficolta_txt.setText("Percorso difficile");
 		else
 			difficolta_txt.setText("Percorso medio");
-		difficolta.setProgress(100*difficolta_val/10);
+		difficolta.setProgress(100*difficolta_val/10);*/
         return convertView;
     }
 }
