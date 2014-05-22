@@ -16,4 +16,5 @@
 	<string name="name">Your name</string>
 	<string name="confirm_psw">Confirm Password</string>
 	<string name="username">Username</string>
+	<string name="remember">Remember credentials</string>
 </resources>

@@ -1,25 +1,30 @@
 
 package tablet_unitn.treasurehunt;
 
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import tablet_unitn.checkInternet.MobileInternetConnectionDetector;
-import tablet_unitn.dbmanager.Sinc_dbmanager;
 import tablet_unitn.dbmanager.Login_db;
+import tablet_unitn.dbmanager.UserDAO_DB_impl;
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class Login extends Activity {
-	EditText name, psw;
+	private static Context context;
+	EditText mail, psw;
 	Button login, register;
 	
 	//Internet status flag
@@ -29,6 +34,11 @@ public class Login extends Activity {
     
     // Connection detector class
     MobileInternetConnectionDetector cd;
+    
+    CheckBox checkBox;
+    List<User> users;
+    User user = null;
+    UserDAO_DB_impl dao;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,9 +46,11 @@ public class Login extends Activity {
         getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
         getActionBar().hide();
         setContentView(R.layout.login);
-        
+        Login.context = getApplicationContext();
         Typeface robotoThin = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Thin.ttf");
         Typeface robotoBold = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Bold.ttf");
+        
+        checkBox = (CheckBox) findViewById(R.id.remember);
         
         TextView t_name = (TextView) findViewById(R.id.t_name);
         t_name.setTypeface(robotoThin);
@@ -47,16 +59,15 @@ public class Login extends Activity {
         TextView title_app = (TextView) findViewById(R.id.app_title);
         title_app.setTypeface(robotoBold);
         
-        name = (EditText) findViewById(R.id.login_name);
+        mail = (EditText) findViewById(R.id.login_name);
         psw = (EditText) findViewById(R.id.login_psw);
         login = (Button) findViewById(R.id.login_button);
         register = (Button) findViewById(R.id.register_button);
         
      // creating connection detector class instance
         cd = new MobileInternetConnectionDetector(getApplicationContext());
-        
+
         login.setOnClickListener(new OnClickListener() {
-			
 			@Override
 			public void onClick(View v) {
 				// get Internet status
@@ -66,6 +77,7 @@ public class Login extends Activity {
 		        if ((isMobileConnectionExist)||true) {
 		            // Internet Connection exists
 		        	//Toast.makeText(Login.this, "Your device has mobile internet", Toast.LENGTH_SHORT).show();
+		        	
 		        	login();
 		        } else {
 		            // Internet connection doesn't exist
@@ -84,29 +96,61 @@ public class Login extends Activity {
         	startActivity(intent);
         	}
         });
+        
+        //Controlla se c'è un utente ancora loggato
+        dao = new UserDAO_DB_impl(); 
+        dao.open(); 
+        users = dao.getAllUser(); 
+        for (int i = 0; i < users.size(); i++) {
+        	if(users.get(i).getLogged()==1){
+        		mail.setText(users.get(i).getMail());
+        		psw.setText(users.get(i).getPsw());
+        		this.user=users.get(i);
+        	}
+    	}
      }
 
      public void login(){
-	     /*if(mail.getText().toString().equals("admin") && 
-	        psw.getText().toString().equals("admin")){*/
-    	 
-    	 String res = "ciao";
-	    	Login_db login = new Login_db();
-	    	try {
-				res=login.execute(name.getText().toString(), psw.getText().toString()).get();
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (ExecutionException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}	
+    	String res="";
+		Login_db login = new Login_db();
+		try {
+			res=login.execute(mail.getText().toString(), psw.getText().toString()).get();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
     	 
     	 
 	    if(res.equals("true")){
+	    	//save or not credentials
+	    	if (checkBox.isChecked()) { //se vuole salvare le credenziali
+	    		if(user == null){ //se non ci sono utenti loggati o hanno fatto un login senza ricordare le credenziali
+	    			int tmp=0;
+	    			for (int i = 0; i < users.size(); i++) { //controllo se l'utente ha già fatto un login (già censito)
+	    	        	if(users.get(i).getMail()==mail.getText().toString()){ //se ha la stessa mail è lui
+	    	        		this.user=users.get(i);
+	    	        		user.setLogged(1);
+	    		        	dao.updateUser(user);
+	    	        		tmp++;
+	    	        	}
+	    	    	}
+	    			if(tmp!=0){ //è la prima volta che fa il login
+	    				Log.d("ciao", "e dov alllora??");
+	    				user=new User(0, "noName", mail.getText().toString(), psw.getText().toString(), 0, 1);
+	    				dao.insertUser(user);
+	    			}
+	    		}else{
+	    			user.setLogged(1);
+		        	dao.updateUser(user);
+	    		}
+	    		
+	        }
 	        //Toast.makeText(this, "Redirecting...", Toast.LENGTH_SHORT).show();
 	        Intent intent = new Intent(this, MainActivity.class);
-		    //intent.putExtra("ID_USR","ciao");
+		    //intent.putExtra("ID_USR",""+user.getID());
 	        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		    startActivity(intent);
 		    finish();
@@ -115,6 +159,22 @@ public class Login extends Activity {
 	        Toast.makeText(this, "Wrong Credentials", Toast.LENGTH_SHORT).show();
 	     }
     }
+     
+	@Override 
+	protected void onResume() { 
+		dao.open(); 
+		super.onResume(); 
+	} 
+	 
+	@Override 
+	protected void onPause() { 
+		dao.close(); 
+		super.onPause(); 
+	} 
+	
+	public static Context getAppContext(){
+ 		return Login.context;
+ 	} 
 }
 
 
