@@ -105,6 +105,7 @@ public class Login extends Activity {
         	if(users.get(i).getLogged()==1){
         		mail.setText(users.get(i).getMail());
         		psw.setText(users.get(i).getPsw());
+        		checkBox.setChecked(true);
         		this.user=users.get(i);
         	}
     	}
@@ -125,6 +126,7 @@ public class Login extends Activity {
     	 
     	 
 	    if(res.equals("true")){
+	    	Toast.makeText(this, "Redirecting...", Toast.LENGTH_SHORT).show();
 	    	//save or not credentials
 	    	if (checkBox.isChecked()) { //se vuole salvare le credenziali
 	    		if(user == null){ //se non ci sono utenti loggati o hanno fatto un login senza ricordare le credenziali
@@ -137,8 +139,7 @@ public class Login extends Activity {
 	    	        		tmp++;
 	    	        	}
 	    	    	}
-	    			if(tmp!=0){ //è la prima volta che fa il login
-	    				Log.d("ciao", "e dov alllora??");
+	    			if(tmp==0){ //è la prima volta che fa il login
 	    				user=new User(0, "noName", mail.getText().toString(), psw.getText().toString(), 0, 1);
 	    				dao.insertUser(user);
 	    			}
@@ -150,7 +151,7 @@ public class Login extends Activity {
 	        }
 	        //Toast.makeText(this, "Redirecting...", Toast.LENGTH_SHORT).show();
 	        Intent intent = new Intent(this, MainActivity.class);
-		    //intent.putExtra("ID_USR",""+user.getID());
+		    intent.putExtra("ID_USR",""+user.getID());
 	        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		    startActivity(intent);
 		    finish();

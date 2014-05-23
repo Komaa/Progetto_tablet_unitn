@@ -59,15 +59,15 @@ public class UserDAO_DB_impl implements UserDAO {
 	
 	@Override 
 	public User insertUser(User user) { 
-		long insertId = database.insert(MySQLiteHelper.TABLE_USER, null, UserToValues(user)); 
+		long insertId = database.insert(MySQLiteHelper.TABLE_USER, null, UserToValues(user));
+		
 		// Now read from DB the inserted User and return it 
 		Cursor cursor = database.query(MySQLiteHelper.TABLE_USER, allColumns, 
 				MySQLiteHelper.COLUMN_ID + " = ?" , new String[] {""+insertId}, 
 				null, null, null); 
-		 cursor.moveToFirst(); 
-		 User p=cursorToUser(cursor); 
-		 cursor.close(); 
-		 return p; 
+		cursor.moveToFirst();
+		User p=cursorToUser(cursor);
+		return p; 
 	 }
 	 @Override 
 	 public void deleteUser(User user) { 
@@ -99,19 +99,16 @@ public class UserDAO_DB_impl implements UserDAO {
 
 	@Override
 	public User updateUser(User user) {
-		Log.d("ciao", " update!");
 		Cursor cursor = database.query(MySQLiteHelper.TABLE_USER, 
 				new String[] {MySQLiteHelper.COLUMN_MAIL},
 				MySQLiteHelper.COLUMN_ID + " = ?", 
 				new String[] {""+user.getID()}, null, null, null);
 		if (cursor != null) {// record exists
-			Log.d("ciao", " esiste record");
 			database.update(MySQLiteHelper.TABLE_USER,
 					UserToValues(user),
 					MySQLiteHelper.COLUMN_ID + " = ?", 
 					new String[] {""+user.getID()}); 
 		} else {// record not found
-			Log.d("ciao", "non esiste record");
 			insertUser(user);
 		}
 		return user;
