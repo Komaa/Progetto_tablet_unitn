@@ -50,7 +50,7 @@ public class Login extends Activity {
         Typeface robotoThin = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Thin.ttf");
         Typeface robotoBold = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Bold.ttf");
         
-        //checkBox = (CheckBox) findViewById(R.id.remember);
+        checkBox = (CheckBox) findViewById(R.id.remember);
         
         TextView t_name = (TextView) findViewById(R.id.t_name);
         t_name.setTypeface(robotoThin);
