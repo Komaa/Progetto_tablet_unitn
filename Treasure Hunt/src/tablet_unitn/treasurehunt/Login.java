@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import tablet_unitn.checkInternet.MobileInternetConnectionDetector;
+import tablet_unitn.checkInternet.WIFIInternetConnectionDetector;
 import tablet_unitn.dbmanager.Login_db;
 import tablet_unitn.dbmanager.UserDAO_DB_impl;
 import android.os.Bundle;
@@ -12,7 +13,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -29,11 +29,11 @@ public class Login extends Activity {
 	
 	//Internet status flag
     Boolean isMobileConnectionExist = false;
-    //Internet status flag
     Boolean isWifiConnectionExist = false;
     
     // Connection detector class
     MobileInternetConnectionDetector cd;
+    WIFIInternetConnectionDetector wc;
     
     CheckBox checkBox;
     List<User> users;
@@ -66,24 +66,24 @@ public class Login extends Activity {
         
      // creating connection detector class instance
         cd = new MobileInternetConnectionDetector(getApplicationContext());
+        wc = new WIFIInternetConnectionDetector(getApplicationContext());
 
         login.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				Toast.makeText(Login.getAppContext(), "Checking..", Toast.LENGTH_SHORT).show();
 				// get Internet status
 		        isMobileConnectionExist = cd.checkMobileInternetConn();
+		        isWifiConnectionExist = wc.checkMobileInternetConn();
 
 		        // check for Internet status
-		        if ((isMobileConnectionExist)||true) {
+		        if ((isMobileConnectionExist)||isWifiConnectionExist) {
 		            // Internet Connection exists
 		        	//Toast.makeText(Login.this, "Your device has mobile internet", Toast.LENGTH_SHORT).show();
-		        	
 		        	login();
 		        } else {
 		            // Internet connection doesn't exist
-		        	Toast.makeText(Login.this, "Your device doesn't have mobile internet", Toast.LENGTH_SHORT).show();
-//		            showAlertDialog(this, "No Internet Connection",
-//		                    "Your device doesn't have mobile internet", false);
+		        	Toast.makeText(Login.this, "No Internet Connection", Toast.LENGTH_LONG).show();
 		        }
 			}
 		});
