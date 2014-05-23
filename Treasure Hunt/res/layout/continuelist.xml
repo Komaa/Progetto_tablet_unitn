@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:textColor="#000" >
 
 	<TextView
         android:id="@+id/continue_nomeMappa"
@@ -10,6 +11,7 @@
         android:layout_marginTop="15dp"
         android:layout_centerHorizontal="true"
         android:textSize="25sp"
+        android:textColor="#000"
         android:text="Titolo"
         />
     
@@ -21,7 +23,7 @@
         android:layout_marginLeft="15dp"
         android:layout_marginTop="5dp"
         android:textSize="15sp"
-        
+        android:textColor="#000"
         android:text="Checkpoints" />
     
     <TextView
@@ -32,7 +34,7 @@
         android:layout_alignBaseline="@+id/continue_checkpoints"
         android:layout_centerHorizontal="true"
         android:textSize="15sp"
-        
+        android:textColor="#000"
         android:text="Path"
         />
 
@@ -44,7 +46,7 @@
         android:layout_alignParentRight="true"
         android:layout_marginRight="15dp"
         android:textSize="15sp"
-        
+        android:textColor="#000"
         android:text="Difficulty" />
 
     <TextView
@@ -56,7 +58,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="5dp"
         android:textSize="15sp"
-        
+        android:textColor="#000"
         android:text="10/15" />
     
     <TextView
@@ -68,7 +70,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="5dp"
         android:textSize="15sp"
-        
+        android:textColor="#000"
         android:text="10/16 km"
         />
     
@@ -82,17 +84,14 @@
         android:layout_marginRight="15dp"
         android:layout_marginTop="5dp"
         android:textSize="15sp"
-        
-        android:text="Easy"
-        />
+        android:textColor="#000"
+        android:text="Easy" />
 
     <View
-        android:id="@+id/space"
-        android:layout_width="wrap_content"
-        android:layout_height="15dp"
-        android:layout_below="@+id/continue_pathData"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="5dp"
-        />
+	       android:id="@+id/SplitLine_ver1"
+	       android:layout_width="match_parent"
+	       android:layout_height= "3dp"
+	       android:background="#99000000"
+	       android:layout_marginTop="5dp" />
     
 </RelativeLayout>
