@@ -64,7 +64,7 @@ public class Login extends Activity {
         login = (Button) findViewById(R.id.login_button);
         register = (Button) findViewById(R.id.register_button);
         
-     // creating connection detector class instance
+        // creating connection detector class instance
         cd = new MobileInternetConnectionDetector(getApplicationContext());
         wc = new WIFIInternetConnectionDetector(getApplicationContext());
 
@@ -77,7 +77,7 @@ public class Login extends Activity {
 		        isWifiConnectionExist = wc.checkMobileInternetConn();
 
 		        // check for Internet status
-		        if ((isMobileConnectionExist)||isWifiConnectionExist) {
+		        if (isMobileConnectionExist||isWifiConnectionExist) {
 		            // Internet Connection exists
 		        	//Toast.makeText(Login.this, "Your device has mobile internet", Toast.LENGTH_SHORT).show();
 		        	login();

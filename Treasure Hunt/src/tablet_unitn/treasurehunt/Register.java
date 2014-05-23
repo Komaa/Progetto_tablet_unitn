@@ -2,6 +2,8 @@ package tablet_unitn.treasurehunt;
 
 import java.util.concurrent.ExecutionException;
 
+import tablet_unitn.checkInternet.MobileInternetConnectionDetector;
+import tablet_unitn.checkInternet.WIFIInternetConnectionDetector;
 import tablet_unitn.dbmanager.Sinc_dbmanager;
 import android.os.Bundle;
 import android.app.Activity;
@@ -17,6 +19,11 @@ import android.widget.Toast;
 public class Register extends Activity {
 	EditText name,mail,psw,rePsw;
 	Button register;
+	
+	// Connection detector class
+    MobileInternetConnectionDetector cd;
+    WIFIInternetConnectionDetector wc;
+	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +33,10 @@ public class Register extends Activity {
         
         Typeface robotoThin = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Thin.ttf");
         Typeface robotoBold = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Bold.ttf");
+        
+        // creating connection detector class instance
+        cd = new MobileInternetConnectionDetector(getApplicationContext());
+        wc = new WIFIInternetConnectionDetector(getApplicationContext());
         
         name = (EditText)findViewById(R.id.register_name);
         mail = (EditText)findViewById(R.id.register_mail);
@@ -47,7 +58,20 @@ public class Register extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				register();
+				Toast.makeText(Login.getAppContext(), "Checking..", Toast.LENGTH_SHORT).show();
+				// get Internet status
+		        boolean isMobileConnectionExist = cd.checkMobileInternetConn();
+		        boolean isWifiConnectionExist = wc.checkMobileInternetConn();
+
+		        // check for Internet status
+		        if (isMobileConnectionExist||isWifiConnectionExist) {
+		            // Internet Connection exists
+		        	//Toast.makeText(Login.this, "Your device has mobile internet", Toast.LENGTH_SHORT).show();
+		        	register();
+		        } else {
+		            // Internet connection doesn't exist
+		        	Toast.makeText(Register.this, "No Internet Connection", Toast.LENGTH_LONG).show();
+		        }
 			}
 		});
      }
