@@ -42,7 +42,7 @@ public class Register extends Activity {
         mail = (EditText)findViewById(R.id.register_mail);
         psw = (EditText)findViewById(R.id.register_psw);
         rePsw = (EditText)findViewById(R.id.register_rePsw);
-        register = (Button)findViewById(R.id.register_button);
+        register = (Button)findViewById(R.id.register_go);
         
         TextView t_mail = (TextView) findViewById(R.id.t_mail);
         TextView t_name = (TextView) findViewById(R.id.t_name);
