@@ -33,7 +33,7 @@ public class HomeFragment extends Fragment {
 		
 		final TextView infoNewPub = (TextView) rootView.findViewById(R.id.t_history);
 		infoNewPub.setTypeface(robotoThin);
-		infoNewPub.setText("Your score is: 203 points");
+		infoNewPub.setText("Your score is: \n 203 points");
 		
 		/*infoNewPub.setText("There " + ((numNewPubGames > 1) ? "are " : "is ") + numNewPubGames 
 				+ " public " + ((numNewPubGames > 1) ? "games" : "game") + " near your locations\n\n"
