@@ -1,66 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#3498db" >
-	
-    <LinearLayout
-        android:layout_width="match_parent"
-	    android:layout_height="match_parent"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:orientation="vertical"
-        android:background="#ccffffff"
-        android:layout_margin="12dp" >
-        
-		<TextView
-	        android:id="@+id/t_wellcome"
-	        android:layout_width="fill_parent"
-	        android:layout_height="wrap_content"
-	        android:layout_margin="12dp"
-	        android:textAppearance="?android:attr/textAppearanceLarge"
-	        android:text="@string/home_title"
-	        android:textSize="25sp" />
-	    
-	    <View
-	       android:layout_width="match_parent"
-	       android:layout_height= "10dp"
-	       android:background="#3498db" />
-	            
-	    <TextView
-	        android:id="@+id/t_stats"
-	        android:layout_width="fill_parent"
-	        android:layout_height="wrap_content"
-	        android:layout_margin="15dp"
-	        android:textAppearance="?android:attr/textAppearanceLarge"
-	        android:textSize="17sp" />
-	    
-	    <View
-	       android:layout_width="match_parent"
-	       android:layout_height= "10dp"
-	       android:background="#3498db" />
-	    
-	    <ImageView
-	        android:layout_width="150dp"
-	        android:layout_height="150dp"
-	        android:layout_marginTop="30dp"
-	        android:contentDescription="@string/logo"
-	        android:layout_gravity="center_horizontal"
-	        android:src="@drawable/treasure" />
-	    
-	    <TextView
-	        android:id="@+id/t_history"
-	        android:layout_width="fill_parent"
-	        android:layout_height="wrap_content"
-	        android:layout_marginLeft="12dp"
-	        android:layout_marginRight="12dp"
-	        android:layout_marginBottom="12dp"
-	        android:layout_marginTop="3dp"
-	        android:textAppearance="?android:attr/textAppearanceLarge"
-	        android:textSize="25sp" 
-	        android:gravity="center" />
-    </LinearLayout>
+    android:fillViewport="true" >
     
+    <RelativeLayout 
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="vertical"
+	    android:background="#3498db" >
+		
+	    <LinearLayout
+	        android:layout_width="match_parent"
+		    android:layout_height="match_parent"
+	        android:layout_centerHorizontal="true"
+	        android:layout_centerVertical="true"
+	        android:orientation="vertical"
+	        android:background="#ccffffff"
+	        android:layout_margin="12dp" >
+	        
+			<TextView
+		        android:id="@+id/t_wellcome"
+		        android:layout_width="fill_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_margin="12dp"
+		        android:textAppearance="?android:attr/textAppearanceLarge"
+		        android:text="@string/home_title"
+		        android:textSize="25sp" />
+		    
+		    <View
+		       android:layout_width="match_parent"
+		       android:layout_height= "10dp"
+		       android:background="#3498db" />
+		            
+		    <TextView
+		        android:id="@+id/t_stats"
+		        android:layout_width="fill_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_margin="15dp"
+		        android:textAppearance="?android:attr/textAppearanceLarge"
+		        android:textSize="17sp" />
+		    
+		    <View
+		       android:layout_width="match_parent"
+		       android:layout_height= "10dp"
+		       android:background="#3498db" />
+		    
+		    <ImageView
+		        android:layout_width="150dp"
+		        android:layout_height="150dp"
+		        android:layout_marginTop="30dp"
+		        android:contentDescription="@string/logo"
+		        android:layout_gravity="center_horizontal"
+		        android:src="@drawable/treasure" />
+		    
+		    <TextView
+		        android:id="@+id/t_history"
+		        android:layout_width="fill_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_marginLeft="12dp"
+		        android:layout_marginRight="12dp"
+		        android:layout_marginBottom="12dp"
+		        android:layout_marginTop="3dp"
+		        android:textAppearance="?android:attr/textAppearanceLarge"
+		        android:textSize="25sp" 
+		        android:gravity="center" />
+	    </LinearLayout>
 
-</RelativeLayout>
+	</RelativeLayout>
+</ScrollView>

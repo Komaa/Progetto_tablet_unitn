@@ -11,9 +11,7 @@
         android:layout_marginTop="15dp"
         android:layout_centerHorizontal="true"
         android:textSize="25sp"
-        android:textColor="#000"
-        android:text="Titolo"
-        />
+        android:textColor="#000" />
     
     <TextView
         android:id="@+id/continue_checkpoints"
@@ -23,8 +21,7 @@
         android:layout_marginLeft="15dp"
         android:layout_marginTop="5dp"
         android:textSize="15sp"
-        android:textColor="#000"
-        android:text="Checkpoints" />
+        android:textColor="#000"/>
     
     <TextView
         android:id="@+id/continue_path"
@@ -34,9 +31,7 @@
         android:layout_alignBaseline="@+id/continue_checkpoints"
         android:layout_centerHorizontal="true"
         android:textSize="15sp"
-        android:textColor="#000"
-        android:text="Path"
-        />
+        android:textColor="#000" />
 
     <TextView
         android:id="@+id/continue_difficulty"
@@ -46,8 +41,7 @@
         android:layout_alignParentRight="true"
         android:layout_marginRight="15dp"
         android:textSize="15sp"
-        android:textColor="#000"
-        android:text="Difficulty" />
+        android:textColor="#000" />
 
     <TextView
         android:id="@+id/continue_checkpointsData"
@@ -58,8 +52,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="5dp"
         android:textSize="15sp"
-        android:textColor="#000"
-        android:text="10/15" />
+        android:textColor="#000" />
     
     <TextView
         android:id="@+id/continue_pathData"
@@ -70,9 +63,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="5dp"
         android:textSize="15sp"
-        android:textColor="#000"
-        android:text="10/16 km"
-        />
+        android:textColor="#000" />
     
     <TextView 
         android:id="@+id/continue_difficultyData"
@@ -84,8 +75,7 @@
         android:layout_marginRight="15dp"
         android:layout_marginTop="5dp"
         android:textSize="15sp"
-        android:textColor="#000"
-        android:text="Easy" />
+        android:textColor="#000" />
 
     <View
 	       android:id="@+id/SplitLine_ver1"

@@ -44,6 +44,7 @@ public class NewFragment extends Fragment {
 		return new_rootView;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void getMaps(){
     	NewMaps_db new_maps = new NewMaps_db();
     	try {

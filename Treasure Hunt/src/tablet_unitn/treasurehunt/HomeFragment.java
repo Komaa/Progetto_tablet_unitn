@@ -4,9 +4,6 @@ import tablet_unitn.treasurehunt.R;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,9 +15,9 @@ public class HomeFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_home, container, false);
 		Typeface robotoThin = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-Thin.ttf");
-		Typeface roboto = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-Black.ttf");
-		
-		int numGames = 3, numNewPubGames = 1, numNewPvtGames = 2;
+//		Typeface roboto = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-Black.ttf");
+//		
+//		int numGames = 3, numNewPubGames = 1, numNewPvtGames = 2;
 		
 		final TextView welcome = (TextView) rootView.findViewById(R.id.t_wellcome);
 		welcome.setTypeface(robotoThin);
@@ -28,7 +25,7 @@ public class HomeFragment extends Fragment {
 		
 		final TextView infoContinue = (TextView) rootView.findViewById(R.id.t_stats);
 		infoContinue.setTypeface(robotoThin);;
-		infoContinue.setText("You're playing " + numGames + " games at the moment.\n\n"
+		infoContinue.setText("You're playing 3 games at the moment.\n\n"
 				+ "You have complited 23 games!");
 		
 		final TextView infoNewPub = (TextView) rootView.findViewById(R.id.t_history);
