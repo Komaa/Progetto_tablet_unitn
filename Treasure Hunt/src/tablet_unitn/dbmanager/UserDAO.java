@@ -8,8 +8,10 @@ public interface UserDAO {
  public void open(); 
  public void close(); 
  
- public User insertUser(User User) ; 
- public User updateUser(User User) ;
- public void deleteUser(User User) ; 
- public List<User> getAllUser() ;
+ public User insertUser(User user); 
+ public User updateUser(User user);
+ public void deleteUser(User user); 
+ public List<User> getAllUser();
+ public User getInfo(String ID);
+ public void logout(String ID);
 }

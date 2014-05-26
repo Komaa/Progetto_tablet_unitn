@@ -20,7 +20,7 @@ public class UserSQLiteHelper extends SQLiteOpenHelper {
 	 // Database creation sql statement 
 	 private static final String DATABASE_CREATE = "create table " 
 			 + TABLE_USER + "( " 
-			 + COLUMN_ID + " integer primary key autoincrement, " 
+			 + COLUMN_ID + " text primary key not null, " 
 			 + COLUMN_NAME + " text not null, " 
 			 + COLUMN_MAIL + " text not null, "
 			 + COLUMN_PASSWORD + " text not null,"

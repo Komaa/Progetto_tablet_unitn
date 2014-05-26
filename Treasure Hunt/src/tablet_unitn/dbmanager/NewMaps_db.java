@@ -14,9 +14,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import tablet_unitn.treasurehunt.Map;
-import android.app.AlertDialog;
 import android.os.AsyncTask;
-import android.util.Log;
 
 public class NewMaps_db extends AsyncTask<List<Map>, Integer, List<Map>>{
 

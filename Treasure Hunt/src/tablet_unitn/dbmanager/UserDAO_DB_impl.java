@@ -39,6 +39,7 @@ public class UserDAO_DB_impl implements UserDAO {
 	
 	private ContentValues UserToValues(User user) { 
 		ContentValues values = new ContentValues(); 
+		values.put(UserSQLiteHelper.COLUMN_ID, user.getID());
 		values.put(UserSQLiteHelper.COLUMN_NAME, user.getName()); 
 		values.put(UserSQLiteHelper.COLUMN_MAIL, user.getMail()); 
 		values.put(UserSQLiteHelper.COLUMN_PASSWORD, user.getPsw()); 
@@ -48,7 +49,7 @@ public class UserDAO_DB_impl implements UserDAO {
 	} 
 		 
 	private User cursorToUser(Cursor cursor) { 
-		int id = cursor.getInt(0); 
+		String id = cursor.getString(0); 
 		String name=cursor.getString(1); 
 		String mail=cursor.getString(2); 
 		String password=cursor.getString(3); 
@@ -59,27 +60,22 @@ public class UserDAO_DB_impl implements UserDAO {
 	
 	@Override 
 	public User insertUser(User user) { 
-		long insertId = database.insert(UserSQLiteHelper.TABLE_USER, null, UserToValues(user));
-		
-		// Now read from DB the inserted User and return it 
+		database.insert(UserSQLiteHelper.TABLE_USER, null, UserToValues(user));
 		Cursor cursor = database.query(UserSQLiteHelper.TABLE_USER, allColumns, 
-				UserSQLiteHelper.COLUMN_ID + " = ?" , new String[] {""+insertId}, 
+				UserSQLiteHelper.COLUMN_ID + " = ?" , new String[] {user.getID()}, 
 				null, null, null); 
 		cursor.moveToFirst();
 		User p=cursorToUser(cursor);
 		return p; 
 	 }
+	
 	 @Override 
 	 public void deleteUser(User user) { 
-		 long id = user.getID(); 
-		 
-		 //database.delete(MySQLiteHelper.TABLE_PEOPLE, 
-		 // MySQLiteHelper.COLUMN_ID + " = " + id, 
-		 // null); 
-		 
+		 String id = user.getID(); 
+		 		 
 		 database.delete(UserSQLiteHelper.TABLE_USER, 
 				 UserSQLiteHelper.COLUMN_ID + " = ?", 
-				 new String[] {""+id}); 
+				 new String[] {id}); 
 	 }
 
 	@Override
@@ -100,17 +96,44 @@ public class UserDAO_DB_impl implements UserDAO {
 	@Override
 	public User updateUser(User user) {
 		Cursor cursor = database.query(UserSQLiteHelper.TABLE_USER, 
-				new String[] {UserSQLiteHelper.COLUMN_MAIL},
+				allColumns,
 				UserSQLiteHelper.COLUMN_ID + " = ?", 
-				new String[] {""+user.getID()}, null, null, null);
+				new String[] {user.getID()}, null, null, null);
+		Log.d("ciao123", "cursor: "+cursor);
 		if (cursor != null) {// record exists
+			cursor.moveToFirst();
 			database.update(UserSQLiteHelper.TABLE_USER,
 					UserToValues(user),
 					UserSQLiteHelper.COLUMN_ID + " = ?", 
-					new String[] {""+user.getID()}); 
+					new String[] {user.getID()}); 
 		} else {// record not found
 			insertUser(user);
 		}
 		return user;
+	}
+
+	@Override
+	public User getInfo(String ID) {
+		Cursor cursor = database.query(UserSQLiteHelper.TABLE_USER, 
+				allColumns,
+				UserSQLiteHelper.COLUMN_ID + " = ?", 
+				new String[] {ID}, null, null, null);
+		cursor.moveToFirst();
+		return cursorToUser(cursor);
+	}
+
+	@Override
+	public void logout(String ID) {
+		Cursor cursor = database.query(UserSQLiteHelper.TABLE_USER, 
+				new String[] {UserSQLiteHelper.COLUMN_MAIL},
+				UserSQLiteHelper.COLUMN_ID + " = ?", 
+				new String[] {ID}, null, null, null);
+		ContentValues cv = new ContentValues();
+		cv.put("logged",0);
+		if (cursor != null) {// record exists
+			database.update(UserSQLiteHelper.TABLE_USER,
+					cv, UserSQLiteHelper.COLUMN_ID + " = ?", 
+					new String[] {ID}); 
+		}
 	}
 }

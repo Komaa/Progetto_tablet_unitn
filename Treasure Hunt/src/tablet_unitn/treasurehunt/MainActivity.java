@@ -2,17 +2,24 @@ package tablet_unitn.treasurehunt;
 
 
 import tablet_unitn.adapter.TabsPagerAdapter;
+import tablet_unitn.dbmanager.UserDAO_DB_impl;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 
 public class MainActivity extends FragmentActivity implements
 		ActionBar.TabListener {
+	User user = null;
+    UserDAO_DB_impl dao;
+    
 	private static Context context;
 	private ViewPager viewPager;
 	private TabsPagerAdapter mAdapter;
@@ -25,6 +32,13 @@ public class MainActivity extends FragmentActivity implements
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		MainActivity.context = getApplicationContext();
+		
+		// Get user informations
+		String ID = (String) this.getIntent().getExtras().get("usr_ID");
+		dao = new UserDAO_DB_impl(); 
+        dao.open(); 
+        user = dao.getInfo(ID);
+		
 		// Initilization
 		viewPager = (ViewPager) findViewById(R.id.pager);
 		actionBar = getActionBar();
@@ -83,8 +97,40 @@ public class MainActivity extends FragmentActivity implements
 	
 	@Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
+	 @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+         
+        switch (item.getItemId())
+        {
+        case R.id.action_logout:
+        	logout();
+            return true;
+        default:
+            return super.onOptionsItemSelected(item);
+        }
+    }  
+	
+	public void logout() {
+		dao.logout(user.getID());	
+		Intent intent = new Intent(this, Login.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+	    startActivity(intent);
+	    finish();
+	}
+	 
+	@Override 
+	protected void onResume() { 
+		dao.open(); 
+		super.onResume(); 
+	} 
+	 
+	@Override 
+	protected void onPause() { 
+		dao.close(); 
+		super.onPause(); 
+	} 
 }

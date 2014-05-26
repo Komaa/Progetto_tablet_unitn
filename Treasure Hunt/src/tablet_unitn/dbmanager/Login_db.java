@@ -1,7 +1,6 @@
 package tablet_unitn.dbmanager;
 
 import java.io.IOException;
-
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
@@ -10,20 +9,21 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import android.os.AsyncTask;
 
-public class Login_db extends AsyncTask<String, Integer, String>{
+public class Login_db extends AsyncTask<String, Integer, String[]>{
 
 	@Override
-	protected String doInBackground(String... params) {
+	protected String[] doInBackground(String... params) {
 		// TODO Auto-generated method stub
-		String res=postData(params[0],params[1]);
+		String[] res = postData(params[0],params[1]);
 		
 		return res;
 	}
 
-	public String postData(String name, String psw) {
-		String result="";
+	public String[] postData(String name, String psw) {
+		String[] res=new String[3];
 		HttpClient httpclient = new DefaultHttpClient();
 
 	    // Prepare a request object
@@ -33,10 +33,11 @@ public class Login_db extends AsyncTask<String, Integer, String>{
 	    HttpResponse response;
 	    try {
 	        response = httpclient.execute(httpget);
-	        result = EntityUtils.toString(response.getEntity());	 
+	        String frse = EntityUtils.toString(response.getEntity());	 
 	        try {
-				JSONObject obj = new JSONObject(result);
-				result=obj.getString("success");
+				JSONObject obj = new JSONObject(frse);
+				res[0]=obj.getString("token");
+				res[1]=obj.getString("success");
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -46,6 +47,6 @@ public class Login_db extends AsyncTask<String, Integer, String>{
 	} catch (IOException e) {
 			// TODO Auto-generated catch block
 	}
-	return result;  
+	return res;  
 	}
 }

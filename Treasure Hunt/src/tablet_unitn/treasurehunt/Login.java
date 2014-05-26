@@ -13,6 +13,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -78,9 +79,7 @@ public class Login extends Activity {
 
 		        // check for Internet status
 		        if (isMobileConnectionExist||isWifiConnectionExist) {
-		            // Internet Connection exists
-		        	//Toast.makeText(Login.this, "Your device has mobile internet", Toast.LENGTH_SHORT).show();
-		        	login();
+		            login();
 		        } else {
 		            // Internet connection doesn't exist
 		        	Toast.makeText(Login.this, "No Internet Connection", Toast.LENGTH_LONG).show();
@@ -112,27 +111,25 @@ public class Login extends Activity {
      }
 
      public void login(){
-    	String res="";
+    	String[] res=null;
 		Login_db login = new Login_db();
 		try {
 			res=login.execute(mail.getText().toString(), psw.getText().toString()).get();
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ExecutionException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}	
     	 
     	 
-	    if(res.equals("true")){
+	    if(res[1].equals("true")){
 	    	Toast.makeText(this, "Redirecting...", Toast.LENGTH_SHORT).show();
 	    	//save or not credentials
 	    	if (checkBox.isChecked()) { //se vuole salvare le credenziali
 	    		if(user == null){ //se non ci sono utenti loggati o hanno fatto un login senza ricordare le credenziali
 	    			int tmp=0;
 	    			for (int i = 0; i < users.size(); i++) { //controllo se l'utente ha già fatto un login (già censito)
-	    	        	if(users.get(i).getMail()==mail.getText().toString()){ //se ha la stessa mail è lui
+	    	        	if((users.get(i).getMail()).equals(mail.getText().toString())){ //se ha la stessa mail è lui
 	    	        		this.user=users.get(i);
 	    	        		user.setLogged(1);
 	    		        	dao.updateUser(user);
@@ -140,8 +137,8 @@ public class Login extends Activity {
 	    	        	}
 	    	    	}
 	    			if(tmp==0){ //è la prima volta che fa il login
-	    				user=new User(0, "noName", mail.getText().toString(), psw.getText().toString(), 0, 1);
-	    				dao.insertUser(user);
+	    				user=new User(res[0], "noName", mail.getText().toString(), psw.getText().toString(), 0, 1);
+    					dao.insertUser(user);
 	    			}
 	    		}else{
 	    			user.setLogged(1);
@@ -151,8 +148,8 @@ public class Login extends Activity {
 	        }
 	        //Toast.makeText(this, "Redirecting...", Toast.LENGTH_SHORT).show();
 	        Intent intent = new Intent(this, MainActivity.class);
-		    intent.putExtra("ID_USR",""+user.getID());
-	        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		    intent.putExtra("usr_ID",user.getID());
+		    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		    startActivity(intent);
 		    finish();
 	     }	

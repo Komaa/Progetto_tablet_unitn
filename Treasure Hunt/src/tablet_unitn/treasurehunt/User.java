@@ -3,14 +3,14 @@ package tablet_unitn.treasurehunt;
 //manca last_access e last_position
 
 public class User {
-	Integer ID = 0,
-			points=0,
+	Integer points=0,
 			logged = 0; //0 = false, 1 = true
-	String mail="", 
+	String ID="",
+			mail="", 
 			psw="",
 			name="";
 			
-	public User(Integer ID, String name, String mail, String psw, Integer points, Integer logged) {
+	public User(String ID, String name, String mail, String psw, Integer points, Integer logged) {
 		this.ID = ID;
 		this.name = name;
 		this.mail = mail;
@@ -18,10 +18,10 @@ public class User {
 		this.points = points;
 		this.logged = logged;
 	}
-	public void setID(Integer ID) {
+	public void setID(String ID) {
 		this.ID=ID;
 	}
-	public Integer getID() {
+	public String getID() {
 		return ID;
 	}
 	public void setLogged(Integer logged) {
