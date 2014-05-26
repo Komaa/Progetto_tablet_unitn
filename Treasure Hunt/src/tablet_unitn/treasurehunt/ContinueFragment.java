@@ -24,7 +24,10 @@ public class ContinueFragment extends Fragment {
 		ListView continue_listView = (ListView)continue_rootView.findViewById(R.id.listContinue);
 		List<Map> continue_list = new LinkedList<Map>();
 		for (int i = 0; i < 30; i++) {
-			continue_list.add(new Map("Mappa"+i, i+5, i+10, "Easy"));
+			Map map = new Map();
+			map.setName("ciao");
+			map.SetID("1234");
+			continue_list.add(map);
 		}
         ContinueAdapter continue_adapter = new ContinueAdapter(MainActivity.getAppContext(), R.layout.continuelist, continue_list);
         continue_listView.setAdapter(continue_adapter);

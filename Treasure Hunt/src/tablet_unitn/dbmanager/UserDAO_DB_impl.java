@@ -14,20 +14,20 @@ import tablet_unitn.treasurehunt.User;
 public class UserDAO_DB_impl implements UserDAO { 
 	 
 	 private SQLiteDatabase database; 
-	 private MySQLiteHelper dbHelper; 
+	 private UserSQLiteHelper dbHelper; 
 	 
 	private String[] allColumns = {
-			MySQLiteHelper.COLUMN_ID, 
-			MySQLiteHelper.COLUMN_NAME, 
-			MySQLiteHelper.COLUMN_MAIL,
-			MySQLiteHelper.COLUMN_PASSWORD,
-			MySQLiteHelper.COLUMN_POINTS,
-			MySQLiteHelper.COLUMN_LOGGED, }; 
+			UserSQLiteHelper.COLUMN_ID, 
+			UserSQLiteHelper.COLUMN_NAME, 
+			UserSQLiteHelper.COLUMN_MAIL,
+			UserSQLiteHelper.COLUMN_PASSWORD,
+			UserSQLiteHelper.COLUMN_POINTS,
+			UserSQLiteHelper.COLUMN_LOGGED, }; 
 	 
 	@Override 
 	public void open() throws SQLException {
 		if (dbHelper==null) 
-			dbHelper = new MySQLiteHelper(Login.getAppContext()); 
+			dbHelper = new UserSQLiteHelper(Login.getAppContext()); 
 		database = dbHelper.getWritableDatabase();
 		Log.d("ciao", "path: "+database);
 	} 
@@ -39,11 +39,11 @@ public class UserDAO_DB_impl implements UserDAO {
 	
 	private ContentValues UserToValues(User user) { 
 		ContentValues values = new ContentValues(); 
-		values.put(MySQLiteHelper.COLUMN_NAME, user.getName()); 
-		values.put(MySQLiteHelper.COLUMN_MAIL, user.getMail()); 
-		values.put(MySQLiteHelper.COLUMN_PASSWORD, user.getPsw()); 
-		values.put(MySQLiteHelper.COLUMN_POINTS, user.getPoints());
-		values.put(MySQLiteHelper.COLUMN_LOGGED, user.getLogged());
+		values.put(UserSQLiteHelper.COLUMN_NAME, user.getName()); 
+		values.put(UserSQLiteHelper.COLUMN_MAIL, user.getMail()); 
+		values.put(UserSQLiteHelper.COLUMN_PASSWORD, user.getPsw()); 
+		values.put(UserSQLiteHelper.COLUMN_POINTS, user.getPoints());
+		values.put(UserSQLiteHelper.COLUMN_LOGGED, user.getLogged());
 		return values; 
 	} 
 		 
@@ -59,11 +59,11 @@ public class UserDAO_DB_impl implements UserDAO {
 	
 	@Override 
 	public User insertUser(User user) { 
-		long insertId = database.insert(MySQLiteHelper.TABLE_USER, null, UserToValues(user));
+		long insertId = database.insert(UserSQLiteHelper.TABLE_USER, null, UserToValues(user));
 		
 		// Now read from DB the inserted User and return it 
-		Cursor cursor = database.query(MySQLiteHelper.TABLE_USER, allColumns, 
-				MySQLiteHelper.COLUMN_ID + " = ?" , new String[] {""+insertId}, 
+		Cursor cursor = database.query(UserSQLiteHelper.TABLE_USER, allColumns, 
+				UserSQLiteHelper.COLUMN_ID + " = ?" , new String[] {""+insertId}, 
 				null, null, null); 
 		cursor.moveToFirst();
 		User p=cursorToUser(cursor);
@@ -77,15 +77,15 @@ public class UserDAO_DB_impl implements UserDAO {
 		 // MySQLiteHelper.COLUMN_ID + " = " + id, 
 		 // null); 
 		 
-		 database.delete(MySQLiteHelper.TABLE_USER, 
-				 MySQLiteHelper.COLUMN_ID + " = ?", 
+		 database.delete(UserSQLiteHelper.TABLE_USER, 
+				 UserSQLiteHelper.COLUMN_ID + " = ?", 
 				 new String[] {""+id}); 
 	 }
 
 	@Override
 	public List<User> getAllUser() {
 		List<User> people = new ArrayList<User>(); 
-		Cursor cursor = database.query(MySQLiteHelper.TABLE_USER, 
+		Cursor cursor = database.query(UserSQLiteHelper.TABLE_USER, 
 				 allColumns, null, null, null, null, null);
 		cursor.moveToFirst(); 
 		while (!cursor.isAfterLast()) { 
@@ -99,14 +99,14 @@ public class UserDAO_DB_impl implements UserDAO {
 
 	@Override
 	public User updateUser(User user) {
-		Cursor cursor = database.query(MySQLiteHelper.TABLE_USER, 
-				new String[] {MySQLiteHelper.COLUMN_MAIL},
-				MySQLiteHelper.COLUMN_ID + " = ?", 
+		Cursor cursor = database.query(UserSQLiteHelper.TABLE_USER, 
+				new String[] {UserSQLiteHelper.COLUMN_MAIL},
+				UserSQLiteHelper.COLUMN_ID + " = ?", 
 				new String[] {""+user.getID()}, null, null, null);
 		if (cursor != null) {// record exists
-			database.update(MySQLiteHelper.TABLE_USER,
+			database.update(UserSQLiteHelper.TABLE_USER,
 					UserToValues(user),
-					MySQLiteHelper.COLUMN_ID + " = ?", 
+					UserSQLiteHelper.COLUMN_ID + " = ?", 
 					new String[] {""+user.getID()}); 
 		} else {// record not found
 			insertUser(user);

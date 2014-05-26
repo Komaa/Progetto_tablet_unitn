@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log; 
 
 
-public class MySQLiteHelper extends SQLiteOpenHelper { 
+public class UserSQLiteHelper extends SQLiteOpenHelper { 
 	 public static final String TABLE_USER = "users"; 
 	 public static final String COLUMN_ID = "_id"; 
 	 public static final String COLUMN_NAME = "name"; 
@@ -28,7 +28,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 			 + COLUMN_LOGGED + " integer not null);"; 
 
 	 
-	 public MySQLiteHelper(Context context) { 
+	 public UserSQLiteHelper(Context context) { 
 		 super(context, DATABASE_NAME, null, DATABASE_VERSION); 
 	 } 
 	 @Override 
@@ -42,7 +42,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 	 
 	 @Override 
 	 public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) { 
-		 Log.w(MySQLiteHelper.class.getName(), 
+		 Log.w(UserSQLiteHelper.class.getName(), 
 				 "Upgrading database from version " + oldVersion + " to " + newVersion + ", which will destroy all old data"); 
 		 db.execSQL("DROP TABLE IF EXISTS " + TABLE_USER); 
 		 onCreate(db); 

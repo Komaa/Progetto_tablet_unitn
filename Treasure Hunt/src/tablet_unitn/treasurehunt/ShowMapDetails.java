@@ -16,8 +16,8 @@ public class ShowMapDetails extends Activity {
         setContentView(R.layout.showmapdetails);
         TextView title = (TextView)findViewById(R.id.map_name);
         Button b_showMap = (Button) findViewById(R.id.show_map);
-        String[] item = (String[]) this.getIntent().getExtras().get(MainActivity.getAppContext()+".item");
-        title.setText("Mappa "+item[0]);
+        String ID = (String) this.getIntent().getExtras().get(MainActivity.getAppContext()+".id");
+        title.setText("ID mappa "+ID);
         
         b_showMap.setOnClickListener(new OnClickListener() {
 			@Override

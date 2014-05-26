@@ -12,7 +12,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import android.os.AsyncTask;
 
-public class Sinc_dbmanager extends AsyncTask<String, Integer, String>{
+public class Register_db extends AsyncTask<String, Integer, String>{
 
 	@Override
 	protected String doInBackground(String... params) {

@@ -4,7 +4,7 @@ import java.util.concurrent.ExecutionException;
 
 import tablet_unitn.checkInternet.MobileInternetConnectionDetector;
 import tablet_unitn.checkInternet.WIFIInternetConnectionDetector;
-import tablet_unitn.dbmanager.Sinc_dbmanager;
+import tablet_unitn.dbmanager.Register_db;
 import android.os.Bundle;
 import android.app.Activity;
 import android.graphics.Typeface;
@@ -79,7 +79,7 @@ public class Register extends Activity {
      public void register(){
 	    if(!name.getText().toString().equals("") && !mail.getText().toString().equals("") && !psw.getText().toString().equals("") && psw.getText().toString().equals(rePsw.getText().toString())){
 	    	String res = "ciao";
-	    	Sinc_dbmanager register = new Sinc_dbmanager();
+	    	Register_db register = new Register_db();
 	    	try {
 				res=register.execute(name.getText().toString(), mail.getText().toString(), psw.getText().toString()).get();
 			} catch (InterruptedException e) {

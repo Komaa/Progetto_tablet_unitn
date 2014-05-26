@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 public class ContinueAdapter extends ArrayAdapter<Map>{
@@ -31,7 +30,7 @@ public class ContinueAdapter extends ArrayAdapter<Map>{
         
         //view che conterranno i dati relativi all'avanzamento del giocatore
         name = (TextView) convertView.findViewById(R.id.continue_nomeMappa);
-		checkpointsData = (TextView) convertView.findViewById(R.id.continue_checkpointsData);
+		/*checkpointsData = (TextView) convertView.findViewById(R.id.continue_checkpointsData);
 		pathData = (TextView) convertView.findViewById(R.id.continue_pathData);
 		difficultyData = (TextView) convertView.findViewById(R.id.continue_difficultyData);
 		
@@ -39,16 +38,16 @@ public class ContinueAdapter extends ArrayAdapter<Map>{
 		checkpoints = (TextView) convertView.findViewById(R.id.continue_checkpoints);
 		path = (TextView) convertView.findViewById(R.id.continue_path);
 		difficulty = (TextView) convertView.findViewById(R.id.continue_difficulty);
-        
+        */
 		//scrittura delle info di avanzamento all'interno dei textview di ogni singola mappa
         Map map = getItem(position);
         name.setText(map.getName());
-        checkpointsData.setText(map.getCheckpointsDone() + 	"/" + map.getCheckpointsTotal());
+        /*checkpointsData.setText(map.getCheckpointsDone() + 	"/" + map.getCheckpointsTotal());
         pathData.setText(map.getPathDone() + "/" + map.getPathTotal() + " km");
         difficultyData.setText(map.getDifficulty());
         
         //impostazione del font
-        /* Non funzionante!!! Non cancellare!!!
+         Non funzionante!!! Non cancellare!!!
         name.setTypeface(robotoBold); checkpoints.setTypeface(robotoBold);
         path.setTypeface(robotoBold); difficulty.setTypeface(robotoBold);
         checkpointsData.setTypeface(roboto); pathData.setTypeface(roboto);
