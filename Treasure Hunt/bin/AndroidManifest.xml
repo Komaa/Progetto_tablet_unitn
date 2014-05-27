@@ -48,7 +48,8 @@
         <activity
             android:name="tablet_unitn.treasurehunt.MainActivity" />
         <activity 
-            android:name="tablet_unitn.treasurehunt.ShowMapDetails" />
+            android:name="tablet_unitn.treasurehunt.ShowMapDetails" 
+        	android:theme="@android:style/Theme.Dialog" />
         <activity 
             android:name="tablet_unitn.treasurehunt.ShowMap" />
         

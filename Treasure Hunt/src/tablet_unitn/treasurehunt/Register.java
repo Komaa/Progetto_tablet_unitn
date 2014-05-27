@@ -65,8 +65,6 @@ public class Register extends Activity {
 
 		        // check for Internet status
 		        if (isMobileConnectionExist||isWifiConnectionExist) {
-		            // Internet Connection exists
-		        	//Toast.makeText(Login.this, "Your device has mobile internet", Toast.LENGTH_SHORT).show();
 		        	register();
 		        } else {
 		            // Internet connection doesn't exist
@@ -89,9 +87,10 @@ public class Register extends Activity {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}	
-	    	if(res.equals("true"))
-	    	Toast.makeText(this, "Registration completed", Toast.LENGTH_SHORT).show();
-	    	else
+	    	if(res.equals("true")){
+		    	Toast.makeText(this, "Registration completed", Toast.LENGTH_SHORT).show();
+	        	finish();
+	    	}else
 	    	Toast.makeText(this, "Username already exists", Toast.LENGTH_SHORT).show();
 	     }	
 	     else{
