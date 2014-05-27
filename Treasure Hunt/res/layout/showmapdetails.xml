@@ -27,7 +27,7 @@
 	        android:layout_below="@+id/map_name"
 	        android:layout_centerHorizontal="true"
 	        android:layout_marginTop="61dp"
-	        android:text="@+string/show_map" />
+	        android:text="@+string/start_game" />
 	
 	</RelativeLayout>
 </ScrollView>

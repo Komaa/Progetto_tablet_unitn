@@ -7,6 +7,7 @@ import tablet_unitn.checkInternet.WIFIInternetConnectionDetector;
 import tablet_unitn.dbmanager.Register_db;
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.graphics.Typeface;
 import android.view.View;
 import android.view.Window;
@@ -23,6 +24,8 @@ public class Register extends Activity {
 	// Connection detector class
     MobileInternetConnectionDetector cd;
     WIFIInternetConnectionDetector wc;
+    
+    private ProgressDialog progressDialog;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +68,7 @@ public class Register extends Activity {
 
 		        // check for Internet status
 		        if (isMobileConnectionExist||isWifiConnectionExist) {
+		        	progressDialog = ProgressDialog.show(Register.this, "", "Loading...");
 		        	register();
 		        } else {
 		            // Internet connection doesn't exist
@@ -75,7 +79,7 @@ public class Register extends Activity {
      }
 
      public void register(){
-	    if(!name.getText().toString().equals("") && !mail.getText().toString().equals("") && !psw.getText().toString().equals("") && psw.getText().toString().equals(rePsw.getText().toString())){
+    	if(!name.getText().toString().equals("") && !mail.getText().toString().equals("") && !psw.getText().toString().equals("") && psw.getText().toString().equals(rePsw.getText().toString())){
 	    	String res = "ciao";
 	    	Register_db register = new Register_db();
 	    	try {
@@ -87,6 +91,7 @@ public class Register extends Activity {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}	
+	    	progressDialog.dismiss();
 	    	if(res.equals("true")){
 		    	Toast.makeText(this, "Registration completed", Toast.LENGTH_SHORT).show();
 	        	finish();

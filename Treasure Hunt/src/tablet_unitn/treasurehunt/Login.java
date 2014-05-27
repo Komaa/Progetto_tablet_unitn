@@ -10,6 +10,7 @@ import tablet_unitn.dbmanager.Login_db;
 import tablet_unitn.dbmanager.UserDAO_DB_impl;
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -39,6 +40,8 @@ public class Login extends Activity {
     List<User> users;
     User user = null;
     UserDAO_DB_impl dao;
+    
+	private ProgressDialog progressDialog;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +70,7 @@ public class Login extends Activity {
         // creating connection detector class instance
         cd = new MobileInternetConnectionDetector(getApplicationContext());
         wc = new WIFIInternetConnectionDetector(getApplicationContext());
-
+        
         login.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -78,6 +81,7 @@ public class Login extends Activity {
 
 		        // check for Internet status
 		        if (isMobileConnectionExist||isWifiConnectionExist) {
+		        	progressDialog = ProgressDialog.show(Login.this, "", "Loading...");
 		            login();
 		        } else {
 		            // Internet connection doesn't exist
@@ -119,7 +123,7 @@ public class Login extends Activity {
 		} catch (ExecutionException e) {
 			e.printStackTrace();
 		}	
-    	 
+		progressDialog.dismiss();    	 
     	 
 	    if(res[1].equals("true")){
 	    	Toast.makeText(this, "Redirecting...", Toast.LENGTH_SHORT).show();

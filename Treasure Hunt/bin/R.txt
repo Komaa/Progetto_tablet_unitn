@@ -494,7 +494,7 @@ int string new_title 0x7f0a002c
 int string psw 0x7f0a002f
 int string rePsw 0x7f0a0030
 int string remember 0x7f0a0037
-int string show_map 0x7f0a0033
+int string start_game 0x7f0a0033
 int string username 0x7f0a0036
 int style AppBaseTheme 0x7f0b008b
 int style AppTheme 0x7f0b008c
