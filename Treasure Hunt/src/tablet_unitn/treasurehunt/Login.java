@@ -24,7 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class Login extends Activity {
-	private static Context context;
+	private static  Context context;
 	EditText mail, psw;
 	Button login, register;
 	
@@ -49,7 +49,7 @@ public class Login extends Activity {
         getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
         getActionBar().hide();
         setContentView(R.layout.login);
-        Login.context = getApplicationContext();
+        Login.context = Login.getAppContext();
         Typeface robotoThin = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Thin.ttf");
         Typeface robotoBold = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Bold.ttf");
         
@@ -68,8 +68,8 @@ public class Login extends Activity {
         register = (Button) findViewById(R.id.register_button);
         
         // creating connection detector class instance
-        cd = new MobileInternetConnectionDetector(getApplicationContext());
-        wc = new WIFIInternetConnectionDetector(getApplicationContext());
+        cd = new MobileInternetConnectionDetector(Login.getAppContext());
+        wc = new WIFIInternetConnectionDetector(Login.getAppContext());
         
         login.setOnClickListener(new OnClickListener() {
 			@Override
@@ -94,7 +94,7 @@ public class Login extends Activity {
         	
         	@Override
         	public void onClick(View v) {
-        	Intent intent = new Intent(getApplicationContext(),Register.class);
+        	Intent intent = new Intent(Login.getAppContext(),Register.class);
         	startActivity(intent);
         	}
         });

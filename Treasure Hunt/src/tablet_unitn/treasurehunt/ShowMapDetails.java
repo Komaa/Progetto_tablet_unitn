@@ -25,17 +25,11 @@ public class ShowMapDetails extends Activity {
         
         Button b_showMap = (Button) findViewById(R.id.show_map);
         
-        description.setMovementMethod(new ScrollingMovementMethod());
+        description.setMovementMethod(new ScrollingMovementMethod()); //rende scrollabile la descrizione
         
-        //dati ricevuti da NewFragment.java tramite putExtra (AP)
         String ID = (String) this.getIntent().getExtras().get(MainActivity.getAppContext()+".map_ID");
-        title.setText((String) this.getIntent().getExtras().get(MainActivity.getAppContext()+".name"));
-        checkpoints.setText((String) this.getIntent().getExtras().get(MainActivity.getAppContext()+".checkpoints").toString());
-        difficulty.setText((String) this.getIntent().getExtras().get(MainActivity.getAppContext()+".level").toString());
-        timeLeft.setText((String) this.getIntent().getExtras().get(MainActivity.getAppContext()+".time"));
-        description.setText((String) this.getIntent().getExtras().get(MainActivity.getAppContext()+".description"));
         
-        //title.setText("ID mappa " + ID);
+        title.setText("ID mappa " + ID);
         
         b_showMap.setOnClickListener(new OnClickListener() {
 			@Override
