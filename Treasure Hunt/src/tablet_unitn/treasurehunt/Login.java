@@ -24,7 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class Login extends Activity {
-	private static Context context;
+	private static  Context context;
 	EditText mail, psw;
 	Button login, register;
 	
@@ -41,8 +41,6 @@ public class Login extends Activity {
     User user = null;
     UserDAO_DB_impl dao;
     
-	private ProgressDialog progressDialog;
-	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,14 +72,13 @@ public class Login extends Activity {
         login.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(Login.getAppContext(), "Checking..", Toast.LENGTH_SHORT).show();
+				Toast.makeText(getApplicationContext(), "Checking..", Toast.LENGTH_SHORT).show();
 				// get Internet status
 		        isMobileConnectionExist = cd.checkMobileInternetConn();
 		        isWifiConnectionExist = wc.checkMobileInternetConn();
 
 		        // check for Internet status
 		        if (isMobileConnectionExist||isWifiConnectionExist) {
-		        	progressDialog = ProgressDialog.show(Login.this, "", "Loading...");
 		            login();
 		        } else {
 		            // Internet connection doesn't exist
@@ -123,7 +120,6 @@ public class Login extends Activity {
 		} catch (ExecutionException e) {
 			e.printStackTrace();
 		}	
-		progressDialog.dismiss();    	 
     	 
 	    if(res[1].equals("true")){
 	    	Toast.makeText(this, "Redirecting...", Toast.LENGTH_SHORT).show();
@@ -151,7 +147,7 @@ public class Login extends Activity {
 	        }
 	        //Toast.makeText(this, "Redirecting...", Toast.LENGTH_SHORT).show();
 	        Intent intent = new Intent(this, MainActivity.class);
-		    intent.putExtra("usr_ID",user.getID());
+		    intent.putExtra("usr_ID", user.getID());
 		    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		    startActivity(intent);
 		    finish();

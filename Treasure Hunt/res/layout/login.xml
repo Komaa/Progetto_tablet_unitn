@@ -93,6 +93,7 @@
         android:layout_height="30dp"
         android:layout_below="@+id/remember"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
         android:background="@drawable/loginbutton"
         android:shadowColor="#A8A8A8"
         android:shadowDx="0"

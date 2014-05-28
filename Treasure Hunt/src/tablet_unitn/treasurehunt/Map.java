@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Map {
-	int level = 0,
+	int level = 0, //direi che qui il numero varia da 1 a 3, cioè 1=easy, 2=medium, 3=hard (AP)
 		count = 0; //numero dei punti (derivabile anche da grandezza list_goal )
 	
 	String ID = "",
