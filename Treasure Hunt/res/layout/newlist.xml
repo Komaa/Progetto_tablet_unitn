@@ -102,18 +102,6 @@
 	            
 	            </LinearLayout>
             
-            <Button 
-                android:id="@+id/dettagli"
-                android:layout_width="150dp"
-                android:layout_height="45dp"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="5dp"
-                android:background="@drawable/playbutton"
-                
-                android:text="Play!"
-                />
 
         </RelativeLayout>
     </RelativeLayout>

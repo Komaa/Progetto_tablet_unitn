@@ -203,7 +203,6 @@
 				android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="15dp"
-                android:background="@drawable/playbutton"
                 
                 android:text="JOIN THE GAME!"
                 />

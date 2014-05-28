@@ -8,7 +8,6 @@ import tablet_unitn.checkInternet.MobileInternetConnectionDetector;
 import tablet_unitn.checkInternet.WIFIInternetConnectionDetector;
 import tablet_unitn.dbmanager.NewMaps_db;
 import tablet_unitn.treasurehunt.R;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -29,8 +28,6 @@ public class NewFragment extends Fragment {
     // Connection detector class
     MobileInternetConnectionDetector cd;
     WIFIInternetConnectionDetector wc;
-	
-    private ProgressDialog progressDialog;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,19 +44,17 @@ public class NewFragment extends Fragment {
         isWifiConnectionExist = wc.checkMobileInternetConn();
         
 		if (isMobileConnectionExist||isWifiConnectionExist) {
-        	progressDialog = ProgressDialog.show(getActivity(), "", "Loading...");
         
 			//GET LIST OF MAPS
 			getMaps();
-			progressDialog.dismiss();  
 			
-			NewAdapter new_adapter = new NewAdapter(MainActivity.getAppContext(), R.layout.newlist, list_map);
+			NewAdapter new_adapter = new NewAdapter(getActivity(), R.layout.newlist, list_map);
 	        new_listView.setAdapter(new_adapter);
 	        new_listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 				  @Override
 				  public void onItemClick(AdapterView<?> parent, final View view,
 				      int position, long id) {
-					  Intent intent = new Intent(MainActivity.getAppContext(),ShowMapDetails.class);
+					  Intent intent = new Intent(getActivity(),ShowMapDetails.class);
 					  
 					  String ID= list_map.get(position).getID();
 					  String name = list_map.get(position).getName();
@@ -71,20 +66,20 @@ public class NewFragment extends Fragment {
 					  
 					  //attraverso putExtra passo a ShowMapDetails.java le informazioni necessarie
 					  //per compilare ogni campo di ogni mappa (AP)
-					  intent.putExtra(MainActivity.getAppContext()+".map_ID", ID);
-					  intent.putExtra(MainActivity.getAppContext()+".name", name);
-					  intent.putExtra(MainActivity.getAppContext()+".checkpoints", checkpoints);
-					  intent.putExtra(MainActivity.getAppContext()+".distance", distance);
-					  intent.putExtra(MainActivity.getAppContext()+".level", level);
-					  intent.putExtra(MainActivity.getAppContext()+".time", time);
-					  intent.putExtra(MainActivity.getAppContext()+".description", description);
+					  intent.putExtra(".map_ID", ID);
+					  intent.putExtra(".map_Name", name);
+					  intent.putExtra(".map_Checkpoints", checkpoints);
+					  intent.putExtra(".map_Distance", distance);
+					  intent.putExtra(".map_Level", level);
+					  intent.putExtra(".map_Time", time);
+					  intent.putExtra(".map_Description", description);
 					  
 					  startActivity(intent);
 				  }
 		    });
 		} else {
             // Internet connection doesn't exist
-        	Toast.makeText(MainActivity.getAppContext(), "No Internet Connection", Toast.LENGTH_LONG).show();
+        	Toast.makeText(getActivity(), "No Internet Connection", Toast.LENGTH_LONG).show();
         }
 		return new_rootView;
 	}

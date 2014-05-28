@@ -3,7 +3,6 @@ package tablet_unitn.treasurehunt;
 import tablet_unitn.checkInternet.MobileInternetConnectionDetector;
 import tablet_unitn.checkInternet.WIFIInternetConnectionDetector;
 import tablet_unitn.treasurehunt.R;
-import android.app.ProgressDialog;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -24,12 +23,10 @@ public class HomeFragment extends Fragment {
     MobileInternetConnectionDetector cd;
     WIFIInternetConnectionDetector wc;
     
-    private ProgressDialog progressDialog;
-    
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_home, container, false);
-		String ID = (String) getActivity().getIntent().getExtras().get("usr_ID");
+//		String ID = (String) getActivity().getIntent().getExtras().get("usr_ID");
 		Typeface robotoThin = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-Thin.ttf");
 //		Typeface roboto = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-Black.ttf");
 //		int numGames = 3, numNewPubGames = 1, numNewPvtGames = 2;
@@ -46,10 +43,8 @@ public class HomeFragment extends Fragment {
         isWifiConnectionExist = wc.checkMobileInternetConn();
         
 		if (isMobileConnectionExist||isWifiConnectionExist) {
-        	progressDialog = ProgressDialog.show(getActivity(), "", "Loading...");
         	//get user info from server
         	//user = getUserInfo(ID);
-        	progressDialog.dismiss();
         	
 			welcome.setTypeface(robotoThin);
 			welcome.setText(welcome.getText() + " Mario27");

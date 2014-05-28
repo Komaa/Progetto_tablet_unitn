@@ -8,7 +8,6 @@ import tablet_unitn.checkInternet.WIFIInternetConnectionDetector;
 import tablet_unitn.treasurehunt.Map;
 import tablet_unitn.treasurehunt.ContinueAdapter;
 import tablet_unitn.treasurehunt.R;
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -27,8 +26,6 @@ public class ContinueFragment extends Fragment {
     MobileInternetConnectionDetector cd;
     WIFIInternetConnectionDetector wc;
     
-    private ProgressDialog progressDialog;
-    
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -44,7 +41,6 @@ public class ContinueFragment extends Fragment {
         Log.d("ciao123", "isMobileConnectionExist: "+isMobileConnectionExist);
         Log.d("ciao123", "isWifiConnectionExist: "+isWifiConnectionExist);
         if (isMobileConnectionExist||isWifiConnectionExist) {
-			progressDialog = ProgressDialog.show(getActivity(), "", "Loading...");
         	
         	//get list from server
 			List<Map> continue_list = new LinkedList<Map>();
@@ -54,7 +50,6 @@ public class ContinueFragment extends Fragment {
 				map.SetID("1234");
 				continue_list.add(map);
 			}
-			progressDialog.dismiss();
 			
 	        ContinueAdapter continue_adapter = new ContinueAdapter(MainActivity.getAppContext(), R.layout.continuelist, continue_list);
 	        continue_listView.setAdapter(continue_adapter);

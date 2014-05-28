@@ -28,12 +28,12 @@ public class ShowMapDetails extends Activity {
         description.setMovementMethod(new ScrollingMovementMethod());
         
         //dati ricevuti da NewFragment.java tramite putExtra (AP)
-        String ID = (String) this.getIntent().getExtras().get(MainActivity.getAppContext()+".map_ID");
-        title.setText((String) this.getIntent().getExtras().get(MainActivity.getAppContext()+".name"));
-        checkpoints.setText((String) this.getIntent().getExtras().get(MainActivity.getAppContext()+".checkpoints").toString());
-        difficulty.setText((String) this.getIntent().getExtras().get(MainActivity.getAppContext()+".level").toString());
-        timeLeft.setText((String) this.getIntent().getExtras().get(MainActivity.getAppContext()+".time"));
-        description.setText((String) this.getIntent().getExtras().get(MainActivity.getAppContext()+".description"));
+        String ID = (String) this.getIntent().getExtras().get(".map_ID");
+        title.setText(""+ this.getIntent().getExtras().get(".map_Name"));
+        checkpoints.setText(""+ this.getIntent().getExtras().get(".map_Checkpoints").toString());
+        difficulty.setText(""+ this.getIntent().getExtras().get(".map_Level").toString());
+        timeLeft.setText(""+ this.getIntent().getExtras().get(".map_Time"));
+        description.setText(""+ this.getIntent().getExtras().get(".map_Description"));
         
         //title.setText("ID mappa " + ID);
         

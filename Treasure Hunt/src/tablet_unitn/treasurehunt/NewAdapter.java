@@ -28,8 +28,8 @@ public class NewAdapter extends ArrayAdapter<Map>{
 		
 		//Nome, descrizione, livello e num punti
 		Map c = getItem(position);
-        name.setText(c.getName());
-        checkpoints.setText(c.getCount());
+        name.setText(""+c.getName());
+        checkpoints.setText(""+c.getCount());
         int level = c.getLevel();
         if(level == 1){
         	difficolta.setText("Easy");
