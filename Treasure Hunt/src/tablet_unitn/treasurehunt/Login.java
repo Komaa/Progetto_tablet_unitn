@@ -151,7 +151,7 @@ public class Login extends Activity {
 	        }
 	        //Toast.makeText(this, "Redirecting...", Toast.LENGTH_SHORT).show();
 	        Intent intent = new Intent(this, MainActivity.class);
-		    intent.putExtra("usr_ID",user.getID());
+		    intent.putExtra("usr_ID", user.getID());
 		    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		    startActivity(intent);
 		    finish();

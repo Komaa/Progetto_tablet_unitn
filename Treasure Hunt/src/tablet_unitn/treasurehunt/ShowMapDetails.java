@@ -14,9 +14,12 @@ public class ShowMapDetails extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.showmapdetails);
+        
         TextView title = (TextView)findViewById(R.id.map_name);
         Button b_showMap = (Button) findViewById(R.id.show_map);
+        
         String ID = (String) this.getIntent().getExtras().get(MainActivity.getAppContext()+".map_ID");
+        
         title.setText("ID mappa "+ID);
         
         b_showMap.setOnClickListener(new OnClickListener() {

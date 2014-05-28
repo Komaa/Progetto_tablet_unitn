@@ -1,53 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent" >
 
-    <TextView
-        android:id="@+id/new_nomeMappa"
-        android:textColor="#000000"
+    <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:background="#22ffffff" />
+        android:layout_height="200dp"
+        android:background="#DF884E"
+        android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/new_distanza"
-        android:textColor="#000000"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/new_nomeMappa"
-        android:background="#22ffffff" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="12dp"
+            android:background="#ccffffff"
+            android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/new_tempoRimasto"
-        android:textColor="#000000"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/new_distanza"
-        android:background="#22ffffff" />
+            <TextView
+                android:id="@+id/new_nomeMappa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="nome mappa"
+                android:textColor="#000000"
+                android:textSize="30sp"
+                tools:ignore="HardcodedText" />
 
-    <ProgressBar
-        android:id="@+id/new_difficolta"
-        android:textColor="#000000"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="match_parent"
-        android:layout_height="25dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/new_tempoRimasto" />
-	<TextView
-	    android:id="@+id/new_difficolta_txt"
-        android:background="#00000000"
-        android:gravity="center"
-        android:textColor="#ffffff"
-        android:layout_width="match_parent"
-        android:layout_height="15dp"
-         />
+            <View
+                android:id="@+id/divider"
+                android:layout_width="wrap_content"
+                android:layout_height="5dp"
+                android:layout_below="@+id/new_nomeMappa"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="5dp"
+                android:background="#DF884E" />
+
+            <ImageView
+                android:id="@+id/checkpointImage"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/divider"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/checkpointimg"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/new_checkpoint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/divider"
+                android:layout_marginLeft="7dp"
+                android:layout_alignTop="@+id/checkpointImage"
+                android:layout_toRightOf="@+id/checkpointImage"
+                android:layout_centerInParent="@+id/checkpointImage"
+                android:layout_centerVertical="true"
+                android:text="56"
+                android:textSize="18sp"
+                tools:ignore="HardcodedText" />
+
+            <ImageView
+                android:id="@+id/feetImage"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignLeft="@+id/new_nomeMappa"
+                android:layout_alignTop="@+id/checkpointImage"
+                android:layout_marginLeft="35dp"
+                android:src="@drawable/feet"
+                tools:ignore="ContentDescription" />
+            
+            <TextView
+                android:id="@+id/new_distanza"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/divider"
+                android:layout_marginLeft="7dp"
+                android:layout_alignTop="@+id/checkpointImage"
+                android:layout_toRightOf="@+id/feetImage"
+                android:layout_centerInParent="@+id/feetImage"
+                android:layout_centerVertical="true"
+                android:text="15 km"
+                android:textSize="18sp"
+                tools:ignore="HardcodedText" />
+
+            <ImageView
+                android:id="@+id/fireImage"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignTop="@+id/checkpointImage"
+                android:layout_toRightOf="@+id/new_distanza"
+                android:layout_marginLeft="33dp"
+                android:src="@drawable/fire"
+                tools:ignore="ContentDescription" />
+            
+            <TextView
+                android:id="@+id/new_difficolta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/divider"
+                android:layout_alignTop="@+id/checkpointImage"
+                android:layout_toRightOf="@+id/fireImage"
+                android:layout_centerInParent="@+id/fireImage"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="7dp"
+                android:text="Medium"
+                android:textSize="18sp"
+                tools:ignore="ContentDescription"
+                />
+            
+            <Button 
+                android:id="@+id/dettagli"
+                android:layout_width="150dp"
+                android:layout_height="45dp"
+                android:layout_below="@+id/feetImage"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/playbutton"
+                
+                android:text="Play!"
+                />
+            
+            <View
+                android:id="@+id/divider2"
+                android:layout_width="wrap_content"
+                android:layout_height="8dp"
+                android:layout_alignParentBottom="true"
+                android:background="#DF884E" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+
 </RelativeLayout>
