@@ -41,15 +41,13 @@ public class Login extends Activity {
     User user = null;
     UserDAO_DB_impl dao;
     
-	private ProgressDialog progressDialog;
-	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
         getActionBar().hide();
         setContentView(R.layout.login);
-        Login.context = Login.getAppContext();
+        Login.context = getApplicationContext();
         Typeface robotoThin = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Thin.ttf");
         Typeface robotoBold = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Bold.ttf");
         
@@ -68,20 +66,19 @@ public class Login extends Activity {
         register = (Button) findViewById(R.id.register_button);
         
         // creating connection detector class instance
-        cd = new MobileInternetConnectionDetector(Login.getAppContext());
-        wc = new WIFIInternetConnectionDetector(Login.getAppContext());
+        cd = new MobileInternetConnectionDetector(getApplicationContext());
+        wc = new WIFIInternetConnectionDetector(getApplicationContext());
         
         login.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(Login.getAppContext(), "Checking..", Toast.LENGTH_SHORT).show();
+				Toast.makeText(getApplicationContext(), "Checking..", Toast.LENGTH_SHORT).show();
 				// get Internet status
 		        isMobileConnectionExist = cd.checkMobileInternetConn();
 		        isWifiConnectionExist = wc.checkMobileInternetConn();
 
 		        // check for Internet status
 		        if (isMobileConnectionExist||isWifiConnectionExist) {
-		        	progressDialog = ProgressDialog.show(Login.this, "", "Loading...");
 		            login();
 		        } else {
 		            // Internet connection doesn't exist
@@ -94,7 +91,7 @@ public class Login extends Activity {
         	
         	@Override
         	public void onClick(View v) {
-        	Intent intent = new Intent(Login.getAppContext(),Register.class);
+        	Intent intent = new Intent(getApplicationContext(),Register.class);
         	startActivity(intent);
         	}
         });
@@ -123,7 +120,6 @@ public class Login extends Activity {
 		} catch (ExecutionException e) {
 			e.printStackTrace();
 		}	
-		progressDialog.dismiss();    	 
     	 
 	    if(res[1].equals("true")){
 	    	Toast.makeText(this, "Redirecting...", Toast.LENGTH_SHORT).show();
