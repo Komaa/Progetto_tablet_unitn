@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android" >
  <item android:state_pressed="true" >
@@ -21,4 +22,29 @@
          <gradient android:angle="-90" android:startColor="#EE6408" android:endColor="#E9AD85" />            
      </shape>
  </item>
+=======
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android" >
+ <item android:state_pressed="true" >
+     <shape android:shape="rectangle"  >
+         <corners android:radius="3dip" />
+         <stroke android:width="1dip" android:color="#5e7974" />
+         <gradient android:angle="-90" android:startColor="#EE6408" android:endColor="#E9AD85"  />            
+     </shape>
+ </item>
+<item android:state_focused="true">
+     <shape android:shape="rectangle"  >
+         <corners android:radius="3dip" />
+         <stroke android:width="1dip" android:color="#B45634" />
+         <solid android:color="#F87646"/>       
+     </shape>
+ </item>  
+<item >
+    <shape android:shape="rectangle"  >
+         <corners android:radius="3dip" />
+         <stroke android:width="1dip" android:color="#F87646" />
+         <gradient android:angle="-90" android:startColor="#EE6408" android:endColor="#E9AD85" />            
+     </shape>
+ </item>
+>>>>>>> 50beaeba78ca383d544f68f748e9ab712fb96464
 </selector>
