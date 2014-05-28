@@ -335,10 +335,10 @@ int id continue_path 0x7f050042
 int id continue_pathData 0x7f050045
 int id default_activity_button 0x7f05002b
 int id det_checkpoint 0x7f050073
+int id det_description 0x7f050077
 int id det_difficulty 0x7f050075
 int id det_distance 0x7f050074
 int id det_time 0x7f050076
-int id details 0x7f050077
 int id dettagli 0x7f050060
 int id dialog 0x7f05000e
 int id difficulty 0x7f050070
