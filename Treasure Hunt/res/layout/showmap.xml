@@ -1,35 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:layout_alignParentLeft="true"
     android:layout_alignParentTop="true"
     android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Hi!"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
     <fragment
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="fill_parent"
-        android:layout_height="328dp" />
-
-    <Button
-        android:id="@+id/b_piazzaDante"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Piazza Dante" />
+    	android:layout_height="fill_parent"/>
 
     <TextView
         android:id="@+id/distance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
         android:text="Distanza: "
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium" 
+        android:background="#ffffff" />
 
-</LinearLayout>
+    
+    <ImageView
+        android:id="@+id/compassArea"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:src="@drawable/compassarea" />
+    <ImageView
+        android:id="@+id/imageViewCompass"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:src="@drawable/compass"  />
+ 
+    <Button
+        android:id="@+id/b_piazzaDante"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/distance"
+        android:text="Piazza Dante" />
+
+</RelativeLayout>

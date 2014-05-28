@@ -51,7 +51,8 @@
             android:name="tablet_unitn.treasurehunt.ShowMapDetails" 
         	android:theme="@android:style/Theme.Dialog" />
         <activity 
-            android:name="tablet_unitn.treasurehunt.ShowMap" />
+            android:name="tablet_unitn.treasurehunt.ShowMap"
+			android:screenOrientation="portrait" />
         
         <!-- Goolge Maps API Key -->
 		<meta-data
