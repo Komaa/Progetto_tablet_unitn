@@ -38,6 +38,7 @@ public class Map {
 	public String getID() {
 		return ID;
 	}
+	
 	//livello map
 	public void SetLevel(Integer level){
 		this.level=level;
@@ -45,6 +46,7 @@ public class Map {
 	public Integer getLevel() {
 		return level;
 	}
+	
 	//numero punti map
 	public void SetCount(Integer count){
 		this.count=count;
@@ -52,6 +54,7 @@ public class Map {
 	public Integer getCount() {
 		return count;
 	}
+	
 	//nome mappa
 	public void setName(String name){
 		this.name=name;
@@ -59,6 +62,7 @@ public class Map {
 	public String getName() {
 		return name;
 	}
+	
 	//descrizione mappa
 	public void setDescription(String description){
 		this.description=description;
@@ -66,6 +70,7 @@ public class Map {
 	public String getDescription() {
 		return description;
 	}
+	
 	//lista punti mappa
 	public void setListGoal(List<Goal> list_goal){
 		this.list_goal=list_goal;

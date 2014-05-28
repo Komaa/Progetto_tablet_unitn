@@ -60,7 +60,7 @@
 		        android:layout_toRightOf="@+id/checkpointImage"
 		        android:textColor="#000000"
 		        android:text="Checkpoints: "
-		        android:textSize="18sp" />
+		        android:textSize="14sp" />
 		    
 		    <ImageView
 		        android:id="@+id/feetImage"
@@ -81,7 +81,7 @@
 		        android:layout_toRightOf="@+id/feetImage"
 		        android:textColor="#000000"
 		        android:text="Distance: "
-		        android:textSize="18sp" />
+		        android:textSize="14sp" />
 		    
 		    <ImageView
 		        android:id="@+id/fireImage"
@@ -102,7 +102,7 @@
 		        android:layout_toRightOf="@+id/fireImage"
 		        android:textColor="#000000"
 		        android:text="Difficulty: "
-		        android:textSize="18sp" />
+		        android:textSize="14sp" />
 		    
 		    <ImageView
 		        android:id="@+id/clockImage"
@@ -123,7 +123,7 @@
 		        android:layout_toRightOf="@+id/clockImage"
 		        android:textColor="#000000"
 		        android:text="Time left: "
-		        android:textSize="18sp" />
+		        android:textSize="14sp" />
 		    
 		    <TextView
 		        android:id="@+id/det_checkpoint"
@@ -134,7 +134,7 @@
 		        android:layout_toRightOf="@+id/checkpoint"
 		        android:textColor="#000000"
 		        android:text="25"
-		        android:textSize="18sp" />
+		        android:textSize="14sp" />
 		    
 		    <TextView
 		        android:id="@+id/det_distance"
@@ -145,7 +145,7 @@
 		        android:layout_toRightOf="@+id/distance"
 		        android:textColor="#000000"
 		        android:text="45 km"
-		        android:textSize="18sp" />
+		        android:textSize="14sp" />
 		    
 		    <TextView
 		        android:id="@+id/det_difficulty"
@@ -156,7 +156,7 @@
 		        android:layout_toRightOf="@+id/difficulty"
 		        android:textColor="#000000"
 		        android:text="Medium"
-		        android:textSize="18sp" />
+		        android:textSize="14sp" />
 		    
 		    <TextView
 		        android:id="@+id/det_time"
@@ -167,7 +167,7 @@
 		        android:layout_toRightOf="@+id/time"
 		        android:textColor="#000000"
 		        android:text="1h 22m"
-		        android:textSize="18sp" />
+		        android:textSize="14sp" />
 		    
 		    <View
                 android:id="@+id/divider"
