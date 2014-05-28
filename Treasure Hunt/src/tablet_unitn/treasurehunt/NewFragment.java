@@ -37,7 +37,7 @@ public class NewFragment extends Fragment {
 			Bundle savedInstanceState) {
 		View new_rootView = inflater.inflate(R.layout.fragment_new_game, container, false);
 		ListView new_listView = (ListView)new_rootView.findViewById(R.id.listNew);
-		list_map=new ArrayList<Map>();
+		list_map = new ArrayList<Map>();
 
 		// creating connection detector class instance
 		cd = new MobileInternetConnectionDetector(getActivity());
@@ -60,8 +60,25 @@ public class NewFragment extends Fragment {
 				  public void onItemClick(AdapterView<?> parent, final View view,
 				      int position, long id) {
 					  Intent intent = new Intent(MainActivity.getAppContext(),ShowMapDetails.class);
+					  
 					  String ID= list_map.get(position).getID();
-					  intent.putExtra(MainActivity.getAppContext()+".map_ID",ID);
+					  String name = list_map.get(position).getName();
+					  int checkpoints = list_map.get(position).getCount();
+					  int distance = 0; //variabile ancora da definire (AP)
+					  int level = list_map.get(position).getLevel();
+					  String time = ""; //variabile ancora da definire (AP)
+					  String description = list_map.get(position).getDescription();
+					  
+					  //attraverso putExtra passo a ShowMapDetails.java le informazioni necessarie
+					  //per compilare ogni campo di ogni mappa (AP)
+					  intent.putExtra(MainActivity.getAppContext()+".map_ID", ID);
+					  intent.putExtra(MainActivity.getAppContext()+".name", name);
+					  intent.putExtra(MainActivity.getAppContext()+".checkpoints", checkpoints);
+					  intent.putExtra(MainActivity.getAppContext()+".distance", distance);
+					  intent.putExtra(MainActivity.getAppContext()+".level", level);
+					  intent.putExtra(MainActivity.getAppContext()+".time", time);
+					  intent.putExtra(MainActivity.getAppContext()+".description", description);
+					  
 					  startActivity(intent);
 				  }
 		    });
