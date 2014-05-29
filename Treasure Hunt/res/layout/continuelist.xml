@@ -3,85 +3,122 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:textColor="#000" >
+    
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+        android:background="#418D54"
+        android:orientation="vertical" >
 
-	<TextView
-        android:id="@+id/continue_nomeMappa"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_centerHorizontal="true"
-        android:textSize="25sp"
-        android:textColor="#000" />
-    
-    <TextView
-        android:id="@+id/continue_checkpoints"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/continue_nomeMappa"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="5dp"
-        android:textSize="15sp"
-        android:textColor="#000"/>
-    
-    <TextView
-        android:id="@+id/continue_path"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/continue_nomeMappa"
-        android:layout_alignBaseline="@+id/continue_checkpoints"
-        android:layout_centerHorizontal="true"
-        android:textSize="15sp"
-        android:textColor="#000" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="12dp"
+            android:background="#ccffffff"
+            android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/continue_difficulty"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/continue_path"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="15dp"
-        android:textSize="15sp"
-        android:textColor="#000" />
-
-    <TextView
-        android:id="@+id/continue_checkpointsData"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/continue_checkpoints"
-        android:layout_below="@+id/continue_checkpoints"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="5dp"
-        android:textSize="15sp"
-        android:textColor="#000" />
-    
-    <TextView
-        android:id="@+id/continue_pathData"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/continue_path"
-        android:layout_alignBaseline="@+id/continue_checkpointsData"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="5dp"
-        android:textSize="15sp"
-        android:textColor="#000" />
-    
-    <TextView 
-        android:id="@+id/continue_difficultyData"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/continue_pathData"
-        android:layout_alignRight="@+id/continue_difficulty"
-        android:layout_below="@+id/continue_difficulty"
-        android:layout_marginRight="15dp"
-        android:layout_marginTop="5dp"
-        android:textSize="15sp"
-        android:textColor="#000" />
-
-    <View
-	       android:id="@+id/SplitLine_ver1"
-	       android:layout_width="match_parent"
-	       android:layout_height= "3dp"
-	       android:background="#99000000"
-	       android:layout_marginTop="5dp" />
-    
+			<TextView
+		        android:id="@+id/continue_nomeMappa"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_marginTop="15dp"
+		        android:layout_centerHorizontal="true"
+		        android:textSize="25sp"
+		        android:textColor="#000"
+		        
+		        android:text="nome mappa" />
+			
+			<View
+                android:id="@+id/divider"
+                android:layout_width="wrap_content"
+                android:layout_height="5dp"
+                android:layout_below="@+id/continue_nomeMappa"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="5dp"
+                android:background="#418D54" />
+		    
+			<LinearLayout
+			    android:id="@+id/imageLayout"
+			    android:layout_width="match_parent"
+			    android:layout_height="30dp"
+			    android:layout_below="@+id/divider"
+			    android:layout_marginTop="10dp" 
+			    android:layout_marginLeft="10dp" 
+			    android:layout_marginRight="10dp" >
+			    
+			    <ImageView
+			        android:id="@+id/checkpointImage"
+			        android:layout_width="0dp"
+			        android:layout_height="20dp"
+			        android:layout_weight="1" 
+			        
+			        android:src="@drawable/checkpointimg"/>
+				
+			    <ImageView
+			        android:id="@+id/pathImage"
+			        android:layout_width="0dp"
+			        android:layout_height="20dp"
+			        android:layout_weight="1" 
+			        
+			        android:src="@drawable/feet"/>
+			
+			    <ImageView
+			        android:id="@+id/fireImage"
+			        android:layout_width="0dp"
+			        android:layout_height="20dp"
+			        android:layout_weight="1"
+			        
+			        android:src="@drawable/fire"/>
+			    
+			</LinearLayout>
+			    
+			<LinearLayout
+			    android:layout_width="match_parent"
+			    android:layout_height="20dp"
+			    android:layout_below="@+id/imageLayout"
+			    android:layout_marginTop="3dp"
+			    android:layout_marginLeft="10dp"
+			    android:layout_marginRight="10dp"
+			    >
+			    
+			    <TextView
+			        android:id="@+id/continue_checkpointsData"
+			        android:layout_width="0dp"
+			        android:layout_height="30dp"
+					android:layout_weight="1"
+					android:gravity="center_horizontal"			        
+			        android:textSize="15sp"
+			        android:textColor="#000" 
+			        
+			        android:text="10/15"/>
+			    
+			    <TextView
+			        android:id="@+id/continue_pathData"
+			        android:layout_width="0dp"
+			        android:layout_height="30dp"
+					android:layout_weight="1"
+					android:gravity="center_horizontal"
+			        android:textSize="15sp"
+			        android:textColor="#000"
+			        
+			        android:text="2/5 km" />
+			    
+			    <TextView 
+			        android:id="@+id/continue_difficultyData"
+			        android:layout_width="0dp"
+			        android:layout_height="30dp"
+			        android:layout_weight="1"
+			        android:gravity="center_horizontal"
+			        android:textSize="15sp"
+			        android:textColor="#000"
+			        
+			        android:text="Medium" />
+		    
+		    </LinearLayout>
+		
+    	</RelativeLayout>
+    </RelativeLayout>
 </RelativeLayout>

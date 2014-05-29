@@ -35,12 +35,15 @@ import android.widget.Toast;
 public class ShowMap extends FragmentActivity implements LocationListener, SensorEventListener {
     GoogleMap googleMap;
     Location myLocation;
+    
     TextView distance;
+    Button togglePosition;
+    int toggle = 0;
     
     // latitude and longitude
     double dante_latitude = 46.071546;
     double dante_longitude = 11.120449;
-    LatLng piazzaDante = new LatLng(dante_latitude, dante_longitude);
+    //LatLng piazzaDante = new LatLng(dante_latitude, dante_longitude);
     
     //Internet status flag
     Boolean isMobileConnectionExist = false;
@@ -64,7 +67,22 @@ public class ShowMap extends FragmentActivity implements LocationListener, Senso
         super.onCreate(savedInstanceState);
         setContentView(R.layout.showmap);
         distance = (TextView) findViewById(R.id.distance);
-        Button piazzaDante = (Button) findViewById(R.id.b_piazzaDante);
+        togglePosition = (Button) findViewById(R.id.toggle_button_position);
+        togglePosition.setOnClickListener(new OnClickListener(){
+        	@Override
+        	public void onClick(View v){
+        		if(toggle == 0){
+        			togglePosition.setText("Your\nPosition");
+        			toggle = 1;
+        		} else if(toggle == 1){
+        			togglePosition.setText("Next Checkpoint");
+        			toggle = 0;
+        		}
+        	}
+        	
+        });
+        
+        //Button piazzaDante = (Button) findViewById(R.id.b_piazzaDante);
         
         image = (ImageView) findViewById(R.id.imageViewCompass);
         // initialize your android device sensor capabilities
@@ -82,13 +100,13 @@ public class ShowMap extends FragmentActivity implements LocationListener, Senso
         	Toast.makeText(ShowMap.this, "No Internet Connection", Toast.LENGTH_LONG).show();
         }
         
-        piazzaDante.setOnClickListener(new OnClickListener() {
+        /*piazzaDante.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				addMarkerAndGo();
 			}
-		});
+		});*/
 
         // Getting Google Play availability status
         int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getBaseContext());
@@ -100,7 +118,7 @@ public class ShowMap extends FragmentActivity implements LocationListener, Senso
             Dialog dialog = GooglePlayServicesUtil.getErrorDialog(status, this, requestCode);
             dialog.show();
  
-        }else { // Google Play Services are available
+        } else { // Google Play Services are available
  
             // Getting reference to the SupportMapFragment of activity_main.xml
             SupportMapFragment fm = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
@@ -110,6 +128,7 @@ public class ShowMap extends FragmentActivity implements LocationListener, Senso
  
             // Enabling MyLocation Layer of Google Map
             googleMap.setMyLocationEnabled(true);
+            googleMap.getUiSettings().setMyLocationButtonEnabled(false);
  
             // Getting LocationManager object from System Service LOCATION_SERVICE
             LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
@@ -165,7 +184,7 @@ public class ShowMap extends FragmentActivity implements LocationListener, Senso
         float[] results = new float[1];
         Location.distanceBetween(latitude, longitude,
         		dante_latitude, dante_longitude, results);
-        distance.setText("Distance: "+results[0]+" metres");
+        distance.setText("Next Checkpoint\n"+results[0]+" metres");
          
     }
  
@@ -186,7 +205,7 @@ public class ShowMap extends FragmentActivity implements LocationListener, Senso
     
     private void addMarkerAndGo() {
     	// create marker
-        MarkerOptions marker = new MarkerOptions().position(piazzaDante).title("Piazza Dante");
+        /*MarkerOptions marker = new MarkerOptions().position(piazzaDante).title("Piazza Dante");
          
         // adding marker
         googleMap.addMarker(marker);
@@ -195,7 +214,7 @@ public class ShowMap extends FragmentActivity implements LocationListener, Senso
         CameraPosition c_piazzaDante = new CameraPosition.Builder().target(
                 piazzaDante).zoom(21).build();
 
-        googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(c_piazzaDante));
+        googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(c_piazzaDante));*/
     }
     
     @Override

@@ -12,37 +12,58 @@
         android:layout_width="fill_parent"
     	android:layout_height="fill_parent"/>
 
-    <TextView
-        android:id="@+id/distance"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:text="Distanza: "
-        android:textAppearance="?android:attr/textAppearanceMedium" 
-        android:background="#ffffff" />
-
+    
     
     <ImageView
         android:id="@+id/compassArea"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_alignParentBottom="true"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
         android:src="@drawable/compassarea" />
+    
     <ImageView
         android:id="@+id/imageViewCompass"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_alignParentBottom="true"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:src="@drawable/compass"  />
- 
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/compass" />
+    
     <Button
-        android:id="@+id/b_piazzaDante"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/distance"
-        android:text="Piazza Dante" />
+        android:id="@+id/toggle_button_position"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_alignParentTop="true"
+		android:layout_alignParentRight="true"
+		android:layout_marginTop="10dp"
+		android:layout_marginRight="10dp"
+		android:background="@drawable/showmapbutton"
+		android:textSize="12sp"
+		android:text="Next Checkpoint" />
+    
+    <RelativeLayout
+	    android:layout_width="150dp"
+	    android:layout_height="70dp"
+	    android:layout_centerHorizontal="true"
+	    android:layout_alignParentBottom="true"
+	    android:layout_marginBottom="20dp"
+	    android:background="#B54703" >
+          
+	    <TextView
+	        android:id="@+id/distance"
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent"
+	        android:background="#ccffffff"
+	        android:layout_margin="5dp"
+	        android:textAppearance="?android:attr/textAppearanceMedium"  
+	        android:gravity="center" 
+	        android:textSize="16sp" />
+ 	</RelativeLayout>
+    
 
 </RelativeLayout>

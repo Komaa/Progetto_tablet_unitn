@@ -29,9 +29,19 @@ public class ShowMapDetails extends Activity {
         
         //dati ricevuti da NewFragment.java tramite putExtra (AP)
         String ID = (String) this.getIntent().getExtras().get(".map_ID");
+        
         title.setText(""+ this.getIntent().getExtras().get(".map_Name"));
         checkpoints.setText(""+ this.getIntent().getExtras().get(".map_Checkpoints").toString());
-        difficulty.setText(""+ this.getIntent().getExtras().get(".map_Level").toString());
+        
+        Integer level = (Integer) this.getIntent().getExtras().get(".map_Level");
+        if(level.byteValue() == 1){
+        	difficulty.setText("Easy");
+        } else if(level.byteValue() == 2){
+        	difficulty.setText("Medium");
+        } else if(level.byteValue() == 3){
+        	difficulty.setText("Hard");
+        }
+        
         timeLeft.setText(""+ this.getIntent().getExtras().get(".map_Time"));
         description.setText(""+ this.getIntent().getExtras().get(".map_Description"));
         
