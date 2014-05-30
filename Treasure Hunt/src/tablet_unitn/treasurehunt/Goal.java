@@ -3,13 +3,15 @@ package tablet_unitn.treasurehunt;
 import java.util.Hashtable;
 
 public class Goal {
-	Integer ID = 0,
-			lat = 0, //latitudine
-			lng = 0; //longitudine
+	Integer lat = 0, //latitudine
+			lng = 0, //longitudine
+			points = 0; //punti per risposta corretta
 	
-	String name ="",
+	String ID = "",
+			name ="",
 			description="",
-			question="";
+			locationType="",
+			text="";
 	
 	Hashtable<String, Boolean> response;
 	
@@ -18,10 +20,10 @@ public class Goal {
 	}
 	
 	// ID GOAL
-	public void SetID(Integer ID) {
+	public void SetID(String ID) {
 		this.ID = ID;
 	}
-	public Integer GetID(){
+	public String GetID(){
 		return ID;
 	}
 	//LATITUDINE DEL GOAL
@@ -38,12 +40,26 @@ public class Goal {
 	public Integer GetLng(){
 		return lng;
 	}
+	//Punti per risposta corretta
+	public void setPoints(Integer points) {
+		this.points=points;
+	}
+	public Integer GetPoints(){
+		return points;
+	}
 	//NOME DEL GOAL
 	public void setName(String name) {
 		this.name=name;
 	}
 	public String GetName(){
 		return name;
+	}
+	//Tipo di locazione
+	public void setLocationType(String locationType) {
+		this.locationType=locationType;
+	}
+	public String GetLocationType(){
+		return description;
 	}
 	//DESCRIZIONE DEL GOAL
 	public void setDescription(String desc) {
@@ -53,11 +69,11 @@ public class Goal {
 		return description;
 	}
 	//QUESITO DEL GOAL
-	public void setQuestion(String question) {
-		this.question=question;
+	public void setText(String text) {
+		this.text=text;
 	}
-	public String GetQuestion(){
-		return question;
+	public String GetText(){
+		return text;
 	}
 	//RISPOSTE DEL GOAL
 	public void setResponse(String res, Boolean val) {

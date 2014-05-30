@@ -28,7 +28,7 @@ public class ShowMapDetails extends Activity {
         description.setMovementMethod(new ScrollingMovementMethod());
         
         //dati ricevuti da NewFragment.java tramite putExtra (AP)
-        String ID = (String) this.getIntent().getExtras().get(".map_ID");
+        final String ID = (String) this.getIntent().getExtras().get(".map_ID");
         
         title.setText(""+ this.getIntent().getExtras().get(".map_Name"));
         checkpoints.setText(""+ this.getIntent().getExtras().get(".map_Checkpoints").toString());
@@ -51,9 +51,10 @@ public class ShowMapDetails extends Activity {
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(getApplicationContext(), ShowMap.class);
-			    /*String[] mio = new String[2];
-			    mio[0]= Integer.toString(123);
-			    intent.putExtra(MainActivity.getAppContext()+".item",mio);*/
+			    String[] put = new String[2];
+			    put[0] = ID; //id map
+			    put[1] = MainActivity.user.getID(); //check if it works - id user
+			    intent.putExtra(".map_info",put);
 			    startActivity(intent);
 			}
 		});

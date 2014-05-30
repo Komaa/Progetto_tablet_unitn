@@ -1,7 +1,13 @@
 package tablet_unitn.treasurehunt;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
+
 import tablet_unitn.checkInternet.MobileInternetConnectionDetector;
 import tablet_unitn.checkInternet.WIFIInternetConnectionDetector;
+import tablet_unitn.dbmanager.GetPoints_db;
+import tablet_unitn.dbmanager.UserDAO_DB_impl;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -23,6 +29,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.Animation;
@@ -33,6 +40,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class ShowMap extends FragmentActivity implements LocationListener, SensorEventListener {
+	
+	List<Goal> listGoals;
+	User user;
+    UserDAO_DB_impl daoUser;
+	
     GoogleMap googleMap;
     Location myLocation;
     
@@ -40,10 +52,12 @@ public class ShowMap extends FragmentActivity implements LocationListener, Senso
     Button togglePosition;
     int toggle = 0;
     
-    // latitude and longitude
-    double dante_latitude = 46.071546;
-    double dante_longitude = 11.120449;
-    //LatLng piazzaDante = new LatLng(dante_latitude, dante_longitude);
+    //next latitude and longitude
+    double offset = 0; //area di ritrovamento del punto 0 -> esattamente sopra 
+    double next_lat = 0;
+    double next_lng = 0;
+    double my_lat = 1000; //deve essere distante dal marker
+    double my_lng = 1000; //deve essere distante dal marker
     
     //Internet status flag
     Boolean isMobileConnectionExist = false;
@@ -65,7 +79,17 @@ public class ShowMap extends FragmentActivity implements LocationListener, Senso
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.showmap);
+        setContentView(R.layout.showmap); 
+        
+        //dati ricevuti da ShowMapDetails.java tramite putExtra (AP) - forse anche ContinueFragment.java??
+        String[] IDs = (String[]) this.getIntent().getExtras().get(".map_info");
+        Log.d("ciao1", "map id: "+IDs[0]);
+        Log.d("ciao1", "user id: "+IDs[1]);
+        //GET LIST OF POINTS and USER
+		getPoints(IDs[0]);
+		getUser(IDs[1]);
+		Log.d("ciao1", "listGoals: "+listGoals);
+        Log.d("ciao1", "user: "+user);
         distance = (TextView) findViewById(R.id.distance);
         togglePosition = (Button) findViewById(R.id.toggle_button_position);
         togglePosition.setOnClickListener(new OnClickListener(){
@@ -81,8 +105,6 @@ public class ShowMap extends FragmentActivity implements LocationListener, Senso
         	}
         	
         });
-        
-        //Button piazzaDante = (Button) findViewById(R.id.b_piazzaDante);
         
         image = (ImageView) findViewById(R.id.imageViewCompass);
         // initialize your android device sensor capabilities
@@ -100,14 +122,6 @@ public class ShowMap extends FragmentActivity implements LocationListener, Senso
         	Toast.makeText(ShowMap.this, "No Internet Connection", Toast.LENGTH_LONG).show();
         }
         
-        /*piazzaDante.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				addMarkerAndGo();
-			}
-		});*/
-
         // Getting Google Play availability status
         int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getBaseContext());
  
@@ -161,18 +175,49 @@ public class ShowMap extends FragmentActivity implements LocationListener, Senso
             CameraPosition myPosition = new CameraPosition.Builder().target(latLng).zoom(16).build();
             googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(myPosition));
         }
+        //aggiungi punti e parti!!!
+        if(listGoals.size()!=0) //pie cazzo lavora!
+        	addPos(46.071546, 11.120449); //da aggiornare quando pie cambia il server. Scommentare prima su GetPoints_db.java
     }
+    
+    @SuppressWarnings("unchecked")
+	public void getPoints(String mapID){
+    	//Need to the function
+    	Goal tmp = new Goal();
+    	tmp.setName("mapID");
+    	tmp.SetID(mapID);
+    	List<Goal> listTmp = new ArrayList<Goal>();
+    	listTmp.add(tmp);
+    	GetPoints_db get_points = new GetPoints_db();
+    	try {
+			listGoals = get_points.execute(listTmp).get();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
+    public void getUser(String userID){
+    	daoUser = new UserDAO_DB_impl(); 
+        daoUser.open(); 
+        user = daoUser.getInfo(userID);
+    }
+    
     @Override
     public void onLocationChanged(Location location) {
   
-        // Getting latitude of the current location
-        double latitude = location.getLatitude();
+        // Getting latitude and longitude of the current location
+        my_lat = location.getLatitude();
+        my_lng = location.getLongitude();
  
-        // Getting longitude of the current location
-        double longitude = location.getLongitude();
- 
+        if(((next_lat-offset) < my_lat && my_lat < (next_lat+offset)) && ((next_lng-offset) < my_lng  && my_lng < (next_lng+offset))){
+        	//next point
+        }
+        
         // Creating a LatLng object for the current location
-        LatLng latLng = new LatLng(latitude, longitude);
+        //LatLng latLng = new LatLng(latitude, longitude);
  
         //Sposta la camera in una posizione
         //CameraPosition myPosition = new CameraPosition.Builder().target(latLng).zoom(21).build();
@@ -182,10 +227,11 @@ public class ShowMap extends FragmentActivity implements LocationListener, Senso
         //If results has length 2 or greater, the initial bearing is stored in results[1].
         //If results has length 3 or greater, the final bearing is stored in results[2].
         float[] results = new float[1];
-        Location.distanceBetween(latitude, longitude,
-        		dante_latitude, dante_longitude, results);
-        distance.setText("Next Checkpoint\n"+results[0]+" metres");
-         
+        Location.distanceBetween(my_lat, my_lng, next_lat, next_lng, results);
+        if(listGoals.size()!=0)
+        	distance.setText("Next Checkpoint\n"+results[0]+" metres");
+        else
+        	distance.setText("No points");
     }
  
     @Override
@@ -203,13 +249,16 @@ public class ShowMap extends FragmentActivity implements LocationListener, Senso
         // TODO Auto-generated method stub
     }
     
-    private void addMarkerAndGo() {
+    private void addPos(double lat, double lng) {
     	// create marker
-        /*MarkerOptions marker = new MarkerOptions().position(piazzaDante).title("Piazza Dante");
-         
+    	LatLng llg = new LatLng(lat, lng);
+    	
+    	MarkerOptions marker = new MarkerOptions().position(llg);
         // adding marker
         googleMap.addMarker(marker);
         
+        
+        /*
         //Sposta la camera in una posizione
         CameraPosition c_piazzaDante = new CameraPosition.Builder().target(
                 piazzaDante).zoom(21).build();
@@ -217,9 +266,12 @@ public class ShowMap extends FragmentActivity implements LocationListener, Senso
         googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(c_piazzaDante));*/
     }
     
-    @Override
-    protected void onResume() {
+    @SuppressWarnings("deprecation")
+	@Override
+    protected void onResume() { 
 		super.onResume();
+		
+		daoUser.open();
 		// for the system's orientation sensor registered listeners
 		mSensorManager.registerListener(this, mSensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION),
 		SensorManager.SENSOR_DELAY_GAME);
@@ -228,10 +280,13 @@ public class ShowMap extends FragmentActivity implements LocationListener, Senso
 	@Override
 	protected void onPause() {
 		super.onPause();
+		
+		daoUser.close(); 
 		// to stop the listener and save battery
 		mSensorManager.unregisterListener(this);
     }
-    @Override
+    
+	@Override
     public void onSensorChanged(SensorEvent event) {
         // get the angle around the z-axis rotated
         float degree = Math.round(event.values[0]);
