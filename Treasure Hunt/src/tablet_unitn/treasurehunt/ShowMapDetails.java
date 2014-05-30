@@ -3,6 +3,7 @@ package tablet_unitn.treasurehunt;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.text.method.ScrollingMovementMethod;
 import android.view.Menu;
 import android.view.View;
@@ -11,10 +12,18 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class ShowMapDetails extends Activity {
+	
+	Typeface robotoThin, robotoCond, roboto, robotoReg;
+	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.showmapdetails);
+        
+        robotoReg = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Regular.ttf");
+        roboto = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Black.ttf");
+        robotoThin = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Thin.ttf");
+        robotoCond = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Condensed.ttf");
         
         TextView title = (TextView)findViewById(R.id.map_name);
         TextView checkpoints = (TextView) findViewById(R.id.det_checkpoint);
@@ -23,7 +32,18 @@ public class ShowMapDetails extends Activity {
         TextView timeLeft = (TextView) findViewById(R.id.det_time);
         TextView description = (TextView) findViewById(R.id.det_description);
         
+        title.setTypeface(robotoCond);
+        checkpoints.setTypeface(roboto); distance.setTypeface(roboto);
+        difficulty.setTypeface(roboto); timeLeft.setTypeface(roboto);
+        description.setTypeface(robotoReg);
+        
+        ((TextView) findViewById(R.id.checkpoint)).setTypeface(robotoThin);
+        ((TextView) findViewById(R.id.distance)).setTypeface(robotoThin);
+        ((TextView) findViewById(R.id.difficulty)).setTypeface(robotoThin);
+        ((TextView) findViewById(R.id.time)).setTypeface(robotoThin);
+        
         Button b_showMap = (Button) findViewById(R.id.show_map);
+        b_showMap.setTypeface(roboto);
         
         description.setMovementMethod(new ScrollingMovementMethod());
         

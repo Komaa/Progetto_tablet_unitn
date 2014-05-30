@@ -8,12 +8,14 @@ import tablet_unitn.checkInternet.WIFIInternetConnectionDetector;
 import tablet_unitn.treasurehunt.Map;
 import tablet_unitn.treasurehunt.ContinueAdapter;
 import tablet_unitn.treasurehunt.R;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -53,6 +55,16 @@ public class ContinueFragment extends Fragment {
 			
 	        ContinueAdapter continue_adapter = new ContinueAdapter(MainActivity.getAppContext(), R.layout.continuelist, continue_list);
 	        continue_listView.setAdapter(continue_adapter);
+	        
+	        continue_listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+				  @Override
+				  public void onItemClick(AdapterView<?> parent, final View view,
+				      int position, long id) {
+					  Intent intent = new Intent(getActivity(),ShowMap.class);
+					  
+					  startActivity(intent);
+				  }
+		    });
 	        
 		} else {
             // Internet connection doesn't exist

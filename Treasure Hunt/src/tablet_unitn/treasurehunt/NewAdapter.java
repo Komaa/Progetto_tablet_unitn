@@ -3,6 +3,7 @@ package tablet_unitn.treasurehunt;
 import java.util.List;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +13,13 @@ import android.widget.TextView;
 
 public class NewAdapter extends ArrayAdapter<Map>{
 	
+	Typeface roboto, robotoCond;
+	
 	public NewAdapter(Context context, int textViewResourceId, List<Map> objects) {
         super(context, textViewResourceId, objects);
+        
+        roboto = Typeface.createFromAsset(context.getAssets(), "fonts/Roboto-Thin.ttf");
+        robotoCond = Typeface.createFromAsset(context.getAssets(), "fonts/Roboto-Condensed.ttf");
     }
 	@Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -25,6 +31,11 @@ public class NewAdapter extends ArrayAdapter<Map>{
         TextView checkpoints = (TextView) convertView.findViewById(R.id.new_checkpoint);
 		TextView distanza = (TextView)convertView.findViewById(R.id.new_distanza);
 		TextView difficolta = (TextView)convertView.findViewById(R.id.new_difficolta);
+		
+		name.setTypeface(robotoCond);
+		checkpoints.setTypeface(roboto);
+		distanza.setTypeface(roboto);
+		difficolta.setTypeface(roboto);
 		
 		//Nome, descrizione, livello e num punti
 		Map c = getItem(position);
