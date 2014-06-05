@@ -1,24 +1,45 @@
 package tablet_unitn.treasurehunt;
 
+import java.util.concurrent.ExecutionException;
+
+import tablet_unitn.checkInternet.MobileInternetConnectionDetector;
+import tablet_unitn.checkInternet.WIFIInternetConnectionDetector;
+import tablet_unitn.dbmanager.JoinMap_db;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ShowMapDetails extends Activity {
-	
+	String usrName="";
 	Typeface robotoThin, robotoCond, roboto, robotoReg;
+	
+	//Internet status flag
+    Boolean isMobileConnectionExist = false;
+    Boolean isWifiConnectionExist = false;
+    
+    // Connection detector class
+    MobileInternetConnectionDetector cd;
+    WIFIInternetConnectionDetector wc;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.showmapdetails);
+        
+        usrName = (String) this.getIntent().getExtras().get(".usrName");
+        
+        // creating connection detector class instance
+        cd = new MobileInternetConnectionDetector(getApplicationContext());
+        wc = new WIFIInternetConnectionDetector(getApplicationContext());
         
         robotoReg = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Regular.ttf");
         roboto = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Black.ttf");
@@ -70,12 +91,34 @@ public class ShowMapDetails extends Activity {
         b_showMap.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(getApplicationContext(), ShowMap.class);
-			    String[] put = new String[2];
-			    put[0] = ID; //id map
-			    put[1] = MainActivity.user.getID(); //check if it works - id user
-			    intent.putExtra(".map_info",put);
-			    startActivity(intent);
+				// get Internet status
+		        isMobileConnectionExist = cd.checkMobileInternetConn();
+		        isWifiConnectionExist = wc.checkMobileInternetConn();
+		        
+				if (isMobileConnectionExist||isWifiConnectionExist) {
+					Intent intent = new Intent(getApplicationContext(), ShowMap.class);
+				    String[] put = new String[2];
+				    put[0] = ID; //id map
+				    put[1] = MainActivity.user.getID(); //check if it works - id user
+				    intent.putExtra(".map_info",put);
+				    
+				    //join map from server
+				    JoinMap_db join = new JoinMap_db();
+				    String check="";
+				    try {
+						check=join.execute(ID,usrName).get();
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					} catch (ExecutionException e) {
+						e.printStackTrace();
+					}	
+//			    	if(Boolean.valueOf(check))	
+				    if(true)
+			    		startActivity(intent);
+			    	else
+			    		Toast.makeText(getApplicationContext(), "An error occorred: "+check, Toast.LENGTH_SHORT).show();
+				}else
+					Toast.makeText(getApplicationContext(), "No internet connection", Toast.LENGTH_SHORT).show();
 			}
 		});
         

@@ -73,7 +73,7 @@ public class NewFragment extends Fragment {
 					  intent.putExtra(".map_Level", level);
 					  intent.putExtra(".map_Time", time);
 					  intent.putExtra(".map_Description", description);
-					  
+					  intent.putExtra(".usrName", MainActivity.user.getName());
 					  startActivity(intent);
 				  }
 		    });

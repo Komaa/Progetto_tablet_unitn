@@ -26,7 +26,9 @@ public class HomeFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_home, container, false);
-//		String ID = (String) getActivity().getIntent().getExtras().get("usr_ID");
+		user=MainActivity.user;		
+		
+	    
 		Typeface robotoThin = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-Thin.ttf");
 //		Typeface roboto = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-Black.ttf");
 //		int numGames = 3, numNewPubGames = 1, numNewPvtGames = 2;

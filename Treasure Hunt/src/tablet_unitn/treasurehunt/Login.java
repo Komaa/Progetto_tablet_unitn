@@ -10,7 +10,6 @@ import tablet_unitn.dbmanager.Login_db;
 import tablet_unitn.dbmanager.UserDAO_DB_impl;
 import android.os.Bundle;
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -153,7 +152,7 @@ public class Login extends Activity {
 	    		}
 		        //Go to home
 		        Intent intent = new Intent(this, MainActivity.class);
-			    intent.putExtra("usr_ID", user.getID());
+			    intent.putExtra(".usr_ID", user.getID());
 			    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			    startActivity(intent);
 			    finish();

@@ -1,7 +1,10 @@
 package tablet_unitn.treasurehunt;
 
 
+import java.util.concurrent.ExecutionException;
+
 import tablet_unitn.adapter.TabsPagerAdapter;
+import tablet_unitn.dbmanager.GetUserInfo_db;
 import tablet_unitn.dbmanager.UserDAO_DB_impl;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
@@ -32,12 +35,25 @@ public class MainActivity extends FragmentActivity implements
 		setContentView(R.layout.activity_main);
 		MainActivity.context = getApplicationContext();
 		
-		// Get user informations
-		String ID = (String) this.getIntent().getExtras().get("usr_ID");
+		// Get user informations from andoird DB
+		String ID = (String) this.getIntent().getExtras().get(".usr_ID");
 		dao = new UserDAO_DB_impl(); 
         dao.open(); 
         user = dao.getInfo(ID);
-		
+        
+        //get user information from server
+	    GetUserInfo_db join = new GetUserInfo_db();
+	    try {
+			user=join.execute(user).get();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			e.printStackTrace();
+		}	
+	    
+	    //aggiorno android DB
+	    user = dao.updateUser(user);
+	    		
 		// Initilization
 		viewPager = (ViewPager) findViewById(R.id.pager);
 		actionBar = getActionBar();
