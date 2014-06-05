@@ -14,6 +14,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -42,14 +43,15 @@ public class MainActivity extends FragmentActivity implements
         user = dao.getInfo(ID);
         
         //get user information from server
-	    GetUserInfo_db join = new GetUserInfo_db();
+	    GetUserInfo_db use = new GetUserInfo_db();
 	    try {
-			user=join.execute(user).get();
+			user=use.execute(user).get();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		} catch (ExecutionException e) {
 			e.printStackTrace();
 		}	
+	    Log.d("ciao1234", "user name: "+user.getName());
 	    
 	    //aggiorno android DB
 	    user = dao.updateUser(user);

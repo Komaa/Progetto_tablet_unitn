@@ -1,6 +1,7 @@
 package tablet_unitn.dbmanager;
 
 import java.io.IOException;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
@@ -11,6 +12,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 public class Login_db extends AsyncTask<String, Integer, String[]>{
 
@@ -32,12 +34,15 @@ public class Login_db extends AsyncTask<String, Integer, String[]>{
 	    // Execute the request
 	    HttpResponse response;
 	    try {
-	        response = httpclient.execute(httpget);
-	        String frse = EntityUtils.toString(response.getEntity());	 
+	    	response = httpclient.execute(httpget);
+	        String frse = EntityUtils.toString(response.getEntity());
 	        try {
 				JSONObject obj = new JSONObject(frse);
-				res[0]=obj.getString("token");
 				res[1]=obj.getString("success");
+				if(res[1].equals("false"))
+					res[2]=obj.getString("err");
+				else
+					res[0]=obj.getString("token");
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

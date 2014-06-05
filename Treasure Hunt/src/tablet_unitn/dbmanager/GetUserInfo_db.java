@@ -1,6 +1,7 @@
 package tablet_unitn.dbmanager;
 
 import java.io.IOException;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
@@ -13,6 +14,7 @@ import org.json.JSONObject;
 
 import tablet_unitn.treasurehunt.User;
 import android.os.AsyncTask;
+import android.util.Log;
 
 public class GetUserInfo_db extends AsyncTask<User, Integer, User>{
 
@@ -27,20 +29,22 @@ public class GetUserInfo_db extends AsyncTask<User, Integer, User>{
 		HttpClient httpclient = new DefaultHttpClient();
 
 	    // Prepare a request object
-	    HttpGet httpget = new HttpGet("http://treasure-back.herokuapp.com/users/datiu/"+user.getMail()); 
+	    HttpGet httpget = new HttpGet("http://treasure-back.herokuapp.com/users/datiu/"+user.getName()); 
 
 	    // Execute the request
 	    HttpResponse response;
 	    try {
 	        response = httpclient.execute(httpget);
 	        res = EntityUtils.toString(response.getEntity());
+	        Log.d("res", "res: "+res);
 	        try {
 	            JSONArray jsonArray = new JSONArray(res);
+	            
 	            for (int i = 0, size = jsonArray.length(); i < size; i++)
 	            {
-					JSONObject obj = jsonArray.getJSONObject(i);
+	            	JSONObject obj = jsonArray.getJSONObject(i);
 					user.setID(obj.getString("id"));
-					user.setName(obj.getString("username"));
+					//user.setName(obj.getString("username"));
 					user.setPoints(obj.getInt("description"));
 					user.setPartiteCorrenti(obj.getInt("walkf_count"));
 					user.setPartiteCompletate(obj.getInt("currentwalk_cout"));

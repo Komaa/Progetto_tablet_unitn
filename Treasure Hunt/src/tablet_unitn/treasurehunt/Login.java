@@ -25,7 +25,7 @@ import android.widget.Toast;
 
 public class Login extends Activity {
 	private static  Context context;
-	EditText mail, psw;
+	EditText name, psw;
 	Button login, register;
 	
 	//Internet status flag
@@ -60,7 +60,7 @@ public class Login extends Activity {
         TextView title_app = (TextView) findViewById(R.id.app_title);
         title_app.setTypeface(robotoBold);
         
-        mail = (EditText) findViewById(R.id.login_name);
+        name = (EditText) findViewById(R.id.login_name);
         psw = (EditText) findViewById(R.id.login_psw);
         login = (Button) findViewById(R.id.login_button);
         register = (Button) findViewById(R.id.register_button);
@@ -102,7 +102,7 @@ public class Login extends Activity {
         users = dao.getAllUser(); 
         for (int i = 0; i < users.size(); i++) {
         	if(users.get(i).getLogged()==1){
-        		mail.setText(users.get(i).getMail());
+        		name.setText(users.get(i).getName());
         		psw.setText(users.get(i).getPsw());
         		checkBox.setChecked(true);
         		this.user=users.get(i);
@@ -113,24 +113,23 @@ public class Login extends Activity {
 
      public void login(){
     	String[] res=null;
-    	if (mail.getText().toString().isEmpty() && psw.getText().toString().isEmpty())
+    	if (name.getText().toString().isEmpty() && psw.getText().toString().isEmpty())
     		Toast.makeText(this, "Wrong Credentials", Toast.LENGTH_SHORT).show();
     	else{
 			Login_db login = new Login_db();
 			try {
-				res=login.execute(mail.getText().toString(), psw.getText().toString()).get();
+				res=login.execute(name.getText().toString(), psw.getText().toString()).get();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			} catch (ExecutionException e) {
 				e.printStackTrace();
-			}	
-	    	 
+			}
 		    if(res[1].equals("true")){
 		    	Toast.makeText(this, "Redirecting...", Toast.LENGTH_SHORT).show();
 	    		if(user == null){ //se non ci sono utenti loggati o hanno fatto un login senza ricordare le credenziali
 	    			int tmp=0;
 	    			for (int i = 0; i < users.size(); i++) { //controllo se l'utente ha già fatto un login (già censito)
-	    	        	if((users.get(i).getMail()).equals(mail.getText().toString())){ //se ha la stessa mail è lui
+	    	        	if((users.get(i).getName()).equals(name.getText().toString())){ //se ha la stessa name è lui
 	    	        		this.user=users.get(i);
 	    	        		if (checkBox.isChecked())  //se vuole salvare le credenziali
 	    	        			user.setLogged(1);
@@ -141,7 +140,7 @@ public class Login extends Activity {
 	    			if(tmp==0){ //è la prima volta che fa il login
 	    				int flg=0;
 	    				if (checkBox.isChecked()) flg=1; //se vuole salvare le credenziali
-	    				user=new User(res[0], "noName", mail.getText().toString(), psw.getText().toString(), 0, flg);
+	    					user=new User(res[0], name.getText().toString(), "noMail", psw.getText().toString(), 0, flg);
     					dao.insertUser(user);
 	    			}
 	    		}else{
@@ -158,7 +157,7 @@ public class Login extends Activity {
 			    finish();
 		     }	
 		     else{
-		        Toast.makeText(this, "Wrong Credentials", Toast.LENGTH_SHORT).show();
+		        Toast.makeText(this, "Wrong Credentials: "+res[2], Toast.LENGTH_SHORT).show();
 		     }
     	}
     }

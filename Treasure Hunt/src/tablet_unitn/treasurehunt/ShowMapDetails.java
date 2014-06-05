@@ -112,8 +112,7 @@ public class ShowMapDetails extends Activity {
 					} catch (ExecutionException e) {
 						e.printStackTrace();
 					}	
-//			    	if(Boolean.valueOf(check))	
-				    if(true)
+			    	if(Boolean.valueOf(check))	
 			    		startActivity(intent);
 			    	else
 			    		Toast.makeText(getApplicationContext(), "An error occorred: "+check, Toast.LENGTH_SHORT).show();
