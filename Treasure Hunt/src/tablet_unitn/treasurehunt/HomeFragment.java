@@ -6,6 +6,7 @@ import tablet_unitn.treasurehunt.R;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +29,6 @@ public class HomeFragment extends Fragment {
 		View rootView = inflater.inflate(R.layout.fragment_home, container, false);
 		user=MainActivity.user;		
 		
-	    
 		Typeface robotoThin = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-Thin.ttf");
 //		Typeface roboto = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-Black.ttf");
 //		int numGames = 3, numNewPubGames = 1, numNewPvtGames = 2;

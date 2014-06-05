@@ -51,7 +51,6 @@ public class MainActivity extends FragmentActivity implements
 		} catch (ExecutionException e) {
 			e.printStackTrace();
 		}	
-	    Log.d("ciao1234", "user name: "+user.getName());
 	    
 	    //aggiorno android DB
 	    user = dao.updateUser(user);

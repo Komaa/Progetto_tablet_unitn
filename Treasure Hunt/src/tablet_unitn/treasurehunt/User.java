@@ -7,8 +7,8 @@ import java.util.Hashtable;
 public class User {
 	Integer points=0,
 			logged = 0, //0 = false, 1 = true
-			walkf_count = 0, //le partite crrenti
-			currentwalk_cout = 0; //le partite completate
+			walkf_count = 0, //le partite completate
+			currentwalk_cout = 0; //le partite correnti
 	String ID="",
 			mail="", 
 			psw="",

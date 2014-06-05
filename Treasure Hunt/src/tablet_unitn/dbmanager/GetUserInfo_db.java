@@ -38,18 +38,12 @@ public class GetUserInfo_db extends AsyncTask<User, Integer, User>{
 	        res = EntityUtils.toString(response.getEntity());
 	        Log.d("res", "res: "+res);
 	        try {
-	            JSONArray jsonArray = new JSONArray(res);
-	            
-	            for (int i = 0, size = jsonArray.length(); i < size; i++)
-	            {
-	            	JSONObject obj = jsonArray.getJSONObject(i);
-					user.setID(obj.getString("id"));
-					//user.setName(obj.getString("username"));
-					user.setPoints(obj.getInt("description"));
-					user.setPartiteCorrenti(obj.getInt("walkf_count"));
-					user.setPartiteCompletate(obj.getInt("currentwalk_cout"));
-	            }			
-	            
+	            JSONObject obj = new JSONObject(res);
+	        	user.setID(obj.getString("id"));
+	        	user.setPoints(obj.getInt("punti"));
+				user.setPartiteCorrenti(obj.getInt("currentwalk_cout"));
+				user.setPartiteCompletate(obj.getInt("walkf_count"));
+	            	
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
