@@ -15,6 +15,7 @@
     
     
     <ImageView
+        android:contentDescription="@string/a_compass"
         android:id="@+id/compassArea"
         android:layout_width="80dp"
         android:layout_height="80dp"
@@ -24,6 +25,7 @@
         android:src="@drawable/compassarea" />
     
     <ImageView
+        android:contentDescription="@string/compass"
         android:id="@+id/imageViewCompass"
         android:layout_width="80dp"
         android:layout_height="80dp"
@@ -41,8 +43,8 @@
 		android:layout_marginBottom="20dp"
 		android:layout_marginLeft="10dp"
 		android:background="@drawable/showmapbutton"
-		android:textSize="11sp"
-		android:text="Next Checkpoint" />
+		android:textSize="12sp"
+		android:text="@string/b_nextC" />
     
     <RelativeLayout
 	    android:layout_width="150dp"

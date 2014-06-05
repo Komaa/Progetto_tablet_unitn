@@ -17,4 +17,7 @@
 	<string name="confirm_psw">Confirm Password</string>
 	<string name="username">Username</string>
 	<string name="remember">Remember credentials</string>
+	<string name="compass">Compass</string>
+	<string name="a_compass">Background compass</string>
+	<string name="b_nextC">Next Checkpoint</string>
 </resources>

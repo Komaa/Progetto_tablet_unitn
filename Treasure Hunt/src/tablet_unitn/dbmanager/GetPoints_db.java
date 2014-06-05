@@ -16,7 +16,6 @@ import org.json.JSONObject;
 
 import tablet_unitn.treasurehunt.Goal;
 import android.os.AsyncTask;
-import android.util.Log;
 
 public class GetPoints_db extends AsyncTask<List<Goal>, Integer, List<Goal>>{
 
@@ -61,11 +60,9 @@ public class GetPoints_db extends AsyncTask<List<Goal>, Integer, List<Goal>>{
 					p.setName(obj.getString("name"));
 					p.setDescription(obj.getString("description"));
 					p.setLocationType(obj.getString("locationType"));
-//					JSONObject c = obj.getJSONObject("coords");
-//					for (int z = 0; z < c.length(); z++) {
-//						p.setLan(coo.getInt("lan"));
-//						p.setLng(coo.getInt("lng"));
-//					}
+//					JSONArray c = obj.getJSONArray("coords");
+//					p.setLan((c.getInt(0)));
+//					p.setLng((c.getInt(1)));
 					if(!obj.isNull( "question" )){ //se ha delle domande
 						p.setPoints(obj.getInt("points"));
 						p.setText(obj.getString("text"));

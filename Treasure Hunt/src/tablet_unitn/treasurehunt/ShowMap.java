@@ -43,7 +43,7 @@ public class ShowMap extends FragmentActivity implements LocationListener, Senso
 	
 	List<Goal> listGoals;
 	User user;
-    UserDAO_DB_impl daoUser;
+//    UserDAO_DB_impl daoUser;
 	
     GoogleMap googleMap;
     Location myLocation;
@@ -87,7 +87,7 @@ public class ShowMap extends FragmentActivity implements LocationListener, Senso
         Log.d("ciao1", "user id: "+IDs[1]);
         //GET LIST OF POINTS and USER
 		getPoints(IDs[0]);
-		getUser(IDs[1]);
+//		getUser(IDs[1]);
 		Log.d("ciao1", "listGoals: "+listGoals);
         Log.d("ciao1", "user: "+user);
         distance = (TextView) findViewById(R.id.distance);
@@ -199,11 +199,11 @@ public class ShowMap extends FragmentActivity implements LocationListener, Senso
 			e.printStackTrace();
 		}
     }
-    public void getUser(String userID){
-    	daoUser = new UserDAO_DB_impl(); 
-        daoUser.open(); 
-        user = daoUser.getInfo(userID);
-    }
+//    public void getUser(String userID){
+//    	daoUser = new UserDAO_DB_impl(); 
+//        daoUser.open(); 
+//        user = daoUser.getInfo(userID);
+//    }
     
     @Override
     public void onLocationChanged(Location location) {
@@ -271,7 +271,7 @@ public class ShowMap extends FragmentActivity implements LocationListener, Senso
     protected void onResume() { 
 		super.onResume();
 		
-		daoUser.open();
+//		daoUser.open();
 		// for the system's orientation sensor registered listeners
 		mSensorManager.registerListener(this, mSensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION),
 		SensorManager.SENSOR_DELAY_GAME);
@@ -281,7 +281,7 @@ public class ShowMap extends FragmentActivity implements LocationListener, Senso
 	protected void onPause() {
 		super.onPause();
 		
-		daoUser.close(); 
+//		daoUser.close(); 
 		// to stop the listener and save battery
 		mSensorManager.unregisterListener(this);
     }

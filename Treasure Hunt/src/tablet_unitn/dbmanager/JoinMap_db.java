@@ -52,6 +52,7 @@ Log.d("ciao1234", "nameUSR: "+nameUSR);
 		} catch (IOException e) {
 				// TODO Auto-generated catch block
 		} 
+	    Log.d("ciao123", "arrivo fino a qui");
 	    return result;
 	}
 

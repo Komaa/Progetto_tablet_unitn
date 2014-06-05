@@ -1,14 +1,12 @@
 package tablet_unitn.treasurehunt;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import tablet_unitn.checkInternet.MobileInternetConnectionDetector;
 import tablet_unitn.checkInternet.WIFIInternetConnectionDetector;
 import tablet_unitn.dbmanager.ContinueMaps_db;
-import tablet_unitn.dbmanager.NewMaps_db;
 import tablet_unitn.treasurehunt.Map;
 import tablet_unitn.treasurehunt.ContinueAdapter;
 import tablet_unitn.treasurehunt.R;
@@ -92,6 +90,8 @@ public class ContinueFragment extends Fragment {
         }
 		return continue_rootView;
 	}
+	
+	@SuppressWarnings("unchecked")
 	public void getMaps(String user){
     	ContinueMaps_db continue_maps = new ContinueMaps_db(user);
     	try {

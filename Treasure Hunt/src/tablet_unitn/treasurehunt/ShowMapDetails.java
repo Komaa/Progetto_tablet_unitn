@@ -10,7 +10,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.text.method.ScrollingMovementMethod;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -19,7 +18,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class ShowMapDetails extends Activity {
-	String usrName="";
+	String usrName="",
+			ID="";
 	Typeface robotoThin, robotoCond, roboto, robotoReg;
 	
 	//Internet status flag
@@ -69,7 +69,7 @@ public class ShowMapDetails extends Activity {
         description.setMovementMethod(new ScrollingMovementMethod());
         
         //dati ricevuti da NewFragment.java tramite putExtra (AP)
-        final String ID = (String) this.getIntent().getExtras().get(".map_ID");
+        ID = (String) this.getIntent().getExtras().get(".map_ID");
         
         title.setText(""+ this.getIntent().getExtras().get(".map_Name"));
         checkpoints.setText(""+ this.getIntent().getExtras().get(".map_Checkpoints").toString());
@@ -91,37 +91,41 @@ public class ShowMapDetails extends Activity {
         b_showMap.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// get Internet status
-		        isMobileConnectionExist = cd.checkMobileInternetConn();
-		        isWifiConnectionExist = wc.checkMobileInternetConn();
-		        
-				if (isMobileConnectionExist||isWifiConnectionExist) {
-					Intent intent = new Intent(getApplicationContext(), ShowMap.class);
-				    String[] put = new String[2];
-				    put[0] = ID; //id map
-				    put[1] = MainActivity.user.getID(); //check if it works - id user
-				    intent.putExtra(".map_info",put);
-				    
-				    //join map from server
-				    JoinMap_db join = new JoinMap_db();
-				    String check="";
-				    try {
-						check=join.execute(ID,usrName).get();
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					} catch (ExecutionException e) {
-						e.printStackTrace();
-					}	
-			    	if(Boolean.valueOf(check))	
-			    		startActivity(intent);
-			    	else
-			    		Toast.makeText(getApplicationContext(), "An error occorred: "+check, Toast.LENGTH_SHORT).show();
-				}else
-					Toast.makeText(getApplicationContext(), "No internet connection", Toast.LENGTH_SHORT).show();
+				joinMap();
 			}
 		});
         
     }
+    
+    public void joinMap(){
+    	// get Internet status
+        isMobileConnectionExist = cd.checkMobileInternetConn();
+        isWifiConnectionExist = wc.checkMobileInternetConn();
+        
+		if (isMobileConnectionExist||isWifiConnectionExist) {
+			Intent intent = new Intent(getApplicationContext(), ShowMap.class);
+		    String[] put = new String[2];
+		    put[0] = ID; //id map
+		    put[1] = MainActivity.user.getID(); //check if it works - id user
+		    intent.putExtra(".map_info",put);
+		    
+		    //join map from server
+		    JoinMap_db join = new JoinMap_db();
+		    String check="";
+		    try {
+				check=join.execute(ID,usrName).get();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			} catch (ExecutionException e) {
+				e.printStackTrace();
+			}	
+	    	if(Boolean.valueOf(check))	
+	    		startActivity(intent);
+	    	else
+	    		Toast.makeText(getApplicationContext(), "An error occorred: "+check, Toast.LENGTH_SHORT).show();
+		}else
+			Toast.makeText(getApplicationContext(), "No internet connection", Toast.LENGTH_SHORT).show();
+	}
 
 
     @Override
