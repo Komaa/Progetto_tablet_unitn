@@ -16,34 +16,32 @@
     
     <ImageView
         android:id="@+id/compassArea"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="10dp"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:src="@drawable/compassarea" />
     
     <ImageView
         android:id="@+id/imageViewCompass"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="10dp"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:src="@drawable/compass" />
     
     <Button
         android:id="@+id/toggle_button_position"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_alignParentTop="true"
-		android:layout_alignParentRight="true"
-		android:layout_marginTop="10dp"
-		android:layout_marginRight="10dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_alignParentBottom="true"
+		android:layout_alignParentLeft="true"
+		android:layout_marginBottom="20dp"
+		android:layout_marginLeft="10dp"
 		android:background="@drawable/showmapbutton"
-		android:textSize="12sp"
+		android:textSize="11sp"
 		android:text="Next Checkpoint" />
     
     <RelativeLayout

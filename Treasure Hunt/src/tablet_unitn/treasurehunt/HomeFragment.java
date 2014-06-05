@@ -49,19 +49,16 @@ public class HomeFragment extends Fragment {
         	//user = getUserInfo(ID);
         	
 			welcome.setTypeface(robotoThin);
-			welcome.setText(welcome.getText() + " Mario27");
+			welcome.setText(welcome.getText() + " " + user.getName());
 			
-			infoContinue.setTypeface(robotoThin);;
-			infoContinue.setText("You're playing 3 games at the moment.\n\n"
-					+ "You have complited 23 games!");
+			infoContinue.setTypeface(robotoThin);
+			user.mapsJoined.size();
+			infoContinue.setText("You're playing " + user.getPartiteCorrenti() + ((user.getPartiteCorrenti() == 1) ? " game " : " games ") 
+									+ "at the moment.\n\n" 
+									+ "You have completed " + user.getPartiteCompletate() + ((user.getPartiteCompletate() == 1) ? " game " : " games "));
 			
 			infoNewPub.setTypeface(robotoThin);
-			infoNewPub.setText("Your score is: \n 203 points");
-			
-			/*infoNewPub.setText("There " + ((numNewPubGames > 1) ? "are " : "is ") + numNewPubGames 
-					+ " public " + ((numNewPubGames > 1) ? "games" : "game") + " near your locations\n\n"
-							+ "You're invited to " + numNewPvtGames + " private " 
-					+ ((numNewPvtGames > 1) ? "games" : "game"));*/
+			infoNewPub.setText("Your score is: \n" + user.getPoints() + " points");
 		} else {
 		    // Internet connection doesn't exist
 			Toast.makeText(MainActivity.getAppContext(), "No Internet Connection", Toast.LENGTH_LONG).show();
