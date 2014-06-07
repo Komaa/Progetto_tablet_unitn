@@ -19,7 +19,7 @@ import android.view.MenuItem;
 
 public class MainActivity extends FragmentActivity implements
 		ActionBar.TabListener {
-	static User user = null;
+	public static User user = null;
     UserDAO_DB_impl dao;
     
 	private static Context context;

@@ -13,6 +13,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import tablet_unitn.treasurehunt.MainActivity;
 import tablet_unitn.treasurehunt.Map;
 import android.os.AsyncTask;
 
@@ -26,11 +27,11 @@ public class NewMaps_db extends AsyncTask<List<Map>, Integer, List<Map>>{
 
 	public List<Map> postData(List<Map> new_list) {
 		String res="";
-		
+				
 		HttpClient httpclient = new DefaultHttpClient();
 
 	    // Prepare a request object
-	    HttpGet httpget = new HttpGet("http://treasure-back.herokuapp.com/walking"); 
+	    HttpGet httpget = new HttpGet("http://treasure-back.herokuapp.com/walking/new/"+MainActivity.user.getName()); 
 
 	    // Execute the request
 	    HttpResponse response;

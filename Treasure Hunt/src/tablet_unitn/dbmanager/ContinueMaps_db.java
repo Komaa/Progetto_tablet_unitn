@@ -1,6 +1,7 @@
 package tablet_unitn.dbmanager;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.http.HttpResponse;
@@ -15,6 +16,7 @@ import org.json.JSONObject;
 
 import tablet_unitn.treasurehunt.Map;
 import android.os.AsyncTask;
+import android.util.Log;
 
 public class ContinueMaps_db extends AsyncTask<List<Map>, Integer, List<Map>>{
 	
@@ -45,7 +47,31 @@ public class ContinueMaps_db extends AsyncTask<List<Map>, Integer, List<Map>>{
 	        response = httpclient.execute(httpget);
 	        res = EntityUtils.toString(response.getEntity());
 	        try {
-	            JSONArray jsonArray = new JSONArray(res);
+	        	
+	        	String perjson="[";
+	        	String[] pairs = res.split("=");
+	       
+	        		
+	        	int[] myIntArray = new int[(pairs.length/2)+1];
+	        	for (int i=0;i<pairs.length;i++) {
+	        			if(i==0){
+	        				perjson += pairs[i].substring(1)+",";
+	        			}else if(i==(pairs.length-1)){	        				
+	        				myIntArray[i-1]=Integer.parseInt(pairs[i].substring(0, 1));	        				
+	        			}else if(i==(pairs.length-2)){
+	        				perjson += pairs[i].substring(3);
+	        				myIntArray[i-1]=Integer.parseInt(pairs[i].substring(0, 1));
+	        			}else{
+	        				perjson += pairs[i].substring(3)+",";
+	        				myIntArray[i-1]=Integer.parseInt(pairs[i].substring(0, 1));
+	        				
+	        			}
+	        	}
+	        	perjson += "]";
+	        	Log.v("per jsoooon", perjson);
+	        	Log.v("arrray contaaaa",myIntArray.toString());
+	        	
+	            JSONArray jsonArray = new JSONArray(perjson);
 	            for (int i = 0, size = jsonArray.length(); i < size; i++)
 	            {
 					JSONObject obj = jsonArray.getJSONObject(i);
@@ -55,7 +81,7 @@ public class ContinueMaps_db extends AsyncTask<List<Map>, Integer, List<Map>>{
 					p.setDescription(obj.getString("description"));
 					p.SetLevel(obj.getInt("level"));
 					p.SetCount(obj.getInt("count"));
-					
+					p.setTappe(myIntArray[i]);
 					continue_list.add(p);
 	            }			
 	            
