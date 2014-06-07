@@ -54,7 +54,7 @@ public class HomeFragment extends Fragment {
 			user.mapsJoined.size();
 			infoContinue.setText("You're playing " + user.getPartiteCorrenti() + ((user.getPartiteCorrenti() == 1) ? " game " : " games ") 
 									+ "at the moment.\n\n" 
-									+ "You have completed " + user.getPartiteCompletate() + ((user.getPartiteCompletate() == 1) ? " game " : " games "));
+									+ "You have completed " + user.getPartiteCompletate() + ((user.getPartiteCompletate() == 1) ? " game " : " games."));
 			
 			infoNewPub.setTypeface(robotoThin);
 			infoNewPub.setText("Your score is: \n" + user.getPoints() + " points");
