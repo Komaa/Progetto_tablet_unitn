@@ -49,12 +49,13 @@ public class ContinueMaps_db extends AsyncTask<List<Map>, Integer, List<Map>>{
 	            for (int i = 0, size = jsonArray.length(); i < size; i++)
 	            {
 					JSONObject obj = jsonArray.getJSONObject(i);
-					Map p=new Map();
+					Map p = new Map();
 					p.SetID(obj.getString("id"));
 					p.setName(obj.getString("name"));
 					p.setDescription(obj.getString("description"));
 					p.SetLevel(obj.getInt("level"));
 					p.SetCount(obj.getInt("count"));
+					
 					continue_list.add(p);
 	            }			
 	            

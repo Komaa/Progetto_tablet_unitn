@@ -53,33 +53,36 @@ public class ContinueFragment extends Fragment {
         	
         	getMaps(user.getName());
         	
-			
 	        ContinueAdapter continue_adapter = new ContinueAdapter(MainActivity.getAppContext(), R.layout.continuelist, list_map);
 	        continue_listView.setAdapter(continue_adapter);
 	        continue_listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 	        	@Override
 				  public void onItemClick(AdapterView<?> parent, final View view,
 				      int position, long id) {
-					  Intent intent = new Intent(getActivity(),ShowMapDetails.class);
+					  Intent intent = new Intent(getActivity(),ShowMap.class);
 					  
 					  String ID= list_map.get(position).getID();
-					  String name = list_map.get(position).getName();
+					  /*String name = list_map.get(position).getName();
 					  int checkpoints = list_map.get(position).getCount();
 					  int distance = 0; //variabile ancora da definire (AP)
 					  int level = list_map.get(position).getLevel();
 					  String time = ""; //variabile ancora da definire (AP)
-					  String description = list_map.get(position).getDescription();
+					  String description = list_map.get(position).getDescription();*/
 					  
-					  //attraverso putExtra passo a ShowMapDetails.java le informazioni necessarie
-					  //per compilare ogni campo di ogni mappa (AP)
-					  intent.putExtra(".map_ID", ID);
+					  String[] put = new String[2];
+					  put[0] = ID; //id map
+					  put[1] = MainActivity.user.getID(); //check if it works - id user
+					  intent.putExtra(".map_info",put);
+					  
+					  /*intent.putExtra(".map_ID", ID);
 					  intent.putExtra(".map_Name", name);
 					  intent.putExtra(".map_Checkpoints", checkpoints);
 					  intent.putExtra(".map_Distance", distance);
 					  intent.putExtra(".map_Level", level);
 					  intent.putExtra(".map_Time", time);
 					  intent.putExtra(".map_Description", description);
-					  intent.putExtra(".usrName", MainActivity.user.getName());
+					  intent.putExtra(".usrName", MainActivity.user.getName());*/
+
 					  startActivity(intent);
 				  }
 		    });

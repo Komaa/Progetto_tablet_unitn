@@ -113,7 +113,7 @@ public class Login extends Activity {
 
      public void login(){
     	String[] res=null;
-    	if (name.getText().toString().isEmpty() && psw.getText().toString().isEmpty())
+    	if (name.getText().toString().isEmpty() || psw.getText().toString().isEmpty())
     		Toast.makeText(this, "Wrong Credentials", Toast.LENGTH_SHORT).show();
     	else{
 			Login_db login = new Login_db();
