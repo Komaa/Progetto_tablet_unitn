@@ -102,11 +102,11 @@ public class Login extends Activity {
         users = dao.getAllUser(); 
         for (int i = 0; i < users.size(); i++) {
         	if(users.get(i).getLogged()==1){
+        		Log.d("ciao12", "Trovato user");
         		name.setText(users.get(i).getName());
         		psw.setText(users.get(i).getPsw());
         		checkBox.setChecked(true);
         		this.user=users.get(i);
-        		Log.d("ciao123", "user not null");
         	}
     	}
      }
@@ -126,7 +126,7 @@ public class Login extends Activity {
 			}
 		    if(res[1].equals("true")){
 		    	Toast.makeText(this, "Redirecting...", Toast.LENGTH_SHORT).show();
-	    		if(user == null){ //se non ci sono utenti loggati o hanno fatto un login senza ricordare le credenziali
+	    		/*if(user == null){ //se non ci sono utenti loggati o hanno fatto un login senza ricordare le credenziali
 	    			int tmp=0;
 	    			for (int i = 0; i < users.size(); i++) { //controllo se l'utente ha già fatto un login (già censito)
 	    	        	if((users.get(i).getName()).equals(name.getText().toString())){ //se ha la stessa name è lui
@@ -148,7 +148,16 @@ public class Login extends Activity {
 	    				user.setLogged(1);
 	    				dao.updateUser(user);
 	    			}
-	    		}
+	    		}*/
+		    	int flg=0;
+		    	if (checkBox.isChecked()) flg=1;
+		    	if(user==null){
+		    		user=new User(res[0], name.getText().toString(), "noMail", psw.getText().toString(), 0, flg);	
+		    		User ris = dao.insertUser(user);
+		    		if(ris==null)
+		    			Toast.makeText(this, "Bad error!", Toast.LENGTH_LONG).show();
+		    	}
+		    	
 		        //Go to home
 		        Intent intent = new Intent(this, MainActivity.class);
 			    intent.putExtra(".usr_ID", user.getID());

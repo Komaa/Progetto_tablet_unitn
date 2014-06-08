@@ -1,6 +1,7 @@
 package tablet_unitn.treasurehunt;
 
 
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import tablet_unitn.adapter.TabsPagerAdapter;
@@ -14,12 +15,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 public class MainActivity extends FragmentActivity implements
 		ActionBar.TabListener {
 	public static User user = null;
+	List<User> users;
     UserDAO_DB_impl dao;
     
 	private static Context context;
@@ -36,12 +39,24 @@ public class MainActivity extends FragmentActivity implements
 		MainActivity.context = getApplicationContext();
 		
 		// Get user informations from andoird DB
-		String ID = (String) this.getIntent().getExtras().get(".usr_ID");
+		String usrID = (String) this.getIntent().getExtras().get(".usr_ID");
 		dao = new UserDAO_DB_impl(); 
         dao.open(); 
-        user = dao.getInfo(ID);
+        users  = dao.getAllUser(); 
+        int q=0;
+        for (int i = 0; i < users.size(); i++) {
+        	if(users.get(i).getID().equals(usrID)){
+        		MainActivity.user=users.get(i);
+        		q++;
+        	}
+    	}
+        if(q==0){
+        	user=new User(usrID, "noName", "", "", 0, 0);
+        }
+
+//        user = dao.getInfo(ID);
         
-        //get user information from server
+//      get user information from server
 	    GetUserInfo_db use = new GetUserInfo_db();
 	    try {
 			user=use.execute(user).get();
@@ -51,7 +66,7 @@ public class MainActivity extends FragmentActivity implements
 			e.printStackTrace();
 		}	
 	    
-	    //aggiorno android DB
+//	    aggiorno android DB
 	    user = dao.updateUser(user);
 	    		
 		// Initilization
@@ -122,6 +137,7 @@ public class MainActivity extends FragmentActivity implements
         switch (item.getItemId())
         {
         case R.id.action_logout:
+        	dao.deleteUser(user);
         	logout();
             return true;
         default:

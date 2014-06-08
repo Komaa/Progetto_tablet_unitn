@@ -61,6 +61,7 @@ public class UserDAO_DB_impl implements UserDAO {
 	@Override 
 	public User insertUser(User user) { 
 		database.insert(UserSQLiteHelper.TABLE_USER, null, UserToValues(user));
+		
 		Cursor cursor = database.query(UserSQLiteHelper.TABLE_USER, allColumns, 
 				UserSQLiteHelper.COLUMN_ID + " = ?" , new String[] {user.getID()}, 
 				null, null, null); 
