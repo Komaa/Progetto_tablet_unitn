@@ -1,6 +1,5 @@
 package tablet_unitn.treasurehunt;
 
-import java.text.DecimalFormat;
 import java.util.List;
 
 import android.content.Context;

@@ -15,9 +15,12 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import android.app.Dialog;
@@ -42,7 +45,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class ShowMap extends FragmentActivity implements LocationListener, SensorEventListener {
+public class ShowMap extends FragmentActivity implements LocationListener, SensorEventListener, OnMarkerClickListener {
 	
 	List<Goal> listGoals=null;
 	List<Map> list_map=null;
@@ -198,6 +201,7 @@ public class ShowMap extends FragmentActivity implements LocationListener, Senso
             }else{
             	Toast.makeText(ShowMap.this, "Map error. No next goal found.", Toast.LENGTH_LONG).show();
             }
+            googleMap.setOnMarkerClickListener(this);
             
         }
        
@@ -210,10 +214,8 @@ public class ShowMap extends FragmentActivity implements LocationListener, Senso
     	try {
 			list_map = continue_maps.execute(list_map).get();
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ExecutionException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}	
     	int q=0;
@@ -236,10 +238,8 @@ public class ShowMap extends FragmentActivity implements LocationListener, Senso
     	try {
 			listGoals = get_points.execute().get();
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ExecutionException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     }
@@ -261,6 +261,21 @@ public class ShowMap extends FragmentActivity implements LocationListener, Senso
 		} catch (ExecutionException e) {
 			e.printStackTrace();
 		}
+        //show information markers on map
+        for (Wiki wiki : info) {
+        	googleMap.addMarker(new MarkerOptions()
+                        .position(new LatLng(wiki.getLat(), wiki.getLng()))
+                        .title(wiki.getTitle())
+                        .snippet(wiki.getUrl_mobile())
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.info_icon))
+                        .flat(true)
+                        );    
+        	
+//        	addPos(wiki.getLat(),wiki.getLng());
+        	Log.d("ciao12", "Aggiungo: "+wiki.getLat()+" "+wiki.getLng());
+		}
+        
+        
         
         if(((next_lat-offset) < my_lat && my_lat < (next_lat+offset)) && ((next_lng-offset) < my_lng  && my_lng < (next_lng+offset))){
         	
@@ -306,18 +321,25 @@ public class ShowMap extends FragmentActivity implements LocationListener, Senso
     }
  
     @Override
+	public boolean onMarkerClick(Marker marker) {
+    	if(marker.getSnippet()!=null){
+    		Intent intent = new Intent(getApplicationContext(),Browser.class);
+    		intent.putExtra(".URL", marker.getSnippet());
+        	startActivity(intent);
+    	}
+		return false;
+	}
+    
+    @Override
     public void onProviderDisabled(String provider) {
-        // TODO Auto-generated method stub
     }
  
     @Override
     public void onProviderEnabled(String provider) {
-        // TODO Auto-generated method stub
     }
  
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras) {
-        // TODO Auto-generated method stub
     }
     
     private void addPos(double lat, double lng) {
@@ -397,5 +419,4 @@ public class ShowMap extends FragmentActivity implements LocationListener, Senso
             }
         }
     }//onActivityResult
-
 }

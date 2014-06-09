@@ -16,7 +16,6 @@ import org.json.JSONObject;
 
 import tablet_unitn.treasurehunt.Goal;
 import android.os.AsyncTask;
-import android.util.Log;
 
 public class GetPoints_db extends AsyncTask<List<Goal>, Integer, List<Goal>>{
 	String mapID="";

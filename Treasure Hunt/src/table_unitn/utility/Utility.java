@@ -8,7 +8,6 @@ public class Utility {
 
 	public static Double calcolakm(String res, int n_tappa) throws JSONException{
 		JSONObject jsonObj = new JSONObject(res);
-		 Double dist=0.0;
 		 Double dres=0.0;
 		 
 	    JSONArray jsonArray = new JSONArray(jsonObj.getString("pois"));

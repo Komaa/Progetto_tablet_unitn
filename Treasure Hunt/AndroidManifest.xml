@@ -51,8 +51,13 @@
             android:name="tablet_unitn.treasurehunt.ShowMapDetails" 
         	android:theme="@android:style/Theme.Dialog" />
         <activity 
+            android:name="tablet_unitn.treasurehunt.CheckpointQuestion" 
+        	android:theme="@android:style/Theme.Dialog" />
+        <activity 
             android:name="tablet_unitn.treasurehunt.ShowMap"
 			android:screenOrientation="portrait" />
+        <activity 
+            android:name="tablet_unitn.treasurehunt.Browser" />
         
         <!-- Goolge Maps API Key -->
 		<meta-data

@@ -1,7 +1,6 @@
 package tablet_unitn.dbmanager;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.http.HttpResponse;
@@ -17,7 +16,6 @@ import org.json.JSONObject;
 import table_unitn.utility.Utility;
 import tablet_unitn.treasurehunt.Map;
 import android.os.AsyncTask;
-import android.util.Log;
 
 public class ContinueMaps_db extends AsyncTask<List<Map>, Integer, List<Map>>{
 	
@@ -69,8 +67,6 @@ public class ContinueMaps_db extends AsyncTask<List<Map>, Integer, List<Map>>{
 	        			}
 	        	}
 	        	perjson += "]";
-	        	Log.v("per jsoooon", perjson);
-	        	Log.v("arrray contaaaa",myIntArray.toString());
 	        	
 	            JSONArray jsonArray = new JSONArray(perjson);
 	            for (int i = 0, size = jsonArray.length(); i < size; i++)

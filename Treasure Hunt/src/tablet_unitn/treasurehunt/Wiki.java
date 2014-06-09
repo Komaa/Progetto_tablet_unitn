@@ -1,82 +1,69 @@
 package tablet_unitn.treasurehunt;
 
-import java.util.Hashtable;
-
 public class Wiki {
-	Integer points = 0; //punti per risposta corretta
-	
 	Double lat = 0.0, //latitudine
 			lng = 0.0; //longitudine
 	
-	String ID = "",
-			name ="",
-			description="",
-			locationType="",
-			text="";
-	
-	Hashtable<String, Boolean> response;
-		
-	// ID GOAL
-	public void setID(String ID) {
-		this.ID = ID;
-	}
-	public String getID(){
-		return ID;
-	}
-	//LATITUDINE DEL GOAL
-	public void setLat(Double lat) {
-		this.lat=lat;
-	}
-	public Double getLat(){
+	String id = "",
+			type ="",
+			title="",
+			url_mobile="",
+			distance="";
+
+	public Double getLat() {
 		return lat;
 	}
-	//LONGITUDINE DEL GOAL
-	public void setLng(Double lng) {
-		this.lng=lng;
+
+	public void setLat(Double lat) {
+		this.lat = lat;
 	}
-	public Double getLng(){
+
+	public Double getLng() {
 		return lng;
 	}
-	//Punti per risposta corretta
-	public void setPoints(Integer points) {
-		this.points=points;
+
+	public void setLng(Double lng) {
+		this.lng = lng;
 	}
-	public Integer getPoints(){
-		return points;
+
+	public String getId() {
+		return id;
 	}
-	//NOME DEL GOAL
-	public void setName(String name) {
-		this.name=name;
+
+	public void setId(String id) {
+		this.id = id;
 	}
-	public String getName(){
-		return name;
+
+	public String getType() {
+		return type;
 	}
-	//Tipo di locazione
-	public void setLocationType(String locationType) {
-		this.locationType=locationType;
+
+	public void setType(String type) {
+		this.type = type;
 	}
-	public String getLocationType(){
-		return description;
+
+	public String getTitle() {
+		return title;
 	}
-	//DESCRIZIONE DEL GOAL
-	public void setDescription(String desc) {
-		this.description=desc;
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
-	public String getDescription(){
-		return description;
+
+	public String getUrl_mobile() {
+		return url_mobile;
 	}
-	//QUESITO DEL GOAL
-	public void setText(String text) {
-		this.text=text;
+
+	public void setUrl_mobile(String url_mobile) {
+		this.url_mobile = url_mobile;
 	}
-	public String getText(){
-		return text;
+
+	public String getDistance() {
+		return distance;
 	}
-	//RISPOSTE DEL GOAL
-	public void setResponse(String res, Boolean val) {
-		this.response.put(res, val);
+
+	public void setDistance(String distance) {
+		this.distance = distance;
 	}
-	public Hashtable<String, Boolean> GetResponse(){
-		return response;
-	}
+	
 }

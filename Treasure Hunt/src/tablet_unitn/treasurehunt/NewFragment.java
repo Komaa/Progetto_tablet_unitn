@@ -3,11 +3,11 @@ package tablet_unitn.treasurehunt;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
-
 import tablet_unitn.checkInternet.MobileInternetConnectionDetector;
 import tablet_unitn.checkInternet.WIFIInternetConnectionDetector;
 import tablet_unitn.dbmanager.NewMaps_db;
 import tablet_unitn.treasurehunt.R;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -51,7 +51,8 @@ public class NewFragment extends Fragment {
 			NewAdapter new_adapter = new NewAdapter(getActivity(), R.layout.newlist, list_map);
 	        new_listView.setAdapter(new_adapter);
 	        new_listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-				  @Override
+				  @SuppressLint("DefaultLocale")
+				@Override
 				  public void onItemClick(AdapterView<?> parent, final View view,
 				      int position, long id) {
 					  Intent intent = new Intent(getActivity(),ShowMapDetails.class);

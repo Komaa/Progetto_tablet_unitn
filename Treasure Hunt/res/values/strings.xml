@@ -20,4 +20,5 @@
 	<string name="compass">Compass</string>
 	<string name="a_compass">Background compass</string>
 	<string name="b_nextC">Next Checkpoint</string>
+	<string name="t_showmap">Searching position..</string>
 </resources>
