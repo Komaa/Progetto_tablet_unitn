@@ -92,7 +92,9 @@ public class ShowMap extends FragmentActivity implements LocationListener, Senso
         
         //GET MAP AND LIST OF POINTS
         getMaps(IDs[0], IDs[1]); //mapID e userName
+        Log.d("ciao123", "maps: "+list_map);
 		getPoints(IDs[0]);
+		Log.d("ciao123", "points: "+listGoals);
 					
 		Log.d("ciao1", "listGoals: "+listGoals);
         distance = (TextView) findViewById(R.id.distance);

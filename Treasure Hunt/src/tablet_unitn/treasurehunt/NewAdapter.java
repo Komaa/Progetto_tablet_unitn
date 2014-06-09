@@ -41,7 +41,7 @@ public class NewAdapter extends ArrayAdapter<Map>{
         name.setText(""+c.getName());
         checkpoints.setText(""+c.getCount());
         
-        distanza.setText(c.getDist()+" km");
+        distanza.setText(String.format("%.1f", c.getDist())+" km");
         
         int level = c.getLevel();
         if(level == 1){

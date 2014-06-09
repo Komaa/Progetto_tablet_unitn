@@ -70,7 +70,7 @@ public class ShowMapDetails extends Activity {
         
         title.setText(""+ this.getIntent().getExtras().get(".map_Name"));
         checkpoints.setText(""+ this.getIntent().getExtras().get(".map_Checkpoints").toString());
-        distance.setText(this.getIntent().getExtras().get(".map_Distance").toString()+" km");
+        distance.setText(String.format("%.1f", this.getIntent().getExtras().get(".map_Distance").toString())+" km");
         
         Integer level = (Integer) this.getIntent().getExtras().get(".map_Level");
         if(level.byteValue() == 1){
