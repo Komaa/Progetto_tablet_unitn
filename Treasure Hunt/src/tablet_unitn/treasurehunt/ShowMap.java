@@ -56,9 +56,10 @@ public class ShowMap extends FragmentActivity implements LocationListener, Senso
     int toggle = 0; //0=your position, 1=next goal
     int checkpointNumber = 0; //la variabile serve per capire quanti checkpoint della mappa sono stati fatti
     int indexRightAnswer = 0;
+    boolean check=false;
     
     //next latitude and longitude
-    double offset = 0; //area di ritrovamento del punto 0 -> esattamente sopra 
+    double offset = 10; //0.0001 area di ritrovamento del punto 0 -> esattamente sopra 
     double next_lat = 0;
     double next_lng = 0;
     double my_lat = 1000; //deve essere distante dal marker
@@ -139,16 +140,16 @@ public class ShowMap extends FragmentActivity implements LocationListener, Senso
         
         // Getting Google Play availability status
         int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getBaseContext());
- 
+      
         // Showing status
         if(status!=ConnectionResult.SUCCESS){ // Google Play Services are not available
  
             int requestCode = 10;
             Dialog dialog = GooglePlayServicesUtil.getErrorDialog(status, this, requestCode);
             dialog.show();
- 
+           
         } else { // Google Play Services are available
- 
+        	
             // Getting reference to the SupportMapFragment of activity_main.xml
             SupportMapFragment fm = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
  
@@ -173,25 +174,23 @@ public class ShowMap extends FragmentActivity implements LocationListener, Senso
 
             locationManager.requestLocationUpdates(provider, 20000, 0, this);
             googleMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
-            
-            Log.d("ciao12", "my: "+myLocation);
          // Getting latitude of the current location
             double latitude = myLocation.getLatitude();
      
             // Getting longitude of the current location
             double longitude = myLocation.getLongitude();
-     
+           
             // Creating a LatLng object for the current location
             LatLng latLng = new LatLng(latitude, longitude);
-            Log.d("ciao12", "ciaooo222");
+            
             //Sposta la camera nella mia posizione
             CameraPosition myPosition = new CameraPosition.Builder().target(latLng).zoom(16).build();
             googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(myPosition));
-        
+            Log.d("ciao1", "qui arrivo");
             //aggiungi punti e vai!!!
             Goal tmp = listGoals.get(map.getTappe()); //get the next goal
             checkpointNumber = map.getTappe();
-            
+           
             if(tmp != null){
             	next_lat=tmp.lat;
             	next_lng=tmp.lng;
@@ -199,27 +198,9 @@ public class ShowMap extends FragmentActivity implements LocationListener, Senso
             }else{
             	Toast.makeText(ShowMap.this, "Map error. No next goal found.", Toast.LENGTH_LONG).show();
             }
+            
         }
-        
-        //questa funzione dovrebbe ritornare la posizione in cui si trova l'utente in quel momento
-//        Location tmp = googleMap.getMyLocation();
-//        
-//        //bisogna dare un range in cui parte la domanda, sicuramente non pu� essere la posizione esatta
-//        //per ora lascio cos�, poi sistemiamo (AP)
-//        if(tmp.getLatitude() == listGoals.get(checkpointNumber+1).getLat() && tmp.getLongitude() == listGoals.get(checkpointNumber+1).getLng()){
-//        	Intent intent = new Intent(getApplicationContext(), CheckpointQuestion.class);
-//        	
-//        	intent.putExtra(".question", "Qual e' il vero nome di Bob Dylan?");
-//        	intent.putExtra(".answer1", "John Dorian");
-//        	intent.putExtra(".answer2", "Robert Allen Zimmerman");
-//        	intent.putExtra(".answer3", "Gustav Linderman");
-//        	intent.putExtra(".answer4", "Ronald Regan");
-//        	intent.putExtra(".rightAsnwer", indexRightAnswer);
-//        	
-//        	this.startActivity(intent);
-//        }
-    	
-        //addPos(46.071546, 11.120449); //da aggiornare quando pie cambia il server. Scommentare prima su GetPoints_db.java
+       
     }
     
     @SuppressWarnings("unchecked")
@@ -282,25 +263,27 @@ public class ShowMap extends FragmentActivity implements LocationListener, Senso
 		}
         
         if(((next_lat-offset) < my_lat && my_lat < (next_lat+offset)) && ((next_lng-offset) < my_lng  && my_lng < (next_lng+offset))){
-    		Intent intent = new Intent(getApplicationContext(), CheckpointQuestion.class);
         	
-        	intent.putExtra(".question", listGoals.get(checkpointNumber).getText());
-        	
-        	
-        	
-        	Enumeration<String> enumKey = listGoals.get(checkpointNumber).response.keys();
-        	int i=1;
-        	while(enumKey.hasMoreElements()) {
-        	    String key = enumKey.nextElement();
-        	    Boolean val = listGoals.get(checkpointNumber).response.get(key);
-        	    intent.putExtra(".answer" + i, key);
-        	    intent.putExtra(".isCorrect" + i, val);
-        	}
+        	if(!check){
+        	Intent intent = new Intent(getApplicationContext(), CheckpointQuestion.class);
+         	intent.putExtra(".question", listGoals.get(checkpointNumber).getText());
+         	
+         	Enumeration<String> enumKey = listGoals.get(checkpointNumber).response.keys();
+         	int i=1;
+         	while(enumKey.hasMoreElements()) {
+         	    String key = enumKey.nextElement();
+         	    Boolean val = listGoals.get(checkpointNumber).response.get(key);
+         	    intent.putExtra(".answer" + i, key);
+         	    intent.putExtra(".isCorrect" +i, val);
+         	    i++;
+         	}
+         	check=true;
+         	this.startActivityForResult(intent, 1);
         	
         	next_lat=listGoals.get(checkpointNumber).getLat();
         	next_lng=listGoals.get(checkpointNumber).getLng();
-        	this.startActivity(intent);
-
+        
+        	}
         	
         }
         
@@ -393,5 +376,26 @@ public class ShowMap extends FragmentActivity implements LocationListener, Senso
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
     	// not in use
     }
+    
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == 1) {
+            if(resultCode == RESULT_OK){
+                googleMap.clear();
+            	check=false;
+            	checkpointNumber++;
+            	next_lat=listGoals.get(checkpointNumber).getLat();
+            	next_lng=listGoals.get(checkpointNumber).getLng();
+                Goal tmp = listGoals.get(checkpointNumber); //get the next goal
+                addPos(tmp.getLat(), tmp.getLng());
+            	
+                String result=data.getStringExtra("result");
+            }
+            if (resultCode == RESULT_CANCELED) {
+                //Write your code if there's no result
+            }
+        }
+    }//onActivityResult
 
 }
