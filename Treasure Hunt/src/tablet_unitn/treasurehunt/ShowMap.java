@@ -2,7 +2,6 @@ package tablet_unitn.treasurehunt;
 
 import java.util.ArrayList;
 import java.util.Enumeration;
-import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -10,6 +9,7 @@ import tablet_unitn.checkInternet.MobileInternetConnectionDetector;
 import tablet_unitn.checkInternet.WIFIInternetConnectionDetector;
 import tablet_unitn.dbmanager.ContinueMaps_db;
 import tablet_unitn.dbmanager.GetPoints_db;
+import tablet_unitn.dbmanager.WikiInfo_db;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -174,6 +174,7 @@ public class ShowMap extends FragmentActivity implements LocationListener, Senso
             locationManager.requestLocationUpdates(provider, 20000, 0, this);
             googleMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
             
+            Log.d("ciao12", "my: "+myLocation);
          // Getting latitude of the current location
             double latitude = myLocation.getLatitude();
      
@@ -182,7 +183,7 @@ public class ShowMap extends FragmentActivity implements LocationListener, Senso
      
             // Creating a LatLng object for the current location
             LatLng latLng = new LatLng(latitude, longitude);
-     
+            Log.d("ciao12", "ciaooo222");
             //Sposta la camera nella mia posizione
             CameraPosition myPosition = new CameraPosition.Builder().target(latLng).zoom(16).build();
             googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(myPosition));
@@ -268,7 +269,18 @@ public class ShowMap extends FragmentActivity implements LocationListener, Senso
         // Getting latitude and longitude of the current location
         my_lat = location.getLatitude();
         my_lng = location.getLongitude();
- 
+        
+        //get wikipedia info
+        WikiInfo_db info_db = new WikiInfo_db(my_lat, my_lng);
+        List<Wiki> info = new ArrayList<Wiki>();
+        try {
+			info = info_db.execute().get();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			e.printStackTrace();
+		}
+        
         if(((next_lat-offset) < my_lat && my_lat < (next_lat+offset)) && ((next_lng-offset) < my_lng  && my_lng < (next_lng+offset))){
     		Intent intent = new Intent(getApplicationContext(), CheckpointQuestion.class);
         	
