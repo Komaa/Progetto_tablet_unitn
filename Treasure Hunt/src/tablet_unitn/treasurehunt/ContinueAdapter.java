@@ -12,7 +12,6 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 public class ContinueAdapter extends ArrayAdapter<Map>{
-	DecimalFormat numberFormat = new DecimalFormat("#.0");
 	TextView name, checkpointsData, pathData, difficultyData, checkpoints, path, difficulty;
 	Typeface robotoCond, roboto;
 	
@@ -27,7 +26,7 @@ public class ContinueAdapter extends ArrayAdapter<Map>{
 		LayoutInflater inflater = (LayoutInflater) getContext()
 	             .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	        convertView = inflater.inflate(R.layout.continuelist, null);
-	        
+
 	        //view che conterranno i dati relativi all'avanzamento del giocatore
 	        name = (TextView) convertView.findViewById(R.id.continue_nomeMappa);
 			checkpointsData = (TextView) convertView.findViewById(R.id.continue_checkpointsData);
@@ -43,7 +42,7 @@ public class ContinueAdapter extends ArrayAdapter<Map>{
 	        Map map = getItem(position);
 	        name.setText("" + map.getName());
 	        checkpointsData.setText(map.getTappe() + "/" + map.getCount());
-//	        pathData.setText(numberFormat.format(map.getDist_parz())+"/"+numberFormat.format(map.getDist()+" km"));
+	        pathData.setText(String.format("%.1f", map.getDist_parz())+" of "+String.format("%.1f", map.getDist())+" km");
 	        int level = map.getLevel();
 	        if(level == 1){
 	        	difficultyData.setText("Easy");
