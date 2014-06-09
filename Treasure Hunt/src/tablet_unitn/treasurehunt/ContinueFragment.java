@@ -62,27 +62,13 @@ public class ContinueFragment extends Fragment {
 					  Intent intent = new Intent(getActivity(),ShowMap.class);
 					  
 					  String ID= list_map.get(position).getID();
-					  /*String name = list_map.get(position).getName();
-					  int checkpoints = list_map.get(position).getCount();
-					  int distance = 0; //variabile ancora da definire (AP)
-					  int level = list_map.get(position).getLevel();
-					  String time = ""; //variabile ancora da definire (AP)
-					  String description = list_map.get(position).getDescription();*/
 					  
 					  String[] put = new String[2];
 					  put[0] = ID; //id map
-					  put[1] = MainActivity.user.getID(); //check if it works - id user
+					  put[1] = MainActivity.user.getName();
+					  
 					  intent.putExtra(".map_info",put);
 					  
-					  /*intent.putExtra(".map_ID", ID);
-					  intent.putExtra(".map_Name", name);
-					  intent.putExtra(".map_Checkpoints", checkpoints);
-					  intent.putExtra(".map_Distance", distance);
-					  intent.putExtra(".map_Level", level);
-					  intent.putExtra(".map_Time", time);
-					  intent.putExtra(".map_Description", description);
-					  intent.putExtra(".usrName", MainActivity.user.getName());*/
-
 					  startActivity(intent);
 				  }
 		    });

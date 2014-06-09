@@ -59,19 +59,17 @@ public class GetPoints_db extends AsyncTask<List<Goal>, Integer, List<Goal>>{
 					
 					String tmp=obj.getString(("coords"));
 					String[] latlon = tmp.split(",");
-					p.setLat(Double.parseDouble(latlon[0]));
-					p.setLng(Double.parseDouble(latlon[1]));
-					Log.d("ciao12", "lat: "+p.getLat());
-					Log.d("ciao12", "lat: "+p.getLng());
+					p.setLat(Double.parseDouble(latlon[0].substring(1)));
+					p.setLng(Double.parseDouble(latlon[1].substring(0,latlon[1].length()-1)));
 					if(!obj.isNull( "question" )){ //se ha delle domande
-						p.setPoints(obj.getInt("points"));
 						p.setText(obj.getString("text"));
 						//get all the answers
-						JSONArray a = obj.getJSONArray("answers");
-						for (int q = 0; q < a.length(); q++) {
-							JSONObject ans = a.getJSONObject(q);
-						    p.setResponse(ans.getString("text"), ans.getBoolean("isCorrect"));
-						}
+//						JSONArray a = obj.getJSONArray("answers");
+//						for (int q = 0; q < a.length(); q++) {
+//							JSONObject ans = a.getJSONObject(q);
+//							Log.d("ciao12", "ciao");
+//						    p.setResponse(ans.getString("text"), ans.getBoolean("isCorrect"));
+//						}
 					}
 					params.add(p);
 	            }			

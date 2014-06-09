@@ -103,7 +103,7 @@ public class ShowMapDetails extends Activity {
 			Intent intent = new Intent(getApplicationContext(), ShowMap.class);
 		    String[] put = new String[2];
 		    put[0] = ID; //id map
-		    put[1] = MainActivity.user.getID(); //check if it works - id user
+		    put[1] = MainActivity.user.getName(); //usrName
 		    intent.putExtra(".map_info",put);
 		    
 		    //join map from server

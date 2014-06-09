@@ -7,8 +7,8 @@ import java.util.concurrent.ExecutionException;
 
 import tablet_unitn.checkInternet.MobileInternetConnectionDetector;
 import tablet_unitn.checkInternet.WIFIInternetConnectionDetector;
+import tablet_unitn.dbmanager.ContinueMaps_db;
 import tablet_unitn.dbmanager.GetPoints_db;
-import tablet_unitn.dbmanager.UserDAO_DB_impl;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -20,7 +20,6 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import android.app.Dialog;
-import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -43,9 +42,9 @@ import android.widget.Toast;
 
 public class ShowMap extends FragmentActivity implements LocationListener, SensorEventListener {
 	
-	List<Goal> listGoals;
-	User user;
-//    UserDAO_DB_impl daoUser;
+	List<Goal> listGoals=null;
+	List<Map> list_map=null;
+	Map map;
 	
     GoogleMap googleMap;
     Location myLocation;
@@ -87,18 +86,15 @@ public class ShowMap extends FragmentActivity implements LocationListener, Senso
         
         //dati ricevuti da ShowMapDetails.java tramite putExtra (AP)
         String[] IDs = (String[]) this.getIntent().getExtras().get(".map_info");
-        Log.d("ciao1", "map id: "+IDs[0]);
-        Log.d("ciao1", "user id: "+IDs[1]);
-        //GET LIST OF POINTS and USER
+        
+//        Log.d("ciao1", "map id: "+IDs[0]);
+//        Log.d("ciao1", "user Name: "+IDs[1]);
+        
+        //GET MAP AND LIST OF POINTS
+        getMaps(IDs[0], IDs[1]); //mapID e userName
 		getPoints(IDs[0]);
-		if(listGoals==null){
-			Toast.makeText(ShowMap.this, "Map error. No goals found.", Toast.LENGTH_LONG).show();
-			listGoals=new ArrayList<Goal>();
-		}
-			
-		//getUser(IDs[1]);
+					
 		Log.d("ciao1", "listGoals: "+listGoals);
-        Log.d("ciao1", "user: "+user);
         distance = (TextView) findViewById(R.id.distance);
         togglePosition = (Button) findViewById(R.id.toggle_button_position);
         togglePosition.setOnClickListener(new OnClickListener(){
@@ -163,10 +159,7 @@ public class ShowMap extends FragmentActivity implements LocationListener, Senso
  
             // Getting Current Location
             myLocation = locationManager.getLastKnownLocation(provider);
- 
-            if(myLocation!=null){
-                onLocationChanged(myLocation);
-            }
+
             locationManager.requestLocationUpdates(provider, 20000, 0, this);
             googleMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
             
@@ -179,43 +172,70 @@ public class ShowMap extends FragmentActivity implements LocationListener, Senso
             // Creating a LatLng object for the current location
             LatLng latLng = new LatLng(latitude, longitude);
      
-            //Sposta la camera in una posizione
+            //Sposta la camera nella mia posizione
             CameraPosition myPosition = new CameraPosition.Builder().target(latLng).zoom(16).build();
             googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(myPosition));
-        }
-        //aggiungi punti e parti!!!
-        if(listGoals.size() != 0){
-        	Iterator<Goal> i = listGoals.iterator();
-        	while(i.hasNext()){
-        		Goal tmp =  i.next();
-        		addPos(tmp.lat, tmp.lng);
-        	}
+        
+            //aggiungi punti e vai!!!
+            Goal tmp = listGoals.get(map.getTappe()); //get the next goal
+            if(tmp != null){
+            	addPos(tmp.lat, tmp.lng);
+            }else{
+            	Toast.makeText(ShowMap.this, "Map error. No next goal found.", Toast.LENGTH_LONG).show();
+            }
         }
         
         //questa funzione dovrebbe ritornare la posizione in cui si trova l'utente in quel momento
-        Location tmp = googleMap.getMyLocation();
-        
-        //bisogna dare un range in cui parte la domanda, sicuramente non può essere la posizione esatta
-        //per ora lascio così, poi sistemiamo (AP)
-        if(tmp.getLatitude() == listGoals.get(checkpointNumber+1).getLat() && tmp.getLongitude() == listGoals.get(checkpointNumber+1).getLng()){
-        	Intent intent = new Intent(getApplicationContext(), CheckpointQuestion.class);
-        	
-        	intent.putExtra(".question", "Qual e' il vero nome di Bob Dylan?");
-        	intent.putExtra(".answer1", "John Dorian");
-        	intent.putExtra(".answer2", "Robert Allen Zimmerman");
-        	intent.putExtra(".answer3", "Gustav Linderman");
-        	intent.putExtra(".answer4", "Ronald Regan");
-        	intent.putExtra(".rightAsnwer", indexRightAnswer);
-        	
-        	this.startActivity(intent);
-        }
+//        Location tmp = googleMap.getMyLocation();
+//        
+//        //bisogna dare un range in cui parte la domanda, sicuramente non può essere la posizione esatta
+//        //per ora lascio così, poi sistemiamo (AP)
+//        if(tmp.getLatitude() == listGoals.get(checkpointNumber+1).getLat() && tmp.getLongitude() == listGoals.get(checkpointNumber+1).getLng()){
+//        	Intent intent = new Intent(getApplicationContext(), CheckpointQuestion.class);
+//        	
+//        	intent.putExtra(".question", "Qual e' il vero nome di Bob Dylan?");
+//        	intent.putExtra(".answer1", "John Dorian");
+//        	intent.putExtra(".answer2", "Robert Allen Zimmerman");
+//        	intent.putExtra(".answer3", "Gustav Linderman");
+//        	intent.putExtra(".answer4", "Ronald Regan");
+//        	intent.putExtra(".rightAsnwer", indexRightAnswer);
+//        	
+//        	this.startActivity(intent);
+//        }
     	
         //addPos(46.071546, 11.120449); //da aggiornare quando pie cambia il server. Scommentare prima su GetPoints_db.java
     }
     
     @SuppressWarnings("unchecked")
+	public void getMaps(String mapID, String usrName){
+    	ContinueMaps_db continue_maps = new ContinueMaps_db(usrName);
+    	list_map=new ArrayList<Map>();
+    	try {
+			list_map = continue_maps.execute(list_map).get();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+    	int q=0;
+    	for (Map mm : list_map) {
+			if(mm.getID().equals(mapID)){
+				this.map=mm;
+				q++;
+			}
+		}
+    	if(q==0){ //map not found
+    		Toast.makeText(ShowMap.this, "Map error. No map found.", Toast.LENGTH_LONG).show();
+    		map=new Map();
+    	}
+	}
+    
+    @SuppressWarnings("unchecked")
 	public void getPoints(String mapID){
     	GetPoints_db get_points = new GetPoints_db(mapID);
+    	listGoals = new ArrayList<Goal>();
     	try {
 			listGoals = get_points.execute().get();
 		} catch (InterruptedException e) {
@@ -226,11 +246,6 @@ public class ShowMap extends FragmentActivity implements LocationListener, Senso
 			e.printStackTrace();
 		}
     }
-//    public void getUser(String userID){
-//    	daoUser = new UserDAO_DB_impl(); 
-//        daoUser.open(); 
-//        user = daoUser.getInfo(userID);
-//    }
     
     @Override
     public void onLocationChanged(Location location) {
@@ -297,8 +312,6 @@ public class ShowMap extends FragmentActivity implements LocationListener, Senso
 	@Override
     protected void onResume() { 
 		super.onResume();
-		
-//		daoUser.open();
 		// for the system's orientation sensor registered listeners
 		mSensorManager.registerListener(this, mSensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION),
 		SensorManager.SENSOR_DELAY_GAME);
@@ -307,8 +320,6 @@ public class ShowMap extends FragmentActivity implements LocationListener, Senso
 	@Override
 	protected void onPause() {
 		super.onPause();
-		
-//		daoUser.close(); 
 		// to stop the listener and save battery
 		mSensorManager.unregisterListener(this);
     }
