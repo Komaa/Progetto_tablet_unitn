@@ -61,15 +61,15 @@ public class GetPoints_db extends AsyncTask<List<Goal>, Integer, List<Goal>>{
 					p.setLat(Double.parseDouble(latlon[0].substring(1)));
 					p.setLng(Double.parseDouble(latlon[1].substring(0,latlon[1].length()-1)));
 					if(!obj.isNull("question")){ //se ha delle domande
-						Log.d("ciao123",obj.getString("text")+"");
-//						p.setText(obj.getString("text"));
+						JSONObject qq = obj.getJSONObject("question");
+						p.setText(qq.getString("text"));
 						//get all the answers
-//						JSONArray a = obj.getJSONArray("answers");
-//						for (int q = 0; q < a.length(); q++) {
-//							JSONObject ans = a.getJSONObject(q);
-//							
-//						    p.setResponse(ans.getString("text"), ans.getBoolean("isCorrect"));
-//						}
+						JSONArray a = qq.getJSONArray("answers");
+						for (int q = 0; q < a.length(); q++) {
+							JSONObject ans = a.getJSONObject(q);
+							
+						    p.setResponse(ans.getString("text"), ans.getBoolean("isCorrect"));
+						}
 					}
 					params.add(p);
 	            }			
