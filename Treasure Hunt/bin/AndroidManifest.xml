@@ -28,7 +28,6 @@
     <uses-feature
         android:glEsVersion="0x00020000"
         android:required="true" />
-
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -53,6 +52,10 @@
         <activity 
             android:name="tablet_unitn.treasurehunt.ShowMap"
 			android:screenOrientation="portrait" />
+        <activity 
+            android:name="tablet_unitn.treasurehunt.CheckpointQuestion" 
+        	android:theme="@android:style/Theme.Dialog" />
+        
         
         <!-- Goolge Maps API Key -->
 		<meta-data
@@ -63,5 +66,4 @@
 		    android:value="@integer/google_play_services_version" />
         
     </application>
-
 </manifest>

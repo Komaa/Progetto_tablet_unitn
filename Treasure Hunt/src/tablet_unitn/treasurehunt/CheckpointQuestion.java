@@ -1,13 +1,12 @@
 package tablet_unitn.treasurehunt;
-
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
-
 public class CheckpointQuestion extends Activity{
 	
 	Typeface robotoThin, robotoCond, roboto, robotoReg;
@@ -15,6 +14,7 @@ public class CheckpointQuestion extends Activity{
 	
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
         setContentView(R.layout.checkpointquestion);
         
         robotoReg = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Regular.ttf");
@@ -52,13 +52,13 @@ public class CheckpointQuestion extends Activity{
 			public void onClick(View v) {
 				if(isCorrect1){
 					answer1.setBackgroundResource(R.drawable.rightanswerbutton);
-					//ritorna alla mappa con i dati aggiornati (AP)
+					Intent returnIntent = new Intent();
+					returnIntent.putExtra("result",1);
+					setResult(RESULT_OK,returnIntent);
+					finish();
 				} else {
 					answer1.setBackgroundResource(R.drawable.wronganswerbutton);
-					if(isCorrect2) answer2.setBackgroundResource(R.drawable.rightanswerbutton);
-					else if(isCorrect3) answer3.setBackgroundResource(R.drawable.rightanswerbutton);
-					else if(isCorrect4) answer4.setBackgroundResource(R.drawable.rightanswerbutton);
-				}
+					}
 			}
 		});
         
@@ -67,13 +67,13 @@ public class CheckpointQuestion extends Activity{
 			public void onClick(View v) {
 				if(isCorrect2){
 					answer2.setBackgroundResource(R.drawable.rightanswerbutton);
-					//ritorna alla mappa con i dati aggiornati (AP)
+					Intent returnIntent = new Intent();
+					returnIntent.putExtra("result",1);
+					setResult(RESULT_OK,returnIntent);
+					finish();
 				} else {
 					answer2.setBackgroundResource(R.drawable.wronganswerbutton);
-					if(isCorrect1) answer1.setBackgroundResource(R.drawable.rightanswerbutton);
-					else if(isCorrect3) answer3.setBackgroundResource(R.drawable.rightanswerbutton);
-					else if(isCorrect4) answer4.setBackgroundResource(R.drawable.rightanswerbutton);
-				}
+						}
 			}
 		});
         
@@ -82,13 +82,13 @@ public class CheckpointQuestion extends Activity{
 			public void onClick(View v) {
 				if(isCorrect3){
 					answer3.setBackgroundResource(R.drawable.rightanswerbutton);
-					//ritorna alla mappa con i dati aggiornati (AP)
+					Intent returnIntent = new Intent();
+					returnIntent.putExtra("result",1);
+					setResult(RESULT_OK,returnIntent);
+					finish();
 				} else {
 					answer3.setBackgroundResource(R.drawable.wronganswerbutton);
-					if(isCorrect1) answer1.setBackgroundResource(R.drawable.rightanswerbutton);
-					else if(isCorrect2) answer2.setBackgroundResource(R.drawable.rightanswerbutton);
-					else if(isCorrect4) answer4.setBackgroundResource(R.drawable.rightanswerbutton);
-				}
+					}
 			}
 		});
         
@@ -97,15 +97,14 @@ public class CheckpointQuestion extends Activity{
 			public void onClick(View v) {
 				if(isCorrect4){
 					answer4.setBackgroundResource(R.drawable.rightanswerbutton);
-					//ritorna alla mappa con i dati aggiornati (AP)
+					Intent returnIntent = new Intent();
+					returnIntent.putExtra("result",1);
+					setResult(RESULT_OK,returnIntent);
+					finish();
 				} else {
 					answer4.setBackgroundResource(R.drawable.wronganswerbutton);
-					if(isCorrect1) answer1.setBackgroundResource(R.drawable.rightanswerbutton);
-					else if(isCorrect2) answer2.setBackgroundResource(R.drawable.rightanswerbutton);
-					else if(isCorrect3) answer3.setBackgroundResource(R.drawable.rightanswerbutton);
-				}
+					}
 			}
 		});
 	}
-
 }
