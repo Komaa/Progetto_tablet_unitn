@@ -14,6 +14,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import table_unitn.utility.Utility;
 import tablet_unitn.treasurehunt.Map;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -82,6 +83,11 @@ public class ContinueMaps_db extends AsyncTask<List<Map>, Integer, List<Map>>{
 					p.SetLevel(obj.getInt("level"));
 					p.SetCount(obj.getInt("count"));
 					p.setTappe(myIntArray[i]);
+					httpget = new HttpGet("http://treasure-back.herokuapp.com/walking/"+p.getID()); 
+					response = httpclient.execute(httpget);
+			        res = EntityUtils.toString(response.getEntity());
+			        p.setDist((Utility.calcolakm(res,0)));
+			        p.setDist_parz((Utility.calcolakm(res,myIntArray[i])));
 					continue_list.add(p);
 	            }			
 	            

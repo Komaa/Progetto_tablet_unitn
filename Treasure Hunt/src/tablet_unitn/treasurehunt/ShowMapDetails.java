@@ -50,18 +50,15 @@ public class ShowMapDetails extends Activity {
         TextView checkpoints = (TextView) findViewById(R.id.det_checkpoint);
         TextView distance = (TextView) findViewById(R.id.det_distance);
         TextView difficulty = (TextView) findViewById(R.id.det_difficulty);
-        TextView timeLeft = (TextView) findViewById(R.id.det_time);
         TextView description = (TextView) findViewById(R.id.det_description);
         
         title.setTypeface(robotoCond);
         checkpoints.setTypeface(roboto); distance.setTypeface(roboto);
-        difficulty.setTypeface(roboto); timeLeft.setTypeface(roboto);
         description.setTypeface(robotoReg);
         
         ((TextView) findViewById(R.id.checkpoint)).setTypeface(robotoThin);
         ((TextView) findViewById(R.id.distance)).setTypeface(robotoThin);
         ((TextView) findViewById(R.id.difficulty)).setTypeface(robotoThin);
-        ((TextView) findViewById(R.id.time)).setTypeface(robotoThin);
         
         Button b_showMap = (Button) findViewById(R.id.show_map);
         b_showMap.setTypeface(roboto);
@@ -73,6 +70,7 @@ public class ShowMapDetails extends Activity {
         
         title.setText(""+ this.getIntent().getExtras().get(".map_Name"));
         checkpoints.setText(""+ this.getIntent().getExtras().get(".map_Checkpoints").toString());
+        distance.setText(this.getIntent().getExtras().get(".map_Distance").toString()+" km");
         
         Integer level = (Integer) this.getIntent().getExtras().get(".map_Level");
         if(level.byteValue() == 1){
@@ -83,7 +81,6 @@ public class ShowMapDetails extends Activity {
         	difficulty.setText("Hard");
         }
         
-        timeLeft.setText(""+ this.getIntent().getExtras().get(".map_Time"));
         description.setText(""+ this.getIntent().getExtras().get(".map_Description"));
         
         //title.setText("ID mappa " + ID);

@@ -85,12 +85,17 @@ public class ShowMap extends FragmentActivity implements LocationListener, Senso
         super.onCreate(savedInstanceState);
         setContentView(R.layout.showmap); 
         
-        //dati ricevuti da ShowMapDetails.java tramite putExtra (AP) - forse anche ContinueFragment.java??
+        //dati ricevuti da ShowMapDetails.java tramite putExtra (AP)
         String[] IDs = (String[]) this.getIntent().getExtras().get(".map_info");
         Log.d("ciao1", "map id: "+IDs[0]);
         Log.d("ciao1", "user id: "+IDs[1]);
         //GET LIST OF POINTS and USER
 		getPoints(IDs[0]);
+		if(listGoals==null){
+			Toast.makeText(ShowMap.this, "Map error. No goals found.", Toast.LENGTH_LONG).show();
+			listGoals=new ArrayList<Goal>();
+		}
+			
 		//getUser(IDs[1]);
 		Log.d("ciao1", "listGoals: "+listGoals);
         Log.d("ciao1", "user: "+user);
@@ -192,7 +197,7 @@ public class ShowMap extends FragmentActivity implements LocationListener, Senso
         
         //bisogna dare un range in cui parte la domanda, sicuramente non può essere la posizione esatta
         //per ora lascio così, poi sistemiamo (AP)
-        if(tmp.getLatitude() == listGoals.get(checkpointNumber+1).GetLan() && tmp.getLongitude() == listGoals.get(checkpointNumber+1).GetLng()){
+        if(tmp.getLatitude() == listGoals.get(checkpointNumber+1).getLat() && tmp.getLongitude() == listGoals.get(checkpointNumber+1).getLng()){
         	Intent intent = new Intent(getApplicationContext(), CheckpointQuestion.class);
         	
         	intent.putExtra(".question", "Qual e' il vero nome di Bob Dylan?");
@@ -210,15 +215,9 @@ public class ShowMap extends FragmentActivity implements LocationListener, Senso
     
     @SuppressWarnings("unchecked")
 	public void getPoints(String mapID){
-    	//Need to the function
-    	Goal tmp = new Goal();
-    	tmp.setName("mapID");
-    	tmp.SetID(mapID);
-    	List<Goal> listTmp = new ArrayList<Goal>();
-    	listTmp.add(tmp);
-    	GetPoints_db get_points = new GetPoints_db();
+    	GetPoints_db get_points = new GetPoints_db(mapID);
     	try {
-			listGoals = get_points.execute(listTmp).get();
+			listGoals = get_points.execute().get();
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

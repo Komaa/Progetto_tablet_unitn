@@ -46,10 +46,10 @@ public class NewMaps_db extends AsyncTask<List<Map>, Integer, List<Map>>{
 					JSONObject obj = jsonArray.getJSONObject(i);
 					Map p=new Map();
 					p.SetID(obj.getString("id"));
-//					httpget = new HttpGet("http://treasure-back.herokuapp.com/walking/"+p.getID()); 
-//					response = httpclient.execute(httpget);
-//			        res = EntityUtils.toString(response.getEntity());
-//			        Utility.calcolakm(res,0);
+					httpget = new HttpGet("http://treasure-back.herokuapp.com/walking/"+p.getID()); 
+					response = httpclient.execute(httpget);
+			        res = EntityUtils.toString(response.getEntity());
+			        p.setDist(Utility.calcolakm(res,0));
 					p.setName(obj.getString("name"));
 					p.setDescription(obj.getString("description"));
 					p.SetLevel(obj.getInt("level"));

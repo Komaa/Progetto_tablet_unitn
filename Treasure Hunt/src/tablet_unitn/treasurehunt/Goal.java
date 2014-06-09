@@ -3,9 +3,10 @@ package tablet_unitn.treasurehunt;
 import java.util.Hashtable;
 
 public class Goal {
-	Integer lat = 0, //latitudine
-			lng = 0, //longitudine
-			points = 0; //punti per risposta corretta
+	Integer points = 0; //punti per risposta corretta
+	
+	Double lat = 0.0, //latitudine
+			lng = 0.0; //longitudine
 	
 	String ID = "",
 			name ="",
@@ -20,59 +21,59 @@ public class Goal {
 	}
 	
 	// ID GOAL
-	public void SetID(String ID) {
+	public void setID(String ID) {
 		this.ID = ID;
 	}
-	public String GetID(){
+	public String getID(){
 		return ID;
 	}
 	//LATITUDINE DEL GOAL
-	public void setLan(Integer lat) {
+	public void setLat(Double lat) {
 		this.lat=lat;
 	}
-	public Integer GetLan(){
+	public Double getLat(){
 		return lat;
 	}
 	//LONGITUDINE DEL GOAL
-	public void setLng(Integer lng) {
+	public void setLng(Double lng) {
 		this.lng=lng;
 	}
-	public Integer GetLng(){
+	public Double getLng(){
 		return lng;
 	}
 	//Punti per risposta corretta
 	public void setPoints(Integer points) {
 		this.points=points;
 	}
-	public Integer GetPoints(){
+	public Integer getPoints(){
 		return points;
 	}
 	//NOME DEL GOAL
 	public void setName(String name) {
 		this.name=name;
 	}
-	public String GetName(){
+	public String getName(){
 		return name;
 	}
 	//Tipo di locazione
 	public void setLocationType(String locationType) {
 		this.locationType=locationType;
 	}
-	public String GetLocationType(){
+	public String getLocationType(){
 		return description;
 	}
 	//DESCRIZIONE DEL GOAL
 	public void setDescription(String desc) {
 		this.description=desc;
 	}
-	public String GetDescription(){
+	public String getDescription(){
 		return description;
 	}
 	//QUESITO DEL GOAL
 	public void setText(String text) {
 		this.text=text;
 	}
-	public String GetText(){
+	public String getText(){
 		return text;
 	}
 	//RISPOSTE DEL GOAL

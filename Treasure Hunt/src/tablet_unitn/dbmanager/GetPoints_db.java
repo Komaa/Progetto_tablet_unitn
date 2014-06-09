@@ -16,28 +16,24 @@ import org.json.JSONObject;
 
 import tablet_unitn.treasurehunt.Goal;
 import android.os.AsyncTask;
+import android.util.Log;
 
 public class GetPoints_db extends AsyncTask<List<Goal>, Integer, List<Goal>>{
-
+	String mapID="";
+	public GetPoints_db(String mapID) {
+		this.mapID=mapID;
+	}
 	@Override
 	protected List<Goal> doInBackground(List<Goal>... params) {
 		// TODO Auto-generated method stub
-		return postData(params[0]);
+		return postData();
 	}
 
-	public List<Goal> postData(List<Goal> hasID) {
+	public List<Goal> postData() {
 		
 		List<Goal> params = new ArrayList<Goal>();
 		
-		String res="",
-				mapID="";
-		
-		//get the ID map
-		for (int i = 0; i < hasID.size(); i++) {
-        	if(hasID.get(i).GetName().equals("mapID")){
-        		mapID=hasID.get(i).GetID();
-        	}
-    	}
+		String res="";
 		
 		HttpClient httpclient = new DefaultHttpClient();
 
@@ -56,13 +52,17 @@ public class GetPoints_db extends AsyncTask<List<Goal>, Integer, List<Goal>>{
 	            {
 					JSONObject obj = jsonArray.getJSONObject(i);
 					Goal p=new Goal();
-					p.SetID(obj.getString("id"));
+					p.setID(obj.getString("id"));
 					p.setName(obj.getString("name"));
 					p.setDescription(obj.getString("description"));
 					p.setLocationType(obj.getString("locationType"));
-//					JSONArray c = obj.getJSONArray("coords");
-//					p.setLan((c.getInt(0)));
-//					p.setLng((c.getInt(1)));
+					
+					String tmp=obj.getString(("coords"));
+					String[] latlon = tmp.split(",");
+					p.setLat(Double.parseDouble(latlon[0]));
+					p.setLng(Double.parseDouble(latlon[1]));
+					Log.d("ciao12", "lat: "+p.getLat());
+					Log.d("ciao12", "lat: "+p.getLng());
 					if(!obj.isNull( "question" )){ //se ha delle domande
 						p.setPoints(obj.getInt("points"));
 						p.setText(obj.getString("text"));

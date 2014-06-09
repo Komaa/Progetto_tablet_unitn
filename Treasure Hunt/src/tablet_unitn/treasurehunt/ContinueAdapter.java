@@ -41,8 +41,8 @@ public class ContinueAdapter extends ArrayAdapter<Map>{
 			//scrittura delle info di avanzamento all'interno dei textview di ogni singola mappa
 	        Map map = getItem(position);
 	        name.setText("" + map.getName());
-	        checkpointsData.setText("" + map.getCount());
-	        pathData.setText("0"); //ancora da definire (AP)
+	        checkpointsData.setText(map.getTappe() + "/" + map.getCount());
+	        pathData.setText(map.getDist_parz()+"/"+map.getDist()+" km");
 	        int level = map.getLevel();
 	        if(level == 1){
 	        	difficultyData.setText("Easy");

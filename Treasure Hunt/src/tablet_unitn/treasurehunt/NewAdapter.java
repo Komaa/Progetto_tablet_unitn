@@ -40,6 +40,9 @@ public class NewAdapter extends ArrayAdapter<Map>{
 		Map c = getItem(position);
         name.setText(""+c.getName());
         checkpoints.setText(""+c.getCount());
+        
+        distanza.setText(c.getDist()+" km");
+        
         int level = c.getLevel();
         if(level == 1){
         	difficolta.setText("Easy");

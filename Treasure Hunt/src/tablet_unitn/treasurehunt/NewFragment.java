@@ -55,11 +55,11 @@ public class NewFragment extends Fragment {
 				  public void onItemClick(AdapterView<?> parent, final View view,
 				      int position, long id) {
 					  Intent intent = new Intent(getActivity(),ShowMapDetails.class);
+					  Map tmp = list_map.get(position);
 					  
 					  String ID= list_map.get(position).getID();
 					  String name = list_map.get(position).getName();
 					  int checkpoints = list_map.get(position).getCount();
-					  int distance = 0; //variabile ancora da definire (AP)
 					  int level = list_map.get(position).getLevel();
 					  String time = ""; //variabile ancora da definire (AP)
 					  String description = list_map.get(position).getDescription();
@@ -69,7 +69,7 @@ public class NewFragment extends Fragment {
 					  intent.putExtra(".map_ID", ID);
 					  intent.putExtra(".map_Name", name);
 					  intent.putExtra(".map_Checkpoints", checkpoints);
-					  intent.putExtra(".map_Distance", distance);
+					  intent.putExtra(".map_Distance", tmp.getDist());
 					  intent.putExtra(".map_Level", level);
 					  intent.putExtra(".map_Time", time);
 					  intent.putExtra(".map_Description", description);

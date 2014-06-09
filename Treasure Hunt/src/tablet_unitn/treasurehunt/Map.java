@@ -6,7 +6,9 @@ import java.util.List;
 public class Map {
 	int level = 0, //direi che qui il numero varia da 1 a 3, cioè 1=easy, 2=medium, 3=hard (AP)
 		count = 0, //numero dei punti (derivabile anche da grandezza list_goal )
-		tappe = 0; //numero di checkpoint raggiunti finora
+		tappe = 0, //numero di checkpoint raggiunti finora
+		dist = 0,
+		dist_parz = 0; //distanza totale - distanza percorsa
 	
 	String ID = "",
 			name = "",
@@ -84,7 +86,21 @@ public class Map {
 	public List<Goal> getListGoal() {
 		return list_goal;
 	}
-	
+	public int getDist() {
+		return dist;
+	}
+
+	public void setDist(int dist) {
+		this.dist = dist;
+	}
+
+	public int getDist_parz() {
+		return dist_parz;
+	}
+
+	public void setDist_parz(int dist_parz) {
+		this.dist_parz = dist_parz;
+	}
 	
 	
 //	public String getDifficulty(){
