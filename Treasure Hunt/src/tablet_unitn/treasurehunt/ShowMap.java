@@ -1,6 +1,7 @@
 package tablet_unitn.treasurehunt;
 
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -20,6 +21,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -52,7 +54,7 @@ public class ShowMap extends FragmentActivity implements LocationListener, Senso
     TextView distance;
     Button togglePosition;
     int toggle = 0;
-    int checkpointNumber = 0; //la variabile serve per capire quanti checkpoint delal mappa sono stati fatti
+    int checkpointNumber = 0; //la variabile serve per capire quanti checkpoint della mappa sono stati fatti
     int indexRightAnswer = 0;
     
     //next latitude and longitude
@@ -92,9 +94,7 @@ public class ShowMap extends FragmentActivity implements LocationListener, Senso
         
         //GET MAP AND LIST OF POINTS
         getMaps(IDs[0], IDs[1]); //mapID e userName
-        Log.d("ciao123", "maps: "+list_map);
 		getPoints(IDs[0]);
-		Log.d("ciao123", "points: "+listGoals);
 					
 		Log.d("ciao1", "listGoals: "+listGoals);
         distance = (TextView) findViewById(R.id.distance);
@@ -180,6 +180,8 @@ public class ShowMap extends FragmentActivity implements LocationListener, Senso
         
             //aggiungi punti e vai!!!
             Goal tmp = listGoals.get(map.getTappe()); //get the next goal
+            checkpointNumber = map.getTappe();
+            
             if(tmp != null){
             	addPos(tmp.lat, tmp.lng);
             }else{
@@ -190,8 +192,8 @@ public class ShowMap extends FragmentActivity implements LocationListener, Senso
         //questa funzione dovrebbe ritornare la posizione in cui si trova l'utente in quel momento
 //        Location tmp = googleMap.getMyLocation();
 //        
-//        //bisogna dare un range in cui parte la domanda, sicuramente non può essere la posizione esatta
-//        //per ora lascio così, poi sistemiamo (AP)
+//        //bisogna dare un range in cui parte la domanda, sicuramente non puï¿½ essere la posizione esatta
+//        //per ora lascio cosï¿½, poi sistemiamo (AP)
 //        if(tmp.getLatitude() == listGoals.get(checkpointNumber+1).getLat() && tmp.getLongitude() == listGoals.get(checkpointNumber+1).getLng()){
 //        	Intent intent = new Intent(getApplicationContext(), CheckpointQuestion.class);
 //        	
@@ -257,7 +259,24 @@ public class ShowMap extends FragmentActivity implements LocationListener, Senso
         my_lng = location.getLongitude();
  
         if(((next_lat-offset) < my_lat && my_lat < (next_lat+offset)) && ((next_lng-offset) < my_lng  && my_lng < (next_lng+offset))){
-        	//next point
+        	Intent intent = new Intent(getApplicationContext(), CheckpointQuestion.class);
+        	
+        	intent.putExtra(".question", listGoals.get(checkpointNumber).getText());
+        	
+        	
+        	
+        	Enumeration<String> enumKey = listGoals.get(checkpointNumber).response.keys();
+        	int i=1;
+        	while(enumKey.hasMoreElements()) {
+        	    String key = enumKey.nextElement();
+        	    Boolean val = listGoals.get(checkpointNumber).response.get(key);
+        	    intent.putExtra(".answer" + i, key);
+        	    intent.putExtra(".isCorrect" + i, val);
+        	}
+        	
+        	this.startActivity(intent);
+
+        	
         }
         
         // Creating a LatLng object for the current location

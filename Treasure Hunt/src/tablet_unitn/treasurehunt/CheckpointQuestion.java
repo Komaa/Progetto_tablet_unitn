@@ -11,7 +11,7 @@ import android.widget.TextView;
 public class CheckpointQuestion extends Activity{
 	
 	Typeface robotoThin, robotoCond, roboto, robotoReg;
-	int indexRightAnswer = 0;
+	Boolean isCorrect1, isCorrect2, isCorrect3, isCorrect4; 
 	
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +28,7 @@ public class CheckpointQuestion extends Activity{
         final Button answer3 = (Button) findViewById(R.id.answer3);
         final Button answer4 = (Button) findViewById(R.id.answer4);
         
+        
         question.setTypeface(roboto);
         answer1.setTypeface(robotoReg); answer2.setTypeface(robotoReg);
         answer3.setTypeface(robotoReg); answer4.setTypeface(robotoReg);
@@ -35,21 +36,28 @@ public class CheckpointQuestion extends Activity{
         //e' solo un getExtras di prova, bisogna ancora sistemare tutto
         question.setText((String) this.getIntent().getExtras().get(".question"));
         answer1.setText((String) this.getIntent().getExtras().get(".answer1"));
+        isCorrect1 = (Boolean) this.getIntent().getExtras().get(".isCorrect1");
+        
         answer2.setText((String) this.getIntent().getExtras().get(".answer2"));
+        isCorrect2 = (Boolean) this.getIntent().getExtras().get(".isCorrect2");
+        
         answer3.setText((String) this.getIntent().getExtras().get(".answer3"));
+        isCorrect3 = (Boolean) this.getIntent().getExtras().get(".isCorrect3");
+        
         answer4.setText((String) this.getIntent().getExtras().get(".answer4"));
-        indexRightAnswer = (Integer) this.getIntent().getExtras().get(".rightAnswer");
+        isCorrect4 = (Boolean) this.getIntent().getExtras().get(".isCorrect4");
         
         answer1.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if(indexRightAnswer == 1){
+				if(isCorrect1){
 					answer1.setBackgroundResource(R.drawable.rightanswerbutton);
 					//ritorna alla mappa con i dati aggiornati (AP)
 				} else {
-					if(indexRightAnswer == 2) answer2.setBackgroundResource(R.drawable.rightanswerbutton);
-					else if(indexRightAnswer == 3) answer3.setBackgroundResource(R.drawable.rightanswerbutton);
-					else if(indexRightAnswer == 4) answer4.setBackgroundResource(R.drawable.rightanswerbutton);
+					answer1.setBackgroundResource(R.drawable.wronganswerbutton);
+					if(isCorrect2) answer2.setBackgroundResource(R.drawable.rightanswerbutton);
+					else if(isCorrect3) answer3.setBackgroundResource(R.drawable.rightanswerbutton);
+					else if(isCorrect4) answer4.setBackgroundResource(R.drawable.rightanswerbutton);
 				}
 			}
 		});
@@ -57,13 +65,14 @@ public class CheckpointQuestion extends Activity{
         answer2.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if(indexRightAnswer == 2){
+				if(isCorrect2){
 					answer2.setBackgroundResource(R.drawable.rightanswerbutton);
 					//ritorna alla mappa con i dati aggiornati (AP)
 				} else {
-					if(indexRightAnswer == 1) answer1.setBackgroundResource(R.drawable.rightanswerbutton);
-					else if(indexRightAnswer == 3) answer3.setBackgroundResource(R.drawable.rightanswerbutton);
-					else if(indexRightAnswer == 4) answer4.setBackgroundResource(R.drawable.rightanswerbutton);
+					answer2.setBackgroundResource(R.drawable.wronganswerbutton);
+					if(isCorrect1) answer1.setBackgroundResource(R.drawable.rightanswerbutton);
+					else if(isCorrect3) answer3.setBackgroundResource(R.drawable.rightanswerbutton);
+					else if(isCorrect4) answer4.setBackgroundResource(R.drawable.rightanswerbutton);
 				}
 			}
 		});
@@ -71,13 +80,14 @@ public class CheckpointQuestion extends Activity{
         answer3.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if(indexRightAnswer == 3){
+				if(isCorrect3){
 					answer3.setBackgroundResource(R.drawable.rightanswerbutton);
 					//ritorna alla mappa con i dati aggiornati (AP)
 				} else {
-					if(indexRightAnswer == 1) answer1.setBackgroundResource(R.drawable.rightanswerbutton);
-					else if(indexRightAnswer == 2) answer2.setBackgroundResource(R.drawable.rightanswerbutton);
-					else if(indexRightAnswer == 4) answer4.setBackgroundResource(R.drawable.rightanswerbutton);
+					answer3.setBackgroundResource(R.drawable.wronganswerbutton);
+					if(isCorrect1) answer1.setBackgroundResource(R.drawable.rightanswerbutton);
+					else if(isCorrect2) answer2.setBackgroundResource(R.drawable.rightanswerbutton);
+					else if(isCorrect4) answer4.setBackgroundResource(R.drawable.rightanswerbutton);
 				}
 			}
 		});
@@ -85,13 +95,14 @@ public class CheckpointQuestion extends Activity{
         answer4.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if(indexRightAnswer == 4){
+				if(isCorrect4){
 					answer4.setBackgroundResource(R.drawable.rightanswerbutton);
 					//ritorna alla mappa con i dati aggiornati (AP)
 				} else {
-					if(indexRightAnswer == 1) answer1.setBackgroundResource(R.drawable.rightanswerbutton);
-					else if(indexRightAnswer == 2) answer2.setBackgroundResource(R.drawable.rightanswerbutton);
-					else if(indexRightAnswer == 3) answer3.setBackgroundResource(R.drawable.rightanswerbutton);
+					answer4.setBackgroundResource(R.drawable.wronganswerbutton);
+					if(isCorrect1) answer1.setBackgroundResource(R.drawable.rightanswerbutton);
+					else if(isCorrect2) answer2.setBackgroundResource(R.drawable.rightanswerbutton);
+					else if(isCorrect3) answer3.setBackgroundResource(R.drawable.rightanswerbutton);
 				}
 			}
 		});
