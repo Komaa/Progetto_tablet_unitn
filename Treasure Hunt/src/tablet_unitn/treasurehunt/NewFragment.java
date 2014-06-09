@@ -69,7 +69,8 @@ public class NewFragment extends Fragment {
 					  intent.putExtra(".map_ID", ID);
 					  intent.putExtra(".map_Name", name);
 					  intent.putExtra(".map_Checkpoints", checkpoints);
-					  intent.putExtra(".map_Distance", tmp.getDist());
+					  String tt = ""+String.format("%.1f", tmp.getDist());
+					  intent.putExtra(".map_Distance", tt);
 					  intent.putExtra(".map_Level", level);
 					  intent.putExtra(".map_Time", time);
 					  intent.putExtra(".map_Description", description);

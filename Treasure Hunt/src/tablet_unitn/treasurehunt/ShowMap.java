@@ -53,7 +53,7 @@ public class ShowMap extends FragmentActivity implements LocationListener, Senso
     
     TextView distance;
     Button togglePosition;
-    int toggle = 0;
+    int toggle = 0; //0=your position, 1=next goal
     int checkpointNumber = 0; //la variabile serve per capire quanti checkpoint della mappa sono stati fatti
     int indexRightAnswer = 0;
     
@@ -94,6 +94,7 @@ public class ShowMap extends FragmentActivity implements LocationListener, Senso
         
         //GET MAP AND LIST OF POINTS
         getMaps(IDs[0], IDs[1]); //mapID e userName
+        Log.d("ciao1", "map: "+map);
 		getPoints(IDs[0]);
 					
 		Log.d("ciao1", "listGoals: "+listGoals);
@@ -259,7 +260,7 @@ public class ShowMap extends FragmentActivity implements LocationListener, Senso
         my_lng = location.getLongitude();
  
         if(((next_lat-offset) < my_lat && my_lat < (next_lat+offset)) && ((next_lng-offset) < my_lng  && my_lng < (next_lng+offset))){
-        	Intent intent = new Intent(getApplicationContext(), CheckpointQuestion.class);
+    		Intent intent = new Intent(getApplicationContext(), CheckpointQuestion.class);
         	
         	intent.putExtra(".question", listGoals.get(checkpointNumber).getText());
         	
@@ -291,10 +292,17 @@ public class ShowMap extends FragmentActivity implements LocationListener, Senso
         //If results has length 3 or greater, the final bearing is stored in results[2].
         float[] results = new float[1];
         Location.distanceBetween(my_lat, my_lng, next_lat, next_lng, results);
-        if(listGoals.size()!=0)
-        	distance.setText("Next Checkpoint\n"+results[0]+" metres");
-        else
-        	distance.setText("No points");
+        if(toggle==0){// see my position
+	        if(listGoals.size()!=0)
+	        	distance.setText("My position\n"+String.format("%.3f", my_lat)+",\n"+String.format("%.3f", my_lng));
+	        else
+	        	distance.setText("No points");
+        }else{ //see next position
+        	if(listGoals.size()!=0)
+	        	distance.setText("Next Checkpoint\n"+results[0]+" metres");
+	        else
+	        	distance.setText("No points");
+        }
     }
  
     @Override
