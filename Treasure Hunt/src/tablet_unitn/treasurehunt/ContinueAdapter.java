@@ -42,7 +42,8 @@ public class ContinueAdapter extends ArrayAdapter<Map>{
 	        Map map = getItem(position);
 	        name.setText("" + map.getName());
 	        checkpointsData.setText(map.getTappe() + "/" + map.getCount());
-	        pathData.setText(String.format("%.1f", map.getDist_parz())+" of "+String.format("%.1f", map.getDist())+" km");
+	        Double tmp = map.getDist() - map.getDist_parz();
+	        pathData.setText(String.format("%.1f", tmp)+" of "+String.format("%.1f", map.getDist())+" km");
 	        int level = map.getLevel();
 	        if(level == 1){
 	        	difficultyData.setText("Easy");

@@ -105,9 +105,17 @@ public class ShowMap extends FragmentActivity implements LocationListener, Senso
         	public void onClick(View v){
         		if(toggle == 0){
         			togglePosition.setText("Your\nPosition");
+        			LatLng latLng = new LatLng(my_lat, my_lng);
+        			CameraPosition cam = new CameraPosition.Builder().target(
+        					latLng).zoom(18).build();
+        	        googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cam));
         			toggle = 1;
         		} else if(toggle == 1){
         			togglePosition.setText("Next Checkpoint");
+        			LatLng latLng = new LatLng(next_lat, next_lng);
+        			CameraPosition cam = new CameraPosition.Builder().target(
+        					latLng).zoom(18).build();
+        	        googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cam));
         			toggle = 0;
         		}
         	}
@@ -184,6 +192,8 @@ public class ShowMap extends FragmentActivity implements LocationListener, Senso
             checkpointNumber = map.getTappe();
             
             if(tmp != null){
+            	next_lat=tmp.lat;
+            	next_lng=tmp.lng;
             	addPos(tmp.lat, tmp.lng);
             }else{
             	Toast.makeText(ShowMap.this, "Map error. No next goal found.", Toast.LENGTH_LONG).show();
@@ -275,6 +285,8 @@ public class ShowMap extends FragmentActivity implements LocationListener, Senso
         	    intent.putExtra(".isCorrect" + i, val);
         	}
         	
+        	next_lat=listGoals.get(checkpointNumber).getLat();
+        	next_lng=listGoals.get(checkpointNumber).getLng();
         	this.startActivity(intent);
 
         	
@@ -292,17 +304,10 @@ public class ShowMap extends FragmentActivity implements LocationListener, Senso
         //If results has length 3 or greater, the final bearing is stored in results[2].
         float[] results = new float[1];
         Location.distanceBetween(my_lat, my_lng, next_lat, next_lng, results);
-        if(toggle==0){// see my position
-	        if(listGoals.size()!=0)
-	        	distance.setText("My position\n"+String.format("%.3f", my_lat)+",\n"+String.format("%.3f", my_lng));
-	        else
-	        	distance.setText("No points");
-        }else{ //see next position
-        	if(listGoals.size()!=0)
-	        	distance.setText("Next Checkpoint\n"+results[0]+" metres");
-	        else
-	        	distance.setText("No points");
-        }
+        if(listGoals.size()!=0)
+        	distance.setText("Next Checkpoint\n"+String.format("%.1f", results[0])+" metres");
+        else
+        	distance.setText("No points");
     }
  
     @Override
