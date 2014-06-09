@@ -1,5 +1,6 @@
 package tablet_unitn.treasurehunt;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import android.content.Context;
@@ -11,7 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 public class ContinueAdapter extends ArrayAdapter<Map>{
-	
+	DecimalFormat numberFormat = new DecimalFormat("#.0");
 	TextView name, checkpointsData, pathData, difficultyData, checkpoints, path, difficulty;
 	Typeface robotoCond, roboto;
 	
@@ -42,7 +43,7 @@ public class ContinueAdapter extends ArrayAdapter<Map>{
 	        Map map = getItem(position);
 	        name.setText("" + map.getName());
 	        checkpointsData.setText(map.getTappe() + "/" + map.getCount());
-	        pathData.setText(map.getDist_parz()+"/"+map.getDist()+" km");
+//	        pathData.setText(numberFormat.format(map.getDist_parz())+"/"+numberFormat.format(map.getDist()+" km"));
 	        int level = map.getLevel();
 	        if(level == 1){
 	        	difficultyData.setText("Easy");

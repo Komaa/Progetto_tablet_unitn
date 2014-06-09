@@ -6,7 +6,7 @@ import org.json.JSONObject;
 
 public class Utility {
 
-	public static int calcolakm(String res, int n_tappa) throws JSONException{
+	public static Double calcolakm(String res, int n_tappa) throws JSONException{
 		JSONObject jsonObj = new JSONObject(res);
 		 Double dist=0.0;
 		 Double dres=0.0;
@@ -29,6 +29,6 @@ public class Utility {
        	dres=6371 * 3.1415926 * Math.sqrt( (ll0[0]-ll1[0])*(ll0[0]-ll1[0]) +Math.cos(ll0[1]/57.29578)*Math.cos(ll1[1]/57.29578) *(ll0[1]-ll1[1])*(ll0[1]-ll1[1]) )/180;
        }
    
-		return dres.intValue(); //il valore calcolato è corretto
+		return dres; //il valore calcolato è corretto
 	}
 }
