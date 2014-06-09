@@ -43,7 +43,7 @@
 		android:layout_marginBottom="20dp"
 		android:layout_marginLeft="10dp"
 		android:background="@drawable/showmapbutton"
-		android:textSize="12sp"
+		android:textSize="11sp"
 		android:text="@string/b_nextC" />
     
     <RelativeLayout

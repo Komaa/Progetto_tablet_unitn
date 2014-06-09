@@ -10,7 +10,7 @@
     	<shape android:shape="oval">
     		<solid android:color="#eeffffff" />
     		<stroke android:width="2sp" android:color="#B54703" />
-    		<gradient android:angle="-90" android:startColor="#C41E2C" android:endColor="#F0B474"  />
+    		<gradient android:angle="-90" android:centerX="35%" android:centerColor="#FFC869" android:startColor="#FF2F05" android:endColor="#FFFFFF"  />
 		</shape>
 	</item>
 </selector>
