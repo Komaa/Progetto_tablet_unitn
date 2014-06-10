@@ -432,7 +432,11 @@ public class ShowMap extends FragmentActivity implements LocationListener, Senso
                 addPos(tmp.getLat(), tmp.getLng());
             	
                 String result=data.getStringExtra("result");
-    			}else{
+    			} else {
+    				Intent intent = new Intent(getApplicationContext(), EndGame.class);
+    				intent.putExtra(".points", res);
+    				this.startActivityForResult(intent, 2);
+    				startActivity(intent);
     				//intent di ago con assegna punti e fine
     				//dentro res ci sono i punti che l'utente ha guadagnato
     				//non bisogna più fare nessuna chiamata al server che i punti sono assegnati
@@ -443,6 +447,13 @@ public class ShowMap extends FragmentActivity implements LocationListener, Senso
             if (resultCode == RESULT_CANCELED) {
                 //Write your code if there's no result
             }
+        } else if(requestCode == 2){
+        	if(resultCode == RESULT_OK || resultCode == RESULT_CANCELED){
+				Intent home = new Intent(getApplicationContext(), HomeFragment.class);
+				home.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(home);
+				finish();
+        	}
         }
     }//onActivityResult
 }

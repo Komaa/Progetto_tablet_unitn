@@ -54,6 +54,9 @@
             android:name="tablet_unitn.treasurehunt.CheckpointQuestion" 
         	android:theme="@android:style/Theme.Dialog" />
         <activity 
+            android:name="tablet_unitn.treasurehunt.EndGame" 
+        	android:theme="@android:style/Theme.Dialog" />
+        <activity 
             android:name="tablet_unitn.treasurehunt.ShowMap"
 			android:screenOrientation="portrait" />
         <activity 
