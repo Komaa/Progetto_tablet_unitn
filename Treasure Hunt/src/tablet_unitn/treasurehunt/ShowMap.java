@@ -9,6 +9,7 @@ import tablet_unitn.checkInternet.MobileInternetConnectionDetector;
 import tablet_unitn.checkInternet.WIFIInternetConnectionDetector;
 import tablet_unitn.dbmanager.ContinueMaps_db;
 import tablet_unitn.dbmanager.GetPoints_db;
+import tablet_unitn.dbmanager.UpdateMap_db;
 import tablet_unitn.dbmanager.WikiInfo_db;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -68,6 +69,10 @@ public class ShowMap extends FragmentActivity implements LocationListener, Senso
     double my_lat = 1000; //deve essere distante dal marker
     double my_lng = 1000; //deve essere distante dal marker
     
+    //Data map and user
+    String mapid="";
+    String user="";
+    
     //Internet status flag
     Boolean isMobileConnectionExist = false;
     Boolean isWifiConnectionExist = false;
@@ -95,6 +100,10 @@ public class ShowMap extends FragmentActivity implements LocationListener, Senso
         
 //        Log.d("ciao1", "map id: "+IDs[0]);
 //        Log.d("ciao1", "user Name: "+IDs[1]);
+        
+        //PUT DATA INTO WALKID AND USER
+        mapid=IDs[0];
+        user=IDs[1];
         
         //GET MAP AND LIST OF POINTS
         getMaps(IDs[0], IDs[1]); //mapID e userName
@@ -401,18 +410,35 @@ public class ShowMap extends FragmentActivity implements LocationListener, Senso
     
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
+    	int res=0;
         if (requestCode == 1) {
             if(resultCode == RESULT_OK){
-                googleMap.clear();
-            	check=false;
             	checkpointNumber++;
+            	UpdateMap_db update = new UpdateMap_db();
+    			try {
+    				res=update.execute(mapid, user, Integer.toString(checkpointNumber)).get();
+    			} catch (InterruptedException e) {
+    				e.printStackTrace();
+    			} catch (ExecutionException e) {
+    				e.printStackTrace();
+    			}
+    			   			
+    			if(res==0){
+                googleMap.clear();
+            	check=false;   	
             	next_lat=listGoals.get(checkpointNumber).getLat();
             	next_lng=listGoals.get(checkpointNumber).getLng();
                 Goal tmp = listGoals.get(checkpointNumber); //get the next goal
                 addPos(tmp.getLat(), tmp.getLng());
             	
                 String result=data.getStringExtra("result");
+    			}else{
+    				//intent di ago con assegna punti e fine
+    				//dentro res ci sono i punti che l'utente ha guadagnato
+    				//non bisogna più fare nessuna chiamata al server che i punti sono assegnati
+    				//bisogna fare in modo che se premo ok fa finish anche di questa activity e torna alla home
+    				//e anche se al posto di ok premo indietro deve fare la stessa cosa.
+    			}
             }
             if (resultCode == RESULT_CANCELED) {
                 //Write your code if there's no result
