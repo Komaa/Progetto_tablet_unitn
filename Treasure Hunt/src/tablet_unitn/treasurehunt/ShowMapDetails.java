@@ -54,7 +54,7 @@ public class ShowMapDetails extends Activity {
         
         title.setTypeface(robotoCond);
         checkpoints.setTypeface(roboto); distance.setTypeface(roboto);
-        description.setTypeface(robotoReg);
+        difficulty.setTypeface(roboto); description.setTypeface(robotoReg);
         
         ((TextView) findViewById(R.id.checkpoint)).setTypeface(robotoThin);
         ((TextView) findViewById(R.id.distance)).setTypeface(robotoThin);
