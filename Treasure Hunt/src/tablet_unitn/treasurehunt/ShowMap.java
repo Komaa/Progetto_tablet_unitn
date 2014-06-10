@@ -436,12 +436,6 @@ public class ShowMap extends FragmentActivity implements LocationListener, Senso
     				Intent intent = new Intent(getApplicationContext(), EndGame.class);
     				intent.putExtra(".points", res);
     				this.startActivityForResult(intent, 2);
-    				startActivity(intent);
-    				//intent di ago con assegna punti e fine
-    				//dentro res ci sono i punti che l'utente ha guadagnato
-    				//non bisogna più fare nessuna chiamata al server che i punti sono assegnati
-    				//bisogna fare in modo che se premo ok fa finish anche di questa activity e torna alla home
-    				//e anche se al posto di ok premo indietro deve fare la stessa cosa.
     			}
             }
             if (resultCode == RESULT_CANCELED) {
