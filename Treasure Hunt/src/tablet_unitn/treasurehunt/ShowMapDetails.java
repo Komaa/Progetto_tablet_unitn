@@ -116,6 +116,7 @@ public class ShowMapDetails extends Activity {
 			} catch (ExecutionException e) {
 				e.printStackTrace();
 			}	
+		    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 	    	if(Boolean.valueOf(check))	
 	    		startActivity(intent);
 	    	else

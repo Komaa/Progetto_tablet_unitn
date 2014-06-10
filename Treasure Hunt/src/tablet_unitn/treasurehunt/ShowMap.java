@@ -36,7 +36,6 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.Animation;
@@ -107,24 +106,24 @@ public class ShowMap extends FragmentActivity implements LocationListener, Senso
         
         //GET MAP AND LIST OF POINTS
         getMaps(IDs[0], IDs[1]); //mapID e userName
-        Log.d("ciao1", "map: "+map);
+//        Log.d("ciao1", "map: "+map);
 		getPoints(IDs[0]);
 					
-		Log.d("ciao1", "listGoals: "+listGoals);
+//		Log.d("ciao1", "listGoals: "+listGoals);
         distance = (TextView) findViewById(R.id.distance);
         togglePosition = (Button) findViewById(R.id.toggle_button_position);
         togglePosition.setOnClickListener(new OnClickListener(){
         	@Override
         	public void onClick(View v){
         		if(toggle == 0){
-        			togglePosition.setText("Your\nPosition");
+        			togglePosition.setText("Next Checkpoint");
         			LatLng latLng = new LatLng(my_lat, my_lng);
         			CameraPosition cam = new CameraPosition.Builder().target(
         					latLng).zoom(18).build();
         	        googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cam));
         			toggle = 1;
         		} else if(toggle == 1){
-        			togglePosition.setText("Next Checkpoint");
+        			togglePosition.setText("Your\nPosition");
         			LatLng latLng = new LatLng(next_lat, next_lng);
         			CameraPosition cam = new CameraPosition.Builder().target(
         					latLng).zoom(18).build();
@@ -198,7 +197,6 @@ public class ShowMap extends FragmentActivity implements LocationListener, Senso
             //Sposta la camera nella mia posizione
             CameraPosition myPosition = new CameraPosition.Builder().target(latLng).zoom(16).build();
             googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(myPosition));
-            Log.d("ciao1", "qui arrivo");
             //aggiungi punti e vai!!!
             Goal tmp = listGoals.get(map.getTappe()); //get the next goal
             checkpointNumber = map.getTappe();
@@ -279,9 +277,6 @@ public class ShowMap extends FragmentActivity implements LocationListener, Senso
                         .icon(BitmapDescriptorFactory.fromResource(R.drawable.info_icon))
                         .flat(true)
                         );    
-        	
-//        	addPos(wiki.getLat(),wiki.getLng());
-        	Log.d("ciao12", "Aggiungo: "+wiki.getLat()+" "+wiki.getLng());
 		}
         
         
@@ -443,11 +438,21 @@ public class ShowMap extends FragmentActivity implements LocationListener, Senso
             }
         } else if(requestCode == 2){
         	if(resultCode == RESULT_OK || resultCode == RESULT_CANCELED){
-				Intent home = new Intent(getApplicationContext(), HomeFragment.class);
+				Intent home = new Intent(getApplicationContext(), MainActivity.class);
+				home.putExtra(".usrName", user);//quaqua
 				home.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivity(home);
 				finish();
         	}
         }
     }//onActivityResult
+    @Override
+    public void onBackPressed() {
+    	Intent home = new Intent(getApplicationContext(), MainActivity.class);
+		home.putExtra(".usrName", user);//quaqua
+		home.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		startActivity(home);
+		finish();
+    	super.onBackPressed();
+    }
 }

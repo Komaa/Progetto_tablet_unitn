@@ -38,20 +38,17 @@ public class MainActivity extends FragmentActivity implements
 		MainActivity.context = getApplicationContext();
 		
 		// Get user informations from andoird DB
-		String usrID = (String) this.getIntent().getExtras().get(".usr_ID");
+		String usrName = (String) this.getIntent().getExtras().get(".usrName");
 		dao = new UserDAO_DB_impl(); 
         dao.open(); 
         users  = dao.getAllUser(); 
         int q=0;
         for (int i = 0; i < users.size(); i++) {
-        	if(users.get(i).getID().equals(usrID)){
+        	if(users.get(i).getName().equals(usrName)){
         		MainActivity.user=users.get(i);
         		q++;
         	}
     	}
-        if(q==0){
-        	user=new User(usrID, "noName", "", "", 0, 0);
-        }
 
 //        user = dao.getInfo(ID);
         
@@ -145,7 +142,7 @@ public class MainActivity extends FragmentActivity implements
     }  
 	
 	public void logout() {
-		dao.logout(user.getID());	
+		dao.deleteUser(user);	
 		Intent intent = new Intent(this, Login.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 	    startActivity(intent);

@@ -5,7 +5,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 public class EndGame extends Activity{
@@ -26,7 +26,7 @@ public class EndGame extends Activity{
         points.setTypeface(robotoCond);
         points.setText("You earned\n"+ this.getIntent().getExtras().get(".points").toString() + " points");
         
-        Button collect = (Button) this.findViewById(R.id.finish_game);
+        ImageButton collect = (ImageButton) this.findViewById(R.id.finish_game);
         collect.setOnClickListener(new OnClickListener(){
 
 			@Override

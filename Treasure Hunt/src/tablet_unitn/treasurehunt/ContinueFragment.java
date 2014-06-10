@@ -68,8 +68,9 @@ public class ContinueFragment extends Fragment {
 					  put[1] = MainActivity.user.getName();
 					  
 					  intent.putExtra(".map_info",put);
-					  
+					  intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 					  startActivity(intent);
+					  getActivity().finish();
 				  }
 		    });
 	        

@@ -23,15 +23,15 @@
         	<ImageView
 				android:id="@+id/youwinimage"
 				android:layout_width="match_parent"
-				android:layout_height="150dp"
-				android:src="@drawable/youwin" />
-        	
+				android:layout_height="150dp" />
+<!-- android:src="@drawable/youwin" --> 
+				
         	<ImageView
         	    android:id="@+id/treasureimage"
             	android:layout_width="match_parent"
             	android:layout_height="150dp"
-            	android:layout_below="@+id/youwinimage"
-            	android:src="@drawable/treasure" />
+            	android:layout_below="@+id/youwinimage" 
+				android:src="@drawable/treasure" />
         	
         	<TextView
         	    android:id="@+id/points"

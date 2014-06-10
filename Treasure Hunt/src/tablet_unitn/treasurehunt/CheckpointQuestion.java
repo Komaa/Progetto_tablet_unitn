@@ -47,6 +47,9 @@ public class CheckpointQuestion extends Activity{
         answer4.setText((String) this.getIntent().getExtras().get(".answer4"));
         isCorrect4 = (Boolean) this.getIntent().getExtras().get(".isCorrect4");
         
+        if(!isCorrect1&&!isCorrect2&&!isCorrect3&&!isCorrect4) //se tutti sono settati a false
+        	isCorrect1=true; //serve per far procedere comunque l'utente anche se la risposta può essere sbagliata
+        
         answer1.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
