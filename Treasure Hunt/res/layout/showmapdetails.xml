@@ -26,13 +26,12 @@
 		        android:layout_height="wrap_content"
 		        android:layout_centerHorizontal="true"
 				android:layout_marginTop="15dp"
-				
 				android:textColor="#000000"
 		        android:textSize="30sp"
 		        android:text="Treasure Hunt!"/>
 		    
 		    <View
-                android:id="@+id/divider2"
+                android:id="@+id/divider1"
                 android:layout_width="wrap_content"
                 android:layout_height="5dp"
                 android:layout_below="@+id/map_name"
@@ -47,7 +46,7 @@
 		        android:layout_width="20dp"
 		        android:layout_height="20dp"
 		        android:layout_alignParentLeft="true"
-		        android:layout_below="@+id/map_name"
+		        android:layout_below="@+id/divider1"
 		        android:layout_marginLeft="30dp"
 		        android:layout_marginTop="17dp"
 		        android:src="@drawable/checkpointimg" />
@@ -62,17 +61,6 @@
 		        android:layout_marginLeft="30dp"
 		        android:layout_marginTop="17dp"
 		        android:src="@drawable/feet" />
-	
-		    <TextView
-		        android:id="@+id/distance"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:layout_alignBottom="@+id/feetImage"
-		        android:layout_marginLeft="12dp"
-		        android:layout_toRightOf="@+id/feetImage"
-		        android:textColor="#000000"
-		        android:text="Distance: "
-		        android:textSize="14sp" />
 		    
 		    <ImageView
 		        android:contentDescription=""
@@ -84,6 +72,28 @@
 		        android:layout_marginLeft="30dp"
 		        android:layout_marginTop="17dp"
 		        android:src="@drawable/fire" />
+		    
+		    <TextView
+		        android:id="@+id/checkpoint"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_alignBottom="@+id/checkpointImage"
+		        android:layout_toRightOf="@+id/checkpointImage"
+		        android:layout_marginLeft="12dp"
+		        android:text="Checkpoints:"
+		        android:textColor="#000000"
+		        android:textSize="14sp" />
+	
+		    <TextView
+		        android:id="@+id/distance"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_alignBottom="@+id/feetImage"
+		        android:layout_marginLeft="12dp"
+		        android:layout_toRightOf="@+id/feetImage"
+		        android:textColor="#000000"
+		        android:text="Distance: "
+		        android:textSize="14sp" />
 	
 		    <TextView
 		        android:id="@+id/difficulty"
@@ -96,27 +106,16 @@
 		        android:text="Difficulty: "
 		        android:textSize="14sp" />
 		    
-<!-- 	    <ImageView
-		        
-		        android:id="@+id/clockImage"
-		        android:layout_width="20dp"
-		        android:layout_height="20dp"
-		        android:layout_alignParentLeft="true"
-		        android:layout_below="@+id/fireImage"
-		        android:layout_marginLeft="30dp"
-		        android:layout_marginTop="17dp"
-		        android:src="@drawable/clock" />-->
-	
-<!-- 		    <TextView
-		        android:id="@+id/time"
+		    <TextView
+		        android:id="@+id/det_checkpoint"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
-		        android:layout_alignBottom="@+id/clockImage"
-		        android:layout_marginLeft="12dp"
-		        android:layout_toRightOf="@+id/clockImage"
+		        android:layout_alignTop="@+id/checkpoint"
+		        android:layout_alignBottom="@+id/checkpoint"
+		        android:layout_marginLeft="34dp"
+		        android:layout_toRightOf="@+id/checkpoint"
 		        android:textColor="#000000"
-		        android:text="Time left: "
-		        android:textSize="14sp" /> -->
+		        android:textSize="14sp" />
 		    
 		    <TextView
 		        android:id="@+id/det_distance"
@@ -124,7 +123,7 @@
 		        android:layout_height="wrap_content"
 		        android:layout_alignBottom="@+id/distance"
 		        android:layout_alignLeft="@+id/det_checkpoint"
-		        android:layout_alignTop="@+id/feetImage"
+		        android:layout_alignTop="@+id/distance"
 		        android:layout_toRightOf="@+id/distance"
 		        android:textColor="#000000"
 		        android:textSize="14sp" />
@@ -135,41 +134,20 @@
 		        android:layout_height="wrap_content"
 		        android:layout_alignBottom="@+id/difficulty"
 		        android:layout_alignLeft="@+id/det_checkpoint"
-		        android:layout_alignTop="@+id/fireImage"
+		        android:layout_alignTop="@+id/difficulty"
 		        android:layout_toRightOf="@+id/difficulty"
 		        android:textColor="#000000"
 		        android:textSize="14sp" />
 		    
-<!-- 		    <TextView
-		        android:id="@+id/det_time"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:layout_alignBottom="@+id/time"
-		        android:layout_alignLeft="@+id/det_checkpoint"
-		        android:layout_toRightOf="@+id/time"
-		        android:textColor="#000000"
-		        android:text="1h 22m"
-		        android:textSize="14sp" /> -->
-		    
 		    <View
-                android:id="@+id/divider1"
+                android:id="@+id/divider2"
                 android:layout_width="wrap_content"
                 android:layout_height="5dp"
-                android:layout_below="@+id/det_time"
+                android:layout_below="@+id/difficulty"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="15dp"
                 android:background="#DF884E" />
-
-		    <TextView
-		        android:id="@+id/checkpoint"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:layout_above="@+id/feetImage"
-		        android:layout_alignLeft="@+id/distance"
-		        android:text="Checkpoints: "
-		        android:textColor="#000000"
-		        android:textSize="14sp" />
 
 		    <TextView
 		        android:id="@+id/det_description"
@@ -178,20 +156,8 @@
 		        android:layout_alignLeft="@+id/map_name"
 		        android:layout_below="@+id/fireImage"
 		        android:layout_marginTop="30dp"
-		        android:text="check"
 		        android:textColor="#000000"
 		        android:textSize="16sp" />
-
-		    <TextView
-		        android:id="@+id/det_checkpoint"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:layout_alignBottom="@+id/checkpoint"
-		        android:layout_below="@+id/divider2"
-		        android:layout_marginLeft="34dp"
-		        android:layout_toRightOf="@+id/checkpoint"
-		        android:textColor="#000000"
-		        android:textSize="14sp" />
 
 		    <Button
 		        android:id="@+id/show_map"
@@ -202,6 +168,8 @@
 		        android:layout_below="@+id/det_description"
 		        android:layout_marginTop="52dp"
 		        android:text="JOIN THE GAME!" />
+
+		    
 	    
 		</RelativeLayout>
 	</RelativeLayout>
