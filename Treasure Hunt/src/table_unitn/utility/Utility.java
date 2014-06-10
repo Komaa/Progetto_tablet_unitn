@@ -7,11 +7,13 @@ import org.json.JSONObject;
 public class Utility {
 
 	public static Double calcolakm(String res, int n_tappa) throws JSONException{
+		if(n_tappa>0) n_tappa--;
 		JSONObject jsonObj = new JSONObject(res);
 		 Double dres=0.0;
 		 
 	    JSONArray jsonArray = new JSONArray(jsonObj.getString("pois"));
 	    String[] mySArray = new String[(jsonArray.length()-n_tappa)];
+	    
        for (int i = (0+n_tappa), size = jsonArray.length(); i < size; i++)
        {
 			JSONObject obj = jsonArray.getJSONObject(i);

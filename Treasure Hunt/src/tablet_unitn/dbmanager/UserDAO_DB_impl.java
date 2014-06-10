@@ -75,8 +75,8 @@ public class UserDAO_DB_impl implements UserDAO {
 		 String id = user.getID(); 
 		 		 
 		 database.delete(UserSQLiteHelper.TABLE_USER, 
-				 UserSQLiteHelper.COLUMN_ID + " = ?", 
-				 new String[] {id}); 
+				 "1", //elimina tutto 
+				 new String[] {}); 
 	 }
 
 	@Override

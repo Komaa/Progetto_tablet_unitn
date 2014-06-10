@@ -151,15 +151,20 @@ public class Login extends Activity {
 	    		}*/
 		    	int flg=0;
 		    	if (checkBox.isChecked()) flg=1;
-		    	if(!user.getName().equals(name.getText().toString())){ //se non è l'utente già loggato
-		    		dao.deleteUser(user);
-		    		user=null;
-		    	}
+		    	
 		    	if(user==null){
 		    		user=new User(res[0], name.getText().toString(), "noMail", psw.getText().toString(), 0, flg);	
 		    		User ris = dao.insertUser(user);
-		    		if(ris==null)
-		    			Toast.makeText(this, "Bad error!", Toast.LENGTH_LONG).show();
+		    		Log.d("ciao1", "nuovo utente");
+		    	}else{ // se user esiste
+		    		if(!user.getName().equals(name.getText().toString())){ //se non è l'utente già loggato
+			    		dao.deleteUser(user); //elimina
+			    		user=null;
+			    		//ricrea user
+			    		user=new User(res[0], name.getText().toString(), "noMail", psw.getText().toString(), 0, flg);	
+			    		User ris = dao.insertUser(user);
+			    		Log.d("ciao1", "elimina vecchio e inserisci nuovo utente");
+			    	}
 		    	}
 		    	
 		        //Go to home
