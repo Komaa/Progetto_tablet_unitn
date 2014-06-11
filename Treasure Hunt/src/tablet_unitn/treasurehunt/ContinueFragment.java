@@ -57,6 +57,7 @@ public class ContinueFragment extends Fragment {
         	
         	getMaps(user.getName());
         	
+        	
 	        ContinueAdapter continue_adapter = new ContinueAdapter(MainActivity.getAppContext(), R.layout.continuelist, list_map);
 	        continue_listView.setAdapter(continue_adapter);
 	        continue_listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
