@@ -154,6 +154,7 @@
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        android:layout_alignLeft="@+id/map_name"
+		        android:layout_alignRight="@+id/map_name"
 		        android:layout_below="@+id/fireImage"
 		        android:layout_marginTop="30dp"
 		        android:textColor="#000000"
