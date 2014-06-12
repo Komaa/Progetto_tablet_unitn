@@ -51,7 +51,7 @@ public class ContinueMaps_db extends AsyncTask<List<Map>, Integer, List<Map>>{
 	        	String[] pairs = res.split("=");
 	       
 	        		
-	        	int[] myIntArray = new int[(pairs.length/2)+1];
+	        	int[] myIntArray = new int[(pairs.length/2)+10];
 	        	for (int i=0;i<pairs.length;i++) {
 	        			if(i==0){
 	        				perjson += pairs[i].substring(1)+",";
